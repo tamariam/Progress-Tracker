@@ -1,0 +1,36 @@
+# Virtual environments
+.env/
+venv/
+env/
+.venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite database (if used for local development)
+db.sqlite3
+
+# Sensitive data and logs
+.env
+local_settings.py
+*.log
+
+# Generated static and media files
+# These will be handled by collectstatic and S3 in production.
+static_root/
+media/
+
+# IDE files
+.vscode/
+
+
+# Operating system file
+Thumbs.db # Windows
+
+# Testing and coverage reports
+.coverage
+.pytest_cache/
+htmlcov/
