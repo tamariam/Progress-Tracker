@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ProgressConfig(AppConfig):
+class TrackerAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'progress'
+    name = 'tracker_app'
