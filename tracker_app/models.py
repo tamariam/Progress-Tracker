@@ -15,6 +15,7 @@ class Theme(models.Model):
 # Define the Action model
 class Action(models.Model):
     title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     progress = models.IntegerField(
         default=0,
         validators=[
