@@ -5,7 +5,7 @@
 # Force specific file types to be treated as binary to prevent any conversion.
 # This prevents corruption of non-text assets like images and fonts.
 # Treat text files as text and normalize line endings to LF
-* text=auto
+
 
 # Explicitly set line endings for common text file types
 *.js     text eol=lf
