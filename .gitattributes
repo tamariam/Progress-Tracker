@@ -4,15 +4,46 @@
 
 # Force specific file types to be treated as binary to prevent any conversion.
 # This prevents corruption of non-text assets like images and fonts.
-*.jpg binary
-*.jpeg binary
-*.png binary
-*.gif binary
-*.ico binary
-*.svg binary
-*.pdf binary
-*.woff binary
-*.woff2 binary
-*.eot binary
-*.ttf binary
-*.otf binary
+# Treat text files as text and normalize line endings to LF
+* text=auto
+
+# Explicitly set line endings for common text file types
+*.js     text eol=lf
+*.css    text eol=lf
+*.html   text eol=lf
+*.htm    text eol=lf
+*.json   text eol=lf
+*.md     text eol=lf
+*.py     text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.xml    text eol=lf
+*.txt    text eol=lf
+*.csv    text eol=lf
+*.ts     text eol=lf
+*.tsx    text eol=lf
+*.jsx    text eol=lf
+
+# Binary files - do not modify line endings
+*.jpg    binary
+*.jpeg   binary
+*.png    binary
+*.gif    binary
+*.ico    binary
+*.svg    binary
+*.pdf    binary
+*.woff   binary
+*.woff2  binary
+*.eot    binary
+*.ttf    binary
+*.otf    binary
+*.mp3    binary
+*.mp4    binary
+*.zip    binary
+*.gz     binary
+*.tar    binary
+*.7z     binary
+*.exe    binary
+*.dll    binary
+*.so     binary
+*.bin    binary

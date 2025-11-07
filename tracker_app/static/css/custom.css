@@ -1,0 +1,26 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+header.masthead {
+  /* Change only this line to your new image path */
+  background-image: url("../assets/img/bggg.jpg"); 
+}
+
+
+section#contact {
+    background-image: url("../assets/img/contact-bg.png") ;
+    background-color: rgb(0, 38, 58);
+}
+
+
+
+
+.mcc-blue {
+  background-color: rgb(0, 38, 58) !important; /* or any color you want */
+}
+.mcc-yellow{
+  background-color:rgb(254, 186, 53)!important;
+
+}
