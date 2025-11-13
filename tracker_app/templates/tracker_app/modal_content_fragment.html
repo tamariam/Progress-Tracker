@@ -1,0 +1,102 @@
+<!-- <div class="modal-body-content">
+    {% for objective in theme.objectives.all %}
+        <div class="accordion-item">
+            <button class="accordion-title" onclick="toggleAccordion(this)">
+                {{ objective.title }}
+            </button>
+            
+            <div class="accordion-content">
+                <div class="card-grid">
+                    {% for action in objective.actions.all %}
+                        <div class="action-card">
+                            <h3 class="card-title">{{ action.title }}</h3>
+                            <p class="card-description">{{ action.description|truncatechars:150 }}</p>
+                            
+                            <div class="card-footer">
+
+                                
+                                {% if action.update %}
+                                    <div class="update-section">
+                                        <button class="view-update-btn" onclick="toggleUpdate(this)">View Update</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {% if action.update %}
+                                <div class="update-content">
+                                    <hr>
+                                    <h4>Latest Update:</h4>
+                                    <p>{{ action.update }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No objectives found for this theme yet.</p>
+    {% endfor %}
+</div> -->
+
+<!-- templates/tracker_app/modal_content_fragment.html -->
+<!-- templates/tracker_app/modal_content_fragment.html -->
+<div class="modal-body-content">
+    
+    <!-- Loop through ALL objectives -->
+    {% for objective in theme.objectives.all %}
+        
+        <div class="accordion-item">
+            <button class="accordion-title" onclick="toggleAccordion(this)">
+                {{ objective.title }}
+            </button>
+            
+            <div class="accordion-content">
+                
+                <!-- Display the Objective Description -->
+                {% if objective.description %}
+                    <p style="padding-top: 15px;">{{ objective.description }}</p>
+                    <hr>
+                {% endif %}
+
+                <!-- Filter the actions here using is_progress (use the Python view method) -->
+                {% if objective.active_actions %}
+                    <div class="card-grid">
+                        {% for action in objective.active_actions %}
+                            <div class="action-card">
+                                <h3 class="card-title">{{ action.title }}</h3>
+                                <p class="card-description">{{ action.description|truncatechars:150 }}</p>
+                                
+                                <div class="card-footer">
+                                    <div class="update-section">
+                                        <button class="view-update-btn" onclick="toggleUpdate(this)">View Update</button>
+                                    </div>
+                                </div>
+
+                                <div class="update-content">
+                                    <hr>
+                                    <h4>Latest Update:</h4>
+                                    <p>{{ action.update }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Display this message if no active actions were found for this specific objective -->
+                    <p>There are no active or in-progress actions for this objective yet.</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% empty %}
+        <!-- This empty tag handles if the theme has no objectives assigned at all -->
+        <p>No objectives found for this theme yet.</p>
+    {% endfor %}
+
+    <!-- A final message if the entire modal ends up empty -->
+    {% if not theme.objectives.all %}
+        <p>There are no actions in process or completed for this theme yet.</p>
+    {% endif %}
+
+</div>
