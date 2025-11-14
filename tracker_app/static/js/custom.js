@@ -35,6 +35,13 @@ function toggleUpdate(button) {
 
 // AJAX functionality to fetch content when a theme link is clicked
 document.addEventListener('DOMContentLoaded', (event) => {
+    // Add the capitalization function here
+    function capitalizeEachWord(str) {
+        if (!str) return '';
+        // Regular expression to find the start of each word (\b) and the first character (\w)
+        return str.replace(/\b\w/g, char => char.toUpperCase());
+    }
+
     // Selector looks for any <a> tag with the 'data-theme-id' attribute
     document.querySelectorAll('a[data-theme-id]').forEach(link => {
         link.addEventListener('click', function(event) {
@@ -51,11 +58,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('dynamicModalContent').innerHTML = data.html_content;
-                    document.getElementById('modalThemeTitle').textContent = data.title;
+                    
+                    // Use the function to capitalize the title before setting it
+                    const capitalizedTitle = capitalizeEachWord(data.title);
+                    document.getElementById('modalThemeTitle').textContent = capitalizedTitle;
                     
                     // Manually show the modal using Bootstrap JS
                     const modalElement = document.getElementById('portfolioModal');
-                    // Ensure you have Bootstrap JS loaded *before* custom.js
                     const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
                     modal.show();
                 })
@@ -73,4 +82,16 @@ function closeMCCModal() {
     // Get the Bootstrap instance and call the hide() method gracefully
     const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
     modal.hide();
+}
+function toggleActionAccordion(button) {
+    button.classList.toggle("active-action");
+    const content = button.nextElementSibling;
+    content.classList.toggle("show-action");
+    if (content.style.maxHeight) { content.style.maxHeight = null; } else { content.style.maxHeight = content.scrollHeight + "px"; }
+    
+    // Ensure the parent objective accordion expands if needed
+    const parentAccordionContent = button.closest('.accordion-content');
+    if (parentAccordionContent && parentAccordionContent.style.maxHeight) {
+        parentAccordionContent.style.maxHeight = parentAccordionContent.scrollHeight + content.scrollHeight + "px";
+    }
 }
