@@ -75,7 +75,7 @@ header.masthead .masthead-heading {
 /* --------------------------------- */
 /* Specific styles to override the generic Bootstrap modal styles */
 .modal-header-custom {
-    background-color: var(--mcc-blue);
+    /* background-color: var(--mcc-blue); */
     color: var(--mcc-yellow);
     padding: 20px;
     /* Helvetica Light font requirement */
@@ -84,16 +84,13 @@ header.masthead .masthead-heading {
 }
 
 #modalThemeTitle{
-    color: var(--mcc-yellow)
+    color: var(--mcc-yellow);
+    font-size:2rem;
 
 }
+
 /* Overriding the default close button icon positioning */
-.close-modal {
-    /* top: 15px;
-    right: 15px; */
-   
-    
-}
+
 
 /* Accordion Styles (Objectives): Clean design, hover effects, MCC Blue titles */
 .accordion-item { border-bottom: 1px solid #eee; }
@@ -178,17 +175,20 @@ header.masthead .masthead-heading {
 .modal-content {
     position: relative; /* CRITICAL: Must be relative */
 }
-
+.portfolio-modal .close-modal{
+    width:2rem !important;
+    height:2rem !important;
+}
 #close-modal-top-right {
-    position: absolute; /* Position relative to .modal-content */
-    top: 10px; /* Offset from the top */
-    right: 10px; /* Offset from the right */
+    /* position: absolute; 
+    top: 10px; 
+    right: 10px;  */
     
     /* Styling the button itself */
     background: none; /* No background */
-    border: none;      /* No border */
+    /* border: none;       */
     cursor: pointer;   /* Hand icon on hover */
-    font-size: 30px;   /* Large X symbol */
+    font-size: 20px;   /* Large X symbol */
     line-height: 1;    /* Adjusts vertical alignment */
     
     /* MCC Colors */
@@ -197,9 +197,16 @@ header.masthead .masthead-heading {
     /* Accessibility and user experience */
     z-index: 1050;     /* Ensures it is above other modal content */
     padding: 5px;      /* Makes it easier to click */
-    min-width: 44px;   /* Ensures large clickable area for accessibility */
+    min-width: 44px;   
     min-height: 44px;
     border-radius:6px;
+    
+}
+.modal-header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--mcc-blue);
 }
 
 /* Hover and Focus States (Accessibility) */
@@ -212,7 +219,7 @@ header.masthead .masthead-heading {
 
 /* -------------------------------------------- */
 /* Sub-Accordion for Actions */
-.action-sub-item {
+.action-sub-item  {
     
     padding: 10px 0;
 }
@@ -230,10 +237,16 @@ header.masthead .masthead-heading {
     min-height: 44px;
     display: flex;
     justify-content: space-between;
+    /* background-color: RGB(113,197,232); */
+    background-color: rgb(254,186,53);
+
+
+    padding:5px;
+    border-radius: 5px;
 }
 
 .action-sub-title.active-action {
-    color: var(--mcc-yellow);
+    color:  #971B2F;
     
 }
 
@@ -250,6 +263,7 @@ header.masthead .masthead-heading {
 
 .modal-content p{
     margin-top:10px;
+    text-align:left;
 }
 
 .objective-p {
@@ -379,6 +393,7 @@ header.masthead .masthead-heading {
     border: 1px solid var(--border-light); 
     border-radius: 4px;
     background-color: var(--background-white); /* White background for action cards */
+ 
 }
 
 .action-sub-item {
@@ -399,7 +414,7 @@ header.masthead .masthead-heading {
 
 .action-sub-title:hover,
 .action-sub-title.active-action {
-    color: var(--mcc-yellow); /* MCC Yellow on hover/active */
+    color: var(--mcc-blue); 
 }
 
 .action-sub-content {
@@ -407,7 +422,7 @@ header.masthead .masthead-heading {
     color: var(--mcc-blue);
 }
 
-.update-section h4 {
+.update-section h4,.action-sub-content h4 {
     color: var(--mcc-red-highlight); /* Use red for emphasis on updates */
     margin-top: 15px;
     font-size: 1em;
@@ -417,3 +432,10 @@ header.masthead .masthead-heading {
     padding: 0  !important;
 }
 /* ??????????????????????????????????????? */
+
+     .modal-content h2{
+        font-size:2rem;
+     }
+
+    
+    

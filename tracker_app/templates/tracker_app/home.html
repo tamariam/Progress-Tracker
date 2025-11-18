@@ -619,13 +619,16 @@
                 <!- <!- Ensure your static tag works for the close icon -->
                 <!-- <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" /> -->
             <!-- </div> --> 
-             <button onclick="closeMCCModal()" class="close-modal" aria-label="Close Modal" id="close-modal-top-right">
+             <div class="modal-header-wrapper">
+             <button onclick="closeMCCModal()" class="close-modal"  aria-label="Close Modal" id="close-modal-top-right">
                 <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" />
             </button>
             <div class="modal-header-custom">
                 <h2 class="modal-title-custom" id="modalThemeTitle">Loading Theme Details...</h2>
             </div>
-
+            </div>
+            
+        
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
