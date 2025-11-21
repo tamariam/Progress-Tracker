@@ -443,10 +443,14 @@ header.masthead .masthead-heading {
 .section-heading{
     font-size: 1.8rem !important;
 }
+/* TIMELINE */
+.img-background{
+    background:none !important;
+}
 
 @media (min-width:768px){
     .timeline > li .timeline-panel {
-    padding: 0 20px 20px 5px  !important;
+    padding: 0 20px 20px 5px;
     text-align: left 
     
   }
