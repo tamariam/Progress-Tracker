@@ -447,6 +447,12 @@ header.masthead .masthead-heading {
 .img-background{
     background:none !important;
 }
+/* Strategy */
+@media(min-width:768px){
+.text-left{
+    text-align: left;
+}
+}
 
 @media (min-width:768px){
     .timeline > li .timeline-panel {

@@ -1,5 +1,7 @@
 # Cr# Import necessary modules from Django's core
+
 from django.db import models
+from django_summernote.fields import SummernoteTextField
 
 # Define the Theme model
 class Theme(models.Model):
@@ -11,14 +13,17 @@ class Theme(models.Model):
 #Define the Objectives model
 class Objective(models.Model):
     title=models.CharField(max_length=200,unique=True)
-    description = models.TextField(default="")
+    description = SummernoteTextField(default="")
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='objectives')
+
+    def __str__(self):
+        return self.title
 
 # Define the Action model
 class Action(models.Model):
     title = models.CharField(max_length=200,unique=True)
-    description = models.TextField(default="")
-    update = models.TextField(blank=True,editable=True)
+    description = SummernoteTextField(default="")
+    update = SummernoteTextField(blank=True,editable=True)
     objective = models.ForeignKey(Objective, on_delete=models.CASCADE, related_name='actions')
     is_progress = models.BooleanField(default=False)
     

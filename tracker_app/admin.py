@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from tracker_app.models import Objective, Theme,Action
 
 # Register your models here.

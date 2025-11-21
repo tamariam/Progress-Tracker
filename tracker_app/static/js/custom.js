@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             const themeId = this.getAttribute('data-theme-id');
             const urlTemplate = document.getElementById('api-url-template').getAttribute('data-url-template');
-            const url = urlTemplate.replace('0', themeId); 
+            const url = urlTemplate.replace('__ID__', themeId);
+             
 
             document.getElementById('modalThemeTitle').textContent = "Loading...";
             document.getElementById('dynamicModalContent').innerHTML = '<p>Fetching data, please wait...</p>';
