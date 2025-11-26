@@ -85,7 +85,7 @@ header.masthead .masthead-heading {
 
 #modalThemeTitle{
     color: var(--mcc-yellow);
-    font-size:2rem;
+    font-size:1.5rem;
 
 }
 
@@ -163,22 +163,23 @@ header.masthead .masthead-heading {
     
 }
 .update-content.show-update {
-    /* display: block; */
-    max-height: 2000px;
-}
+     display: block; 
+     max-height:2000px;
+ } 
 
 /* Responsive Design (1 column mobile) */
 @media (max-width: 768px) {
     .card-grid { grid-template-columns: 1fr; } 
 }
+
 /* ---------------------------MODAL CARD---------------------------------- */
 .modal-content {
     position: relative; /* CRITICAL: Must be relative */
 }
-.portfolio-modal .close-modal{
-    width:2rem !important;
-    height:2rem !important;
-}
+/* .portfolio-modal .close-modal{
+    width:1rem !important;
+    height:1rem !important;
+} */
 #close-modal-top-right {
     /* position: absolute; 
     top: 10px; 
@@ -190,22 +191,30 @@ header.masthead .masthead-heading {
     cursor: pointer;   /* Hand icon on hover */
     font-size: 20px;   /* Large X symbol */
     line-height: 1;    /* Adjusts vertical alignment */
-    
+    margin-right:5px;
     /* MCC Colors */
     background-color:var(--mcc-yellow); /* Default MCC Blue color */
     
     /* Accessibility and user experience */
-    z-index: 1050;     /* Ensures it is above other modal content */
-    padding: 5px;      /* Makes it easier to click */
-    min-width: 44px;   
-    min-height: 44px;
+    /* z-index: 1050;      */
+     /* Makes it easier to click */
+    min-width: 29px;   
+    min-height: 29px;
     border-radius:6px;
     
 }
+@media (min-width: 768px) {
+    #close-modal-top-right {
+        min-width: 44px;   
+    min-height: 44px;
+    }
+    #modalThemeTitle{
+        font-size: 2rem;
+    }}
 .modal-header-wrapper{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     background-color: var(--mcc-blue);
 }
 
@@ -220,7 +229,7 @@ header.masthead .masthead-heading {
 /* -------------------------------------------- */
 /* Sub-Accordion for Actions */
 .action-sub-item  {
-    
+    /* overflow: auto; */
     padding: 10px 0;
 }
 
@@ -251,16 +260,18 @@ header.masthead .masthead-heading {
 }
 
 .action-sub-content {
-    padding: 0 0 10px 0;
-    overflow: hidden;
+    /* padding: 0 0 10px 0; */
+    overflow-y: auto;
     max-height: 0;
     transition: max-height 0.4s ease-in-out;
 }
 
-.action-sub-content.show-action {
+/* .action-sub-content.show-action {
     max-height: 2000px;
+} */
+.modal-body{
+    box-sizing: content-box;
 }
-
 .modal-content p{
     margin-top:10px;
     text-align:left;
@@ -324,6 +335,9 @@ header.masthead .masthead-heading {
     line-height: 1.5;
 }
 
+/* .modal-body ol, .modal-body ul{
+padding:0 !important;
+} */
 /* ------------------------- OBJECTIVE ACCORDIONS ------------------------- */
 
 /* Icon rotation transition */
@@ -428,9 +442,13 @@ header.masthead .masthead-heading {
     font-size: 1em;
     font-weight: bold;
 }
+.update-section ul{
+    text-align:left;
+}
 .modal-content{
     padding: 0  !important;
 }
+
 /* ??????????????????????????????????????? */
 
      .modal-content h2{
@@ -452,12 +470,12 @@ header.masthead .masthead-heading {
 .text-left{
     text-align: left;
 }
-}
+
 
 @media (min-width:768px){
     .timeline > li .timeline-panel {
     padding: 0 20px 20px 5px;
     text-align: left 
     
-  }
+  }}
 }

@@ -7,11 +7,11 @@ class ThemeAdmin(admin.ModelAdmin):
     list_display = ('id', 'title',)
     search_fields = ('title',)
 
-class ObjectiveAdmin(admin.ModelAdmin):
+class ObjectiveAdmin(SummernoteModelAdmin):
     list_display = ('id', 'title', 'theme')
     search_fields = ('title', 'description')            
 
-class ActionAdmin(admin.ModelAdmin):
+class ActionAdmin(SummernoteModelAdmin):
     list_display = ('id', 'title','description', 'update', 'is_progress', 'objective')
     search_fields = ('title', 'description')
     list_filter = ('is_progress', 'objective')

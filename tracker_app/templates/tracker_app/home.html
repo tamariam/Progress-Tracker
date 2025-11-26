@@ -666,12 +666,14 @@
                 <!-- <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" /> -->
             <!-- </div> --> 
              <div class="modal-header-wrapper">
-             <button onclick="closeMCCModal()" class="close-modal"  aria-label="Close Modal" id="close-modal-top-right">
-                <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" />
-            </button>
-            <div class="modal-header-custom">
+                <div class="modal-header-custom">
                 <h2 class="modal-title-custom" id="modalThemeTitle">Loading Theme Details...</h2>
             </div>
+             <button onclick="closeMCCModal()"  aria-label="Close Modal" id="close-modal-top-right">
+                <!-- <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" /> -->
+                 <i class="fa-solid fa-x"></i>
+            </button>
+            
             </div>
             
         
@@ -718,6 +720,6 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    
     </body>
 </html>
