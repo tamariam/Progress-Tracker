@@ -2,6 +2,49 @@
 
 // static/js/custom.js
 
+// Function to handle the actual counting animation
+function animateCounter(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Found the section, now find all specific counter elements inside it
+            const counters = document.querySelectorAll('.counter-value');
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target'); // Get the final number (4, 29, 122)
+                let current = 0;
+                const increment = target / 40; // Determines the speed (150 frames total)
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        // Use innerText to update the visible number
+                        counter.innerText = Math.ceil(current); 
+                        requestAnimationFrame(updateCounter); // Loop the animation
+                    } else {
+                        counter.innerText = target; // Ensure the final value is exactly the target
+                    }
+                };
+                updateCounter();
+            });
+            
+            // Stop observing after the animation runs once
+            observer.unobserve(entry.target); 
+        }
+    });
+}
+// finish counter animation
+
+// Set up the Intersection Observer to watch for the section scrolling into view
+const counterSection = document.getElementById('strategy-counter');
+if (counterSection) {
+    const observerOptions = {
+        root: null, // observe against the viewport
+        threshold: 0.5 // trigger when 50% of the section is visible
+    };
+    const observer = new IntersectionObserver(animateCounter, observerOptions);
+    observer.observe(counterSection);
+}
+
 // Accordion Functionality (for Objectives)
 function toggleAccordion(button) {
     // We target the class 'accordion-title' used in your HTML
@@ -83,6 +126,8 @@ function toggleActionAccordion(button) {
 }
 
 
+
+
 // --- All your other existing code below this line is unchanged ---
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -136,4 +181,6 @@ function closeMCCModal() {
     const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
     modal.hide();
 }
+// counting animation
+
 

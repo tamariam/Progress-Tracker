@@ -1,6 +1,6 @@
 <div class="modal-header-summary py-4">
-    <p class="header-summary">
-       <strong>{{ theme.title|title }} theme has <strong>{{ theme.objectives.count }}</strong> objectives. 
+    <strong><p class="header-summary">
+     {{ theme.title|title }} theme has <strong>{{ theme.objectives.count }}</strong> objectives. 
        Expand the objectives below to see associated actions and view the latest progress updates.
     </p></strong>
 </div>
@@ -16,7 +16,7 @@
             <div class="accordion-content">
                 <div>
                 {% if objective.description %}
-                    <p class="objective-p">{{ objective.description }}</p>
+                   <strong> <p class="objective-p">{{ objective.description }}</p></strong>
                     <!-- <hr class="--mcc-blue"> -->
                 {% endif %}
                 </div>

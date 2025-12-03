@@ -52,6 +52,32 @@ header.masthead .masthead-heading {
 }
 
 /*  -------------------------*/
+/* scrollbarrr colour */
+/* Custom Scrollbar Styles for .modal-body */
+
+/* For Chrome, Safari, and Edge (Webkit) */
+.modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #FFFFFF; /* White background/track */
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: #FFFFFF; /* White thumb/handle */
+  border-radius: 6px;
+  /* Optional border to define the thumb against the white background */
+  border: 1px solid #eee; 
+}
+
+/* For Firefox */
+.modal-body {
+  scrollbar-width: thin;
+  /* Syntax: scrollbar-color: [thumb-color] [track-color]; */
+  scrollbar-color: #FFFFFF #FFFFFF; 
+}
+
 
 .modal-body {
     /* Ensure the padding doesn't push the content down out of view */
@@ -65,7 +91,9 @@ header.masthead .masthead-heading {
     position: relative;
     z-index: 1;
 }
-
+.portfolio-item img{
+    border-radius: 8px !important;
+}
 /* Ensure dynamic content container allows flow */
 #dynamicModalContent {
     position: relative;
@@ -229,7 +257,7 @@ header.masthead .masthead-heading {
 /* -------------------------------------------- */
 /* Sub-Accordion for Actions */
 .action-sub-item  {
-    /* overflow: auto; */
+    overflow-x: hidden;
     padding: 10px 0;
 }
 
@@ -278,15 +306,22 @@ header.masthead .masthead-heading {
 }
 
 .objective-p {
+    font-size:1rem;
     padding-top: 15px;
     white-space:normal;
     word-wrap:break-word;
     overflow-wrap: break-word;
     min-width:0;
-    color:RGB(151, 27, 47);
+    color:var(--mcc-blue);
 }
 .header-summary{
-    color:RGB(151, 27, 47);
+    color:var(--mcc-blue);
+    font-size:1rem;
+}
+@media (min-width: 768px) {
+    .objective-p, .header-summary{
+        font-size:1.25rem;
+    }
 }
 
 /*-------------------------------------- */
@@ -478,4 +513,25 @@ padding:0 !important;
     text-align: left 
     
   }}
+}
+
+/* ////COUNTER */
+
+/*  Counter Section  */
+.counter-div{
+    max-width: 416px;
+    margin:auto;
+}
+.counter-text{
+    color: var(--mcc-yellow);
+   font-weight:bold;
+}
+@media (min-width:768px){
+    .counter-text{
+        font-size:1.4rem;
+    }
+}
+
+.bg-blue{
+    background-color: var(--mcc-blue);
 }
