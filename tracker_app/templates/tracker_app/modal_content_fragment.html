@@ -1,10 +1,146 @@
-<div class="modal-header-summary py-4">
+<!-- <div class="modal-header-summary py-4">
     <strong><p class="header-summary">
      {{ theme.title|title }} theme has <strong>{{ theme.objectives.count }}</strong> objectives. 
        Expand the objectives below to see associated actions and view the latest progress updates.
     </p></strong>
-</div>
-<div class="modal-body-content">
+</div> -->
+
+
+<!-- sjsjsjsjjsjsjsfinish -->
+
+
+<!-- templates/dashboard.html -->
+<section class="page-section  mcc-blue my-2 py-5 rounded">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-lg-5 mb-lg-0">
+        <p class="fs-6 bigger-font yellow-color">
+          In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:
+        </p>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-lg-7">
+        <div class="row g-3">
+          
+          <!-- Completed -->
+          <div class="col-12">
+            <div class="card mcc-green text-white shadow-sm p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text uppercase-class mb-0 fw-bold">
+                  <i class="fas fa-check-circle icon-spacing fa-2x"></i> Actions Completed
+                </p>
+                <h2 class="display-6 mb-0 counter-value"
+                    data-target="{{ counts.completed }}"
+                    aria-label="Completed actions">
+                  {{ counts.completed }}
+                    
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- In Progress -->
+          <div class="col-12">
+            <div class="card mcc-yellow text-dark shadow-sm p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text uppercase-class mb-0 fw-bold">
+                  <i class="fas fa-hourglass-half icon-spacing fa-2x"></i> Actions In Progress
+                </p>
+                <h2 class="display-6 mb-0 counter-value"
+                    data-target="{{ counts.in_progress }}"
+                    aria-label="In-progress actions">
+                  {{ counts.in_progress }}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Not Started -->
+          <div class="col-12">
+            <div class="card mcc-red text-white shadow-sm p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text uppercase-class mb-0 fw-bold">
+                  <i class="fas fa-times-circle icon-spacing fa-2x"></i> Actions Not Started
+                </p>
+                <h2 class="display-6 mb-0 counter-value"
+                    data-target="{{ counts.not_started }}"
+                    aria-label="Not started actions">
+                  {{ counts.not_started }}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Include your animation script -->
+
+
+
+
+<!--  -->
+<!-- <section class="page-section bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+
+             <!-ACTIONS LAYOUT IDEA--------------------------------------------------------------------------------------------------------ACTIONN--- --> 
+            <!-- <div class="col-lg-5 mb-4 mb-lg-0">
+                <h4 class="text-dark mb-3">Strategic Progress Overview</h4>
+                <p class="lead text-muted mb-0">
+                    In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:
+                </p>
+            </div>
+            
+       
+            <div class="col-lg-7">
+                <div class="row g-2">
+                    
+                   
+                    <div class="col-12">
+                        <div class="card p-3 border-start border-success border-5 rounded-0 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text text-uppercase mb-0 fw-bold">Actions Completed</p>
+                                <h2 class="display-6 mb-0 counter-value text-success" data-target="4">4</h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+               
+                    <div class="col-12">
+                        <div class="card p-3 border-start border-warning border-5 rounded-0 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text text-uppercase mb-0 fw-bold">Actions In Progress</p>
+                                <h2 class="display-6 mb-0 counter-value text-warning" data-target="29">29</h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-12">
+                        <div class="card p-3 border-start border-danger border-5 rounded-0 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text text-uppercase mb-0 fw-bold">Actions Not Started</p>
+                                <h2 class="display-6 mb-0 counter-value text-danger" data-target="122">122</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  -->
+<!-- fffffffffffffffffffffff -->
+
+ <!-- ddddddddddddddddddddddddd -->
+<!-- <div class="modal-body-content">
     {% for objective in theme.objectives.all %}
         <div class="accordion-item">
             <button class="accordion-title" onclick="toggleAccordion(this)">
@@ -16,28 +152,27 @@
             <div class="accordion-content">
                 <div>
                 {% if objective.description %}
-                   <strong> <p class="objective-p">{{ objective.description }}</p></strong>
-                    <!-- <hr class="--mcc-blue"> -->
+                   <strong> <p class="objective-p">{{ objective.description|safe }}</p></strong>
+                  
                 {% endif %}
                 </div>
 
-                {% if objective.active_actions %}
-                    <!-- New Container for Action Sub-Accordions -->
+                {% if objective.actions.all %}
+           
                     <div class="action-accordion-container">
-                        {% for action in objective.active_actions %}
-                            
-                            <!-- Action Sub-Accordion Item -->
+                        {% for action in objective.approved_actions %}
+                        
                             <div class="action-sub-item">
-                                <!-- Action Title Button -->
+                              
                                 <button class="action-sub-title" onclick="toggleActionAccordion(this)">
                                     {{ action.title }}
                                     <i class="fa-solid fa-angle-down"></i>
                                 </button>
                                 
-                                <!-- Action Content (Description and Update) -->
+                              
                                 <div class="action-sub-content">
                                     <h4>Action Description:</h4>
-                                    <p>{{ action.description }}</p>
+                                    <p>{{ action.description | safe}}</p>
                                 <hr>
                                     <div class="update-section">
                                         
@@ -49,7 +184,76 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p>There are no active or in-progress actions for this objective yet.</p>
+                    <p>There are no actions for this objective yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No objectives found for this theme yet.</p>
+    {% endfor %}
+</div> -->
+
+<!-- Example of a flat, card-based layout for actions -->
+<!-- START of the new table layout for actions -->
+<div class="modal-body-content">
+    {% for objective in theme.objectives.all %}
+        <div class="accordion-item">
+            <button class="accordion-title" onclick="toggleAccordion(this)">
+                Objective - {{ objective.title }}
+                <i class="fa-solid fa-angle-down"></i>
+            </button>
+            
+            <div class="accordion-content">
+                <div>
+                {% if objective.description %}
+                   <strong> <p class="objective-p">{{ objective.description|safe }}</p></strong>
+                {% endif %}
+                </div>
+
+                {% if objective.actions.all %}
+                    <div class="action-accordion-container">
+                        <!-- Table Headers simulated with flex layout -->
+                        <div class="table-header-fake">
+                            <h3 class="title-col">Actions</h3> <!-- Changed H3 to normal text -->
+                            <!-- <div class="details-col">Details</div> -->
+                        </div>
+
+                      {% for action in objective.actions.all %}
+    <!-- Action Card Item -->
+    <div class="action-card-item status-{{ action.status|lower }}">
+        <div class="action-summary-row" data-action-id="{{ action.id }}"> 
+            <div class="title-col">
+                <strong>{{ action.title }}</strong><br>
+                <small>{{ action.small_description }}</small>
+            </div>
+            <div class="details-col">
+                <!-- Use a single universal color class for all buttons -->
+                <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">Show More</button>
+                <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
+            </div>
+        </div>
+        
+        <!-- Details Content (Hidden by default) -->
+        <div class="full-details" style="display: none;">
+            <div class="details-content">
+                <!-- Action Description is always shown -->
+                <h5>Action Description:</h5>
+                <p>{{ action.description|safe }}</p>
+                
+                <!-- Conditional Block: Only show updates if status is NOT 'NOT_STARTED' -->
+                {% if action.status != 'NOT_STARTED' %}
+                    <hr>
+                    <h5>Latest Update:</h5>
+                    <p>{{ action.update|safe }}</p>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+{% endfor %}
+                    </div>
+                {% else %}
+                    <p>There are no actions for this objective yet.</p>
                 {% endif %}
             </div>
         </div>
@@ -57,3 +261,4 @@
         <p>No objectives found for this theme yet.</p>
     {% endfor %}
 </div>
+<!-- END of the new card-based action layout -->

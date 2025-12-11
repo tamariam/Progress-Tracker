@@ -1,56 +1,56 @@
-from django.shortcuts import render,get_object_or_404
-from django.template.loader import render_to_string
-from.models import Theme, Action ,Objective  
-from django.http import JsonResponse 
 
+from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+# Prefetch was added to these imports:
+from django.db.models import Count, Q, Prefetch 
+from .models import Theme, Action, ActionStatus 
 
 
 # Create your views here.
 def home(request):
+    # This view displays the main home page
     return render(request, 'tracker_app/home.html', {})
 
-
-# def get_theme_details(request, theme_id):
-#     print(f"--- Fetching theme ID: {theme_id} ---") # Added print
-#     theme = get_object_or_404(Theme.objects.prefetch_related('objectives__actions'), pk=theme_id)
-#     print(f"--- Theme found: {theme.title} ---") # Added print
-    
-#     html_content = render_to_string(
-#         'tracker_app/modal_content_fragment.html', 
-#         {'theme': theme},
-#         request=request
-#     )
-#     print("--- Template rendered successfully ---") # This likely won't print before crash
-    
-#     return JsonResponse({'html_content': html_content, 'title': theme.title})
-
-# tracker_app/views.py
 
 def get_theme_details(request, theme_id):
     """ 
     API endpoint to fetch a single theme's details and return HTML/JSON.
-    Returns a custom message if the theme ID is not found.
+    Fetches ONLY approved actions that are ready for public view.
     """
-    # Use filter() instead of get_object_or_404(). .first() returns None if not found.
+    
+    # Define a base queryset filter for "publicly visible" actions
+    PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
+
+    # 1. Fetch the theme, but restrict the prefetched actions to only approved ones.
+    # This uses the Prefetch object to apply the filter when fetching related data.
     theme = Theme.objects.filter(pk=theme_id).prefetch_related(
-       'objectives__actions'
+       Prefetch(
+           'objectives__actions', 
+           queryset=Action.objects.filter(PUBLIC_ACTIONS_FILTER), # Apply the approved filter here
+           to_attr='approved_actions' # We use 'approved_actions' in the template now
+       )
     ).first()
     
-    # If the theme doesn't exist, return a generic "Not Found" JSON response
     if not theme:
         return JsonResponse({
             'html_content': '<p>This strategic theme does not exist or has been removed.</p>',
             'title': 'Theme Not Found'
-        }, status=404) # It's still good practice to return a 404 HTTP status code
+        }, status=404)
 
-    # --- MANUAL DATA FILTERING START (as before) ---
-    for objective in theme.objectives.all():
-        objective.active_actions = objective.actions.filter(is_progress=True)
-    # --- MANUAL DATA FILTERING END ---
-
+    # 2. Calculate counts based *only* on the publicly visible actions
+    # The counts here will match the totals displayed by the progress bars in the template
+    theme_actions = Action.objects.filter(objective__theme=theme).filter(PUBLIC_ACTIONS_FILTER)
+    action_counts = theme_actions.aggregate(
+        completed=Count('id', filter=Q(status=ActionStatus.COMPLETED)),
+        in_progress=Count('id', filter=Q(status=ActionStatus.IN_PROGRESS)),
+        not_started=Count('id', filter=Q(status=ActionStatus.NOT_STARTED)),
+    )
+    
+    # Render the HTML fragment using the theme object and the counts
     html_content = render_to_string(
-        'tracker_app/modal_content_fragment.html', 
-        {'theme': theme},
+        'tracker_app/modal_content_fragment.html', # <-- Make sure this is your correct template path
+        {'theme': theme, 'counts': action_counts},
         request=request
     )
     

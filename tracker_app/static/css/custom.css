@@ -51,6 +51,21 @@ header.masthead .masthead-heading {
     --background-light-gray: #f9f9f9;
 }
 
+.yellow-color{
+    color:#FEBA35;
+    font-weight:bold;
+}
+.mcc-green{
+    background-color:#719949;
+}
+.mcc-red{
+    background-color:#971B2F;
+}
+
+.mcc-blue-transparent {
+    /* Example: Sets the background to 70% opacity */
+    background-color: rgba(0, 123, 255, 0.1) !important; 
+}
 /*  -------------------------*/
 /* scrollbarrr colour */
 /* Custom Scrollbar Styles for .modal-body */
@@ -436,8 +451,6 @@ padding:0 !important;
 /* ------------------------- ACTION SUB-ACCORDIONS ------------------------- */
 
 .action-accordion-container {
-    margin-top: 15px;
-    padding-top: 10px;
     /* Optional border for definition */
     border: 1px solid var(--border-light); 
     border-radius: 4px;
@@ -530,8 +543,439 @@ padding:0 !important;
     .counter-text{
         font-size:1.4rem;
     }
+    /* module section left column  text size for larger screens */
+    
+    .bigger-font{
+        font-size:1.5rem !important;
+    }
+    .uppercase-class{
+        text-transform:uppercase;
+    }
 }
 
-.bg-blue{
-    background-color: var(--mcc-blue);
+/* modal counter icons */
+    /* Custom styles for counter card colors and icon spacing */
+        .mcc-green { background-color: #28a745; }
+        .mcc-yellow { background-color: #ffc107; }
+        .mcc-red { background-color: #dc3545; }
+        
+        /* CSS to ensure space next to the bigger icon */
+        .icon-spacing {
+            margin-right: 15px; /* Increased space since icons are bigger */
+        }
+        
+        /* Ensures text and icons are aligned nicely within the card */
+        .d-flex p {
+            display: flex;
+            align-items: center;
+        }
+
+        /* progress module new layout */
+        .action-card-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* Color codes for your statuses (use your MCC colors if available) */
+.status-completed { background-color: #28a745; /* Green */ }
+.status-in_progress { background-color: #ffc107; /* Yellow */ color: #333; }
+.status-not_started { background-color: #dc3545; /* Red */ }
+
+.action-card-item p {
+    margin-top: 10px;
+    color: #555;
+}
+
+.action-card-item .btn-primary {
+    margin-top: 10px;
+    /* Style this button using your existing CSS framework styles if you have one */
+}
+
+/* /////another version of progress section */
+.action-table {
+    width: 100%;
+    border-collapse: collapse; /* Removes space between borders */
+    margin-top: 15px;
+}
+
+.action-table th {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.action-table-row td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+/* Add striped rows for better readability */
+.action-table tbody tr:nth-child(4n+1), .action-table tbody tr:nth-child(4n+2) {
+    background-color: #fafafa;
+}
+
+/* Style for the hidden details row */
+.full-details td {
+    padding: 20px 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.details-content h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.details-content p {
+    margin-bottom: 10px;
+}
+
+/* Status badge styles remain the same as before */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.status-completed { background-color: #28a745; }
+.status-in_progress { background-color: #ffc107; color: #333; }
+.status-not_started { background-color: #dc3545; }
+/* aqnotheer versionnnnnnnnnnnnnnnnnnnnn */
+.action-table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 15px;
+}
+
+.action-table th {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.action-table-row td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+/* Add striped rows for better readability */
+.action-table tbody tr:nth-child(4n+1) td, .action-table tbody tr:nth-child(4n+2) td {
+    background-color: #fafafa;
+}
+/* Ensure details rows don't have the striped background */
+.full-details td {
+    background-color: #fff !important;
+}
+
+/* Style for the hidden details row */
+.full-details td {
+    padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.details-content h5 { margin-top: 0; margin-bottom: 5px; color: #333; }
+.details-content p { margin-bottom: 10px; }
+
+
+/* --- NEW BORDER STYLING --- */
+
+.action-table-row {
+    border-left: 8px solid transparent; /* Base style, will be overridden */
+}
+
+/* Color codes for the left border (use your MCC colors) */
+/* The class name must match action.status|lower exactly */
+.status-completed { border-left-color: #28a745; /* Green */ }
+.status-in_progress { border-left-color: #ffc107; /* Yellow */ }
+.status-not_started { border-left-color: #dc3545; /* Red */ }
+
+/* Ensure the bottom border of the details row matches the status color for continuity */
+.full-details.status-completed td { border-bottom: 3px solid #28a745; }
+.full-details.status-in_progress td { border-bottom: 3px solid #ffc107; }
+.full-details.status-not_started td { border-bottom: 3px solid #dc3545; }
+
+/* Remove status badge styles, no longer needed */
+.status-badge { display: none; }
+
+/* anotherrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr */
+/* Styles for the new table layout (updated for borders and no row backgrounds) */
+.action-table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 15px;
+}
+
+.action-table th {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #f2f2f2; /* Heading background color kept */
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.action-table-row td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    cursor: pointer;
+    background-color: #fff; /* ENSURE background is white */
+}
+
+/* REMOVE the striped rows CSS rule: */
+/* .action-table tbody tr:nth-child(4n+1) td, .action-table tbody tr:nth-child(4n+2) td {
+    background-color: #fafafa;
+} */
+
+
+/* Style for the hidden details row */
+.full-details td {
+    padding: 20px 10px;
+    background-color: #fff !important; /* ENSURE background is white */
+    border-bottom: 1px solid #ddd;
+}
+
+.details-content h5 { margin-top: 0; margin-bottom: 5px; color: #333; }
+.details-content p { margin-bottom: 10px; }
+
+
+/* --- NEW BORDER STYLING --- */
+
+.action-table-row {
+    border-left: 15px solid transparent; /* Base style, will be overridden */
+}
+
+/* Color codes for the left border */
+.status-completed { border-left-color: #28a745; /* Green */ }
+.status-in_progress { border-left-color: #ffc107; /* Yellow */ }
+.status-not_started { border-left-color: #dc3545; /* Red */ }
+
+/* Ensure the bottom border of the details row matches the status color for continuity */
+.full-details.status-completed td { border-bottom: 5px solid #28a745; }
+.full-details.status-in_progress td { border-bottom: 5px solid #ffc107; }
+.full-details.status-not_started td { border-bottom: 5px solid #dc3545; }
+
+/* Remove status badge styles, no longer needed */
+.status-badge { display: none; }
+
+/* anmotherr oneeeeeeeeeeeeeeeee /////////////////////*/
+/* .table-header-fake {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    border-radius: 4px 4px 0 0;
+} */
+
+/* Base card item style (the row lookalike) */
+/* .accordion-content {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: auto; 
+    transition: max-height 0.2s ease-out;
+} */
+
+.accordion-content.show {
+    /* When the accordion is 'shown', this class is applied by JS */
+    overflow: visible; /* Ensure it is visible when expanded */
+    /* max-height is handled by JS (content.scrollHeight + "px") */
+}
+.status-legend {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.legend-item {
+    padding-left: 20px;
+    position: relative;
+    margin-right: 5px;
+}
+
+.legend-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: currentColor; /* Uses text color by default */
+}
+
+/* Color codes for the legend items (match your table borders) */
+.status-completed-border::before { background-color: #28a745; }
+.status-in_progress-border::before { background-color: #ffc107; }
+.status-not_started-border::before { background-color: #dc3545; }
+
+
+/* Header styles (The fake table header) */
+.table-header-fake {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Base card item style (the row lookalike) */
+.action-card-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: none; 
+    margin-bottom: 0px;
+    position: relative;
+    overflow: auto;
+    padding-left: 8px; /* Space for L/R borders */
+    padding-right: 8px;
+}
+.action-card-item:last-child {
+    border-bottom: 1px solid #ddd; /* Add the bottom border to the last item only */
+    border-radius: 0 0 4px 4px;
+}
+
+.action-summary-row {
+    display: flex; /* Use flexbox for layout */
+    padding: 10px 0px; /* Padding handled by parent container now */
+
+    cursor: pointer;
+    align-items: center;
+     flex-wrap: wrap;
+}
+
+/* Define column widths using flex properties */
+.title-col { 
+    flex-grow: 1; /* Takes up all available space */
+    padding-right: 15px; /* Add some space between text and button */
+    text-align: left;
+}
+.details-col { 
+    flex-shrink: 0; /* Stays a fixed width, doesn't shrink */
+    text-align: right; 
+}
+.table-header-fake .details-col { text-align: right; }
+
+
+/* --- BORDER STYLING (left and right sides) --- */
+.action-card-item {
+    border-left: 8px solid transparent; 
+    border-right: 8px solid transparent; 
+}
+
+/* Color codes for both the left and right border */
+.status-completed { border-left-color: #28a745; border-right-color: #28a745; }
+.status-in_progress { border-left-color: #ffc107; border-right-color: #ffc107; }
+.status-not_started { border-left-color: #dc3545; border-right-color: #dc3545; }
+
+
+/* Style for the hidden details section */
+.full-details {
+    padding: 0 15px 15px 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.details-content h5 { margin-top: 0; margin-bottom: 5px; color: #333; }
+.details-content p { margin-bottom: 10px; }
+
+
+/* --- BUTTON STYLING (matching status color) --- */
+
+.toggle-details {
+    color: white; /* Default text color */
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Color codes for the button backgrounds */
+.status-completed-button { background-color: #28a745; }
+.status-in_progress-button { background-color: #ffc107; color: #333; } /* Yellow buttons need dark text */
+.status-not_started-button { background-color: #dc3545; }
+
+
+/* Remove status badge styles, no longer needed */
+.status-badge { display: none; }
+
+.view-button, .close-button {
+    /* Ensure they are treated as buttons */
+    display: inline-block; 
+    background-color: var(--mcc-blue);
+    color: white;
+}
+.view-button:hover, .close-button:hover {
+    background-color: var(--mcc-yellow);
+}
+
+.close-button {
+    font-size: 1.5rem;   /* Make the icon much larger */
+    font-weight: bold;   /* Make the icon thicker/bolder */
+    line-height: 0.8;    /* Adjust line height to vertically center the thick icon in the button */
+    padding: 6px 12px; /* Ensure padding is consistent with the view button */
+}
+
+.accordion-content .objective-p {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important; /* Keep a small gap */
+}
+
+/* Target the <small> tag used for the action small description */
+.title-col small {
+    margin-top: 5px !important; /* Small gap between title and description */
+    display: block; /* Ensures margin works correctly */
+}
+
+/* Target elements inside the details content area */
+.full-details h5, .full-details p {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+}
+
+/* Target the header text of the 'fake' table header */
+.table-header-fake .title-col,
+.table-header-fake .details-col {
+    margin: 0 !important; 
+}
+
+/* Also ensure the header of the fake table has no top margin */
