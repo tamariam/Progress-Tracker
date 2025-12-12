@@ -24,7 +24,7 @@ class Objective(models.Model):
 
 
 class ActionStatus(models.TextChoices):
-    NOT_STARTED = "NOT_STARTED", "Not started"
+    NOT_STARTED = "NOT_STARTED", "Inactive"
     IN_PROGRESS = "IN_PROGRESS", "In progress"
     COMPLETED   = "COMPLETED",   "Completed"
 

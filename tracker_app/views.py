@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render,    get_object_or_404   
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 # Prefetch was added to these imports:
@@ -12,6 +12,45 @@ def home(request):
     # This view displays the main home page
     return render(request, 'tracker_app/home.html', {})
 
+def get_actions_by_status(request, theme_id, status_filter):
+    """
+    API endpoint to fetch actions for a theme filtered by status.
+    Returns HTML/JSON for a unified table modal.
+    """
+    PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
+    
+    # Ensure the status filter provided is valid (using the internal database values)
+    valid_statuses = [choice[0] for choice in ActionStatus.choices] # Use choice[0] to get the value
+    if status_filter not in valid_statuses:
+        return JsonResponse({'error': 'Invalid status filter provided.'}, status=400)
+
+    # Fetch approved actions matching the theme and status
+    actions_list = Action.objects.filter(
+        objective__theme_id=theme_id
+    ).filter(
+        PUBLIC_ACTIONS_FILTER
+    ).filter(
+        status=status_filter
+    ).order_by(
+        'title' # Order alphabetically
+    )
+
+    theme = get_object_or_404(Theme, pk=theme_id)
+    
+    # Render the new actions.html template file
+    html_content = render_to_string(
+        'tracker_app/actions.html', 
+        {'actions_list': actions_list, 'theme': theme, 'status_filter': status_filter},
+        request=request
+    )
+    
+    # Use ActionStatus.choices to get the professional display name
+    status_display_name = dict(ActionStatus.choices)[status_filter]
+
+    return JsonResponse({
+        'html_content': html_content, 
+        'title': f'{theme.title} | {status_display_name} Actions'
+    })
 
 def get_theme_details(request, theme_id):
     """ 

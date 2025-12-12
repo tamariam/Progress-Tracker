@@ -210,48 +210,57 @@
                 {% endif %}
                 </div>
 
-                {% if objective.actions.all %}
-                    <div class="action-accordion-container">
-                        <!-- Table Headers simulated with flex layout -->
-                        <div class="table-header-fake">
-                            <h3 class="title-col">Actions</h3> <!-- Changed H3 to normal text -->
-                            <!-- <div class="details-col">Details</div> -->
-                        </div>
-
-                      {% for action in objective.actions.all %}
-    <!-- Action Card Item -->
-    <div class="action-card-item status-{{ action.status|lower }}">
-        <div class="action-summary-row" data-action-id="{{ action.id }}"> 
-            <div class="title-col">
-                <strong>{{ action.title }}</strong><br>
-                <small>{{ action.small_description }}</small>
-            </div>
-            <div class="details-col">
-                <!-- Use a single universal color class for all buttons -->
-                <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">Show More</button>
-                <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
-            </div>
-        </div>
-        
-        <!-- Details Content (Hidden by default) -->
-        <div class="full-details" style="display: none;">
-            <div class="details-content">
-                <!-- Action Description is always shown -->
-                <h5>Action Description:</h5>
-                <p>{{ action.description|safe }}</p>
-                
-                <!-- Conditional Block: Only show updates if status is NOT 'NOT_STARTED' -->
-                {% if action.status != 'NOT_STARTED' %}
-                    <hr>
-                    <h5>Latest Update:</h5>
-                    <p>{{ action.update|safe }}</p>
-                {% endif %}
-                
-            </div>
-        </div>
-    </div>
-{% endfor %}
+                {% if objective.approved_actions %}
+                    
+                    <!-- NEW TABLE STRUCTURE STARTS HERE -->
+                    <div class="action-table-container">
+                        <table class="action-table">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Status</th>
+                                    <th class="text-right">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for action in objective.actions.all %}
+                                    <!-- This is the main TR that holds the summary row -->
+                                    <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}"> 
+                                        <td class="title-col">
+                                            <strong>{{ action.title }}</strong><br>
+                                            <p class="text-muted">{{ action.small_description }}</p>
+                                        </td>
+                                        <td class="status-col">
+                                            <!-- Status Badge using status-specific color classes -->
+                                            <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
+                                        </td>
+                                        <td class="details-col text-right">
+                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">Show More</button>
+                                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Details Content (Hidden TR) -->
+                                    <tr class="full-details" style="display: none;">
+                                        <td colspan="3"> <!-- Span across all three columns -->
+                                            <div class="details-content">
+                                                <h5>Action Description:</h5>
+                                                <p>{{ action.description|safe }}</p>
+                                                
+                                                {% if action.status != 'NOT_STARTED' %}
+                                                    <hr class="bg-light">
+                                                    <h5>Latest Update:</h5>
+                                                    <p>{{ action.update|safe }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+                    <!-- NEW TABLE STRUCTURE ENDS HERE -->
+
                 {% else %}
                     <p>There are no actions for this objective yet.</p>
                 {% endif %}
