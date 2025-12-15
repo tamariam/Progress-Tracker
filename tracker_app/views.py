@@ -1,55 +1,65 @@
 
-from django.shortcuts import render,    get_object_or_404   
+from django.shortcuts import render, get_object_or_404   
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-# Prefetch was added to these imports:
 from django.db.models import Count, Q, Prefetch 
+# Ensure you import your models:
 from .models import Theme, Action, ActionStatus 
+from django.utils.html import strip_tags 
 
+
+PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
 
 # Create your views here.
 def home(request):
     # This view displays the main home page
     return render(request, 'tracker_app/home.html', {})
 
-def get_actions_by_status(request, theme_id, status_filter):
-    """
-    API endpoint to fetch actions for a theme filtered by status.
-    Returns HTML/JSON for a unified table modal.
-    """
-    PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
-    
-    # Ensure the status filter provided is valid (using the internal database values)
-    valid_statuses = [choice[0] for choice in ActionStatus.choices] # Use choice[0] to get the value
-    if status_filter not in valid_statuses:
-        return JsonResponse({'error': 'Invalid status filter provided.'}, status=400)
 
-    # Fetch approved actions matching the theme and status
-    actions_list = Action.objects.filter(
-        objective__theme_id=theme_id
-    ).filter(
-        PUBLIC_ACTIONS_FILTER
-    ).filter(
-        status=status_filter
-    ).order_by(
-        'title' # Order alphabetically
-    )
+def get_filtered_actions_by_status(request, status):
+    """
+    API endpoint to fetch all approved actions matching a specific status 
+    and return them as JSON data.
+    """
+    # Map the URL string identifier to the actual Django model choice value
+    status_map = {
+        'completed': ActionStatus.COMPLETED,
+        'in_progress': ActionStatus.IN_PROGRESS,
+        'not_started': ActionStatus.NOT_STARTED,
+    }
 
-    theme = get_object_or_404(Theme, pk=theme_id)
-    
-    # Render the new actions.html template file
-    html_content = render_to_string(
-        'tracker_app/actions.html', 
-        {'actions_list': actions_list, 'theme': theme, 'status_filter': status_filter},
-        request=request
-    )
-    
-    # Use ActionStatus.choices to get the professional display name
-    status_display_name = dict(ActionStatus.choices)[status_filter]
+    # Validate the status provided in the URL
+    target_status = status_map.get(status.lower())
+    if not target_status:
+        return JsonResponse({'error': 'Invalid status provided.'}, status=400)
+
+    # Fetch approved actions matching the status
+    actions = Action.objects.filter(
+        PUBLIC_ACTIONS_FILTER # from your existing views.py filter
+    ).filter(
+        status=target_status
+    ).select_related('objective') # Optimise query to get objective title later
+
+    # Format the data into a simple list of dictionaries for the frontend JS
+    data = []
+    for action in actions:
+        data.append({
+            'title': action.title,
+            'small_description': action.small_description,
+            # Use strip_tags because SummernoteTextField might contain HTML you don't want in a raw JSON list
+            'description': strip_tags(action.description), 
+            # Return the raw status code (e.g. NOT_STARTED, IN_PROGRESS, COMPLETED)
+            # so the frontend can reliably build CSS classes like "status-in_progress".
+            'status': action.status,
+            'status_display': action.get_status_display(),
+            'objective_title': action.objective.title, # Access the related objective title
+        })
 
     return JsonResponse({
-        'html_content': html_content, 
-        'title': f'{theme.title} | {status_display_name} Actions'
+        'status_requested': status.lower(),
+        'status_title': status.replace('_', ' ').title(),
+        'count': len(data),
+        'actions': data
     })
 
 def get_theme_details(request, theme_id):

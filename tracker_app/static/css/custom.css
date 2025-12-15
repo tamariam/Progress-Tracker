@@ -969,3 +969,16 @@ padding:0 !important;
 hr{
     border:none !important
 }
+
+/* counter-styles */
+.status-card {
+    cursor: pointer; /* Changes the arrow to a hand icon */
+    transition: transform 0.2s; /* Optional: makes the card slightly interactive on hover */
+}
+
+.status-card:hover {
+    transform: translateY(-2px); /* Optional: lifts the card slightly on hover */
+}
+
+/* /// counter  */
+
