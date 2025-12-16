@@ -51,15 +51,17 @@ header.masthead .masthead-heading {
     --background-light-gray: #f9f9f9;
 }
 
+
+
 .yellow-color{
-    color:#FEBA35;
+    color: rgb(254, 186, 53);
     font-weight:bold;
 }
 .mcc-green{
-    background-color:#719949;
+    background-color: rgb(113, 153, 73);
 }
 .mcc-red{
-    background-color:#971B2F;
+    background-color: rgb(151, 27, 47);
 }
 
 .mcc-blue-transparent {
@@ -560,9 +562,9 @@ padding:0 !important;
 
 /* modal counter icons */
     /* Custom styles for counter card colors and icon spacing */
-        .mcc-green { background-color: #28a745; }
-        .mcc-yellow { background-color: #ffc107; }
-        .mcc-red { background-color: #dc3545; }
+        .mcc-green { background-color: rgb(113, 153, 73); }
+        .mcc-yellow { background-color: rgb(254, 186, 53); }
+        .mcc-red { background-color: rgb(151, 27, 47); }
         
         /* CSS to ensure space next to the bigger icon */
         .icon-spacing {
@@ -606,9 +608,9 @@ padding:0 !important;
 }
 
 /* Color codes for your statuses (use your MCC colors if available) */ 
-.status-completed { background-color: #28a745;  }
-.status-in_progress { background-color: #ffc107}
-.status-not_started { background-color: #dc3545; /* Red */ }
+.status-completed { background-color: rgb(113, 153, 73); }
+.status-in_progress { background-color: rgb(254, 186, 53); }
+.status-not_started { background-color: rgb(151, 27, 47); /* Red */ }
 
 .action-card-item p {
     margin-top: 10px;
@@ -725,14 +727,16 @@ padding:0 !important;
 
 /* Color codes for the left border (use your MCC colors) */
 /* The class name must match action.status|lower exactly */
-.status-completed { border-left-color: #28a745; /* Green */ }
-.status-in_progress { border-left-color: #ffc107; /* Yellow */ }
-.status-not_started { border-left-color: #dc3545; /* Red */ }
+.status-completed { border-left-color: #719949; /* Green */ }
+.status-in_progress { border-left-color: #FEBA35; /* Yellow */ }
+.status-not_started { border-left-color: rgb(151, 27, 47); /* Red */ }
 
 /* Ensure the bottom border of the details row matches the status color for continuity */
-.full-details.status-completed td { border-bottom: 3px solid #28a745; }
-.full-details.status-in_progress td { border-bottom: 3px solid #ffc107; }
-.full-details.status-not_started td { border-bottom: 3px solid #dc3545; }
+.full-details.status-completed td { border-bottom: 3px solid #719949; }
+.full-details.status-in_progress td { border-bottom: 3px solid #FEBA35; }
+.full-details.status-not_started td { border-bottom: 3px solid rgb(151, 27, 47); }
+
+;
 
 /* Remove status badge styles, no longer needed */
 .status-badge { display: none; }
@@ -786,13 +790,13 @@ padding:0 !important;
 
 /* Color codes for the left border */
 .status-completed { border-left-color: #28a745; /* Green */ }
-.status-in_progress { border-left-color: #ffc107; /* Yellow */ }
-.status-not_started { border-left-color: #dc3545; /* Red */ }
+.status-in_progress { border-left-color: #FEBA35; /* Yellow */ }
+.status-not_started { border-left-color: rgb(151, 27, 47); /* Red */ }
 
 /* Ensure the bottom border of the details row matches the status color for continuity */
 .full-details.status-completed td { border-bottom: 5px solid #28a745; }
-.full-details.status-in_progress td { border-bottom: 5px solid #ffc107; }
-.full-details.status-not_started td { border-bottom: 5px solid #dc3545; }
+.full-details.status-in_progress td { border-bottom: 5px solid #FEBA35; }
+.full-details.status-not_started td { border-bottom: 5px solid rgb(151, 27, 47); }
 
 /* Remove status badge styles, no longer needed */
 .status-badge { display: none; }
@@ -836,9 +840,9 @@ padding:0 !important;
 }
 
 /* Color codes for the legend items (Keep if needed) */
-.status-completed-border::before { background-color: #28a745; }
-.status-in_progress-border::before { background-color: #ffc107; }
-.status-not_started-border::before { background-color: #dc3545; }
+.status-completed-border::before { background-color: rgb(113, 153, 73); }
+.status-in_progress-border::before { background-color: rgb(254, 186, 53); }
+.status-not_started-border::before { background-color: rgb(151, 27, 47); }
 
 
 /* --- TABLE STYLING --- */
@@ -884,9 +888,9 @@ padding:0 !important;
 /* .action-summary-row {
     border-left: 10px solid transparent; 
 } */
-.status-completed { border-left-color: #28a745; }
-.status-in_progress { border-left-color: #ffc107; }
-.status-not_started { border-left-color: #dc3545; }
+.status-completed { border-left-color:  #719949; }
+.status-in_progress { border-left-color: rgb(254, 186, 53); }
+.status-not_started { border-left-color: rgb(151, 27, 47); }
 
 
 /* --- Status Badge Styling (Pill shape - these are now used in the HTML) --- */
@@ -901,9 +905,9 @@ padding:0 !important;
 }
 
 /* Background colors for badges using new distinct classes (Requires HTML update as previously specified) */
-.badge-completed { background-color: #28a745; }
-.badge-in_progress { background-color: #ffc107; color: #333; }
-.badge-not_started { background-color: #dc3545; }
+.badge-completed,.header-completed { background-color: #719949; }
+.badge-in_progress,.header-in_progress { background-color: rgb(254, 186, 53); color: #333; }
+.badge-not_started,.header-not_started { background-color: rgb(151, 27, 47); }
 
 
 /* Style for the hidden details section (full row spanning all columns) */
@@ -913,9 +917,9 @@ padding:0 !important;
 }
 
 /* Ensure the bottom border of the details row matches the status color for continuity */
-.full-details.status-completed td { border-bottom: 5px solid #28a745; }
-.full-details.status-in_progress td { border-bottom: 5px solid #ffc107; }
-.full-details.status-not_started td { border-bottom: 5px solid #dc3545; }
+.full-details.status-completed td { border-bottom: 5px solid ; }
+.full-details.status-in_progress td { border-bottom: 5px solid var(--mcc-yellow); }
+.full-details.status-not_started td { border-bottom: 5px solid  mcc-red; }
 
 
 .details-content {
@@ -974,11 +978,41 @@ hr{
 .status-card {
     cursor: pointer; /* Changes the arrow to a hand icon */
     transition: transform 0.2s; /* Optional: makes the card slightly interactive on hover */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .status-card:hover {
     transform: translateY(-2px); /* Optional: lifts the card slightly on hover */
+    transform: scale(0.98);
 }
 
 /* /// counter  */
+.btn-back{
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.btn-back:hover{
+    background-color:var(--mcc-yellow) !important;
+    transform: scale(1.2);
+
+}
+
+/* change thead  background accordingly  */
+
+/* Table Header Status Colors */
+/* Target the TH inside the colored THEAD */
+.action-table thead.header-completed th {
+    background-color: #719949 ;
+    color: white ;
+}
+
+.action-table thead.header-in_progress th {
+   background-color: rgb(254, 186, 53);
+color: #333;
+}
+
+.action-table thead.header-not_started th {
+    background-color:  #971B2F ;
+    color: white ;
+}
+
 

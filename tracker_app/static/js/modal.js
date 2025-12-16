@@ -1,3 +1,5 @@
+
+
 function capitalizeEachWord(str) { 
     if (!str) return ''; 
     return str.replace(/\b\w/g, char => char.toUpperCase()); 
@@ -94,100 +96,96 @@ function hideFilteredActions() {
     // document.getElementById('modalThemeTitle').textContent = "Meath Digital Strategy"; 
 }
 
-// --- All your other existing code below this line is unchanged ---
-function fetchAndDisplayActions(status) {
-    // Note: The URL must match the Django URL pattern you set up earlier: 
-    // path('api/actions/filter/<str:status>/', ...)
-    const url = `/api/actions/filter/${status.toLowerCase()}/`; 
-
-    // Target the specific containers within the modal
-    const accordionArea = document.getElementById('accordion-view-container');
-    const tableArea = document.getElementById('filtered-table-view-container');
-    const modalTitle = document.getElementById('modalThemeTitle');
+function fetchAndDisplayActions(status, page = 1) {
+    // Include page number in the API request
+    const url = `/api/actions/filter/${status.toLowerCase()}/?page=${page}`; 
     
-    if (!accordionArea || !tableArea || !modalTitle) {
-        console.error("Modal content areas not found. Ensure IDs are correct.");
-        return; 
-    }
+    const tableArea = document.getElementById('filtered-table-view-container');
+    const accordionArea = document.getElementById('accordion-view-container');
+    const modalTitle = document.getElementById('modalThemeTitle');
 
-    // Set loading state and switch view
-    modalTitle.textContent = `Loading ${capitalizeEachWord(status.replace('_', ' '))} Actions...`;
-    accordionArea.style.display = 'none'; // Hide the default view
-    tableArea.style.display = ''; // Show the new area
+    // Initial UI state
+    accordionArea.style.display = 'none'; 
+    tableArea.style.display = ''; 
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Build the HTML table structure that mimics your original HTML style
+            const statusHeaderClass = `header-${status.toLowerCase()}`;
+            
+            // 1. Build the Table Structure
             let htmlOutput = `
-                <h2>${capitalizeEachWord(data.status_title)} Actions (${data.count})</h2>
-                <p><button class="btn btn-secondary" onclick="hideFilteredActions()">← Back to Objective Accordions</button></p>
-                
                 <div class="action-table-container">
                     <table class="action-table">
-                        <thead>
+                        <thead class="${statusHeaderClass}">
                             <tr>
-                                <!-- "Status" column removed as requested -->
                                 <th>Action</th>
-                                <th>Objective</th>
+                                <th>Description</th>
                                 <th class="text-right">Details</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
             
+            // 2. Loop through Actions
             data.actions.forEach(action => {
-                // Determine if 'NOT_STARTED' check is needed for update section (JS equivalent of Django template logic)
-                const needsUpdateSection = action.status.toLowerCase() !== 'not_started';
-                const updateHtml = needsUpdateSection ? `
-                    <hr class="bg-light">
-                    <h5>Latest Update:</h5>
-                    <p>${action.description || 'No update available.'}</p>
-                ` : '';
-
-                // Build the summary row and the hidden details row
                 htmlOutput += `
-                    <!-- Summary Row: Use the status class for the left border CSS we defined -->
-                    <tr class="action-summary-row status-${action.status.toLowerCase()}" data-action-id="${action.id}"> 
-                        <td class="title-col">
-                            <strong>${action.title}</strong><br>
-                            <p class="text-muted">${action.small_description}</p>
-                        </td>
-                        <td class="objective-col">
-                            ${action.objective_title}
-                        </td>
+                    <tr class="action-summary-row status-${action.status.toLowerCase()}">
+                        <td class="title-col"><strong>${action.title}</strong></td>
+                        <td class="objective-col">${action.small_description}</td>
                         <td class="details-col text-right">
-                            <!-- Buttons rely on your existing handleDetailsToggle JS function -->
-                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">Show More</button>
-                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
+                            <button class="btn btn-sm view-button" onclick="handleDetailsToggle(this)">Show More</button>
                         </td>
                     </tr>
-                    
-                    <!-- Details Content (Hidden TR): Use same classes -->
                     <tr class="full-details" style="display: none;">
                         <td colspan="3">
                             <div class="details-content">
                                 <h5>Action Description:</h5>
                                 <p>${action.description}</p>
-                                ${updateHtml}
                             </div>
                         </td>
                     </tr>
                 `;
             });
             
-            // Close the table and containers
-            htmlOutput += '</tbody></table></div>'; 
-
-            // Inject the finished HTML
-            modalTitle.textContent = `${capitalizeEachWord(data.status_title)} Actions`;
+            htmlOutput += '</tbody></table></div>';
+            
+            // 3. Add Pagination Controls (if more than 1 page)
+            if (data.total_pages > 1) {
+                htmlOutput += `<div class="pagination-controls text-center mt-3">`;
+                if (data.has_previous) {
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page - 1})">Previous</button>`;
+                }
+                htmlOutput += `<span class="mx-2">Page ${data.current_page} of ${data.total_pages}</span>`;
+                if (data.has_next) {
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page + 1})">Next</button>`;
+                }
+                htmlOutput += `</div>`;
+            }
+            
+            // 4. Add the Centered "Go Back" Button
+            htmlOutput += `
+                <p class="text-center">
+                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">← Objectives</button>
+                </p>
+            `;
+            
+            // 5. Inject final HTML and update title
             tableArea.innerHTML = htmlOutput;
+           
         })
         .catch(error => {
             console.error('Error fetching filtered actions:', error);
-            tableArea.innerHTML = '<p>Error loading content.</p><button onclick="hideFilteredActions()">Go Back</button>';
+            tableArea.innerHTML = `
+                <div class="text-center py-4">
+                    <p class="text-danger">Error loading content. Please try again.</p>
+                    <button class="btn btn-secondary btn-back" onclick="hideFilteredActions()">Objectives</button>
+                </div>
+            `;
         });
 }
+
+let currentModalThemeTitle = ''; 
 // ggggggggggggggggggggggggggggg
 document.addEventListener('DOMContentLoaded', (event) => {
 //    new code

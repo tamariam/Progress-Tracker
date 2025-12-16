@@ -6,7 +6,8 @@ from django.db.models import Count, Q, Prefetch
 # Ensure you import your models:
 from .models import Theme, Action, ActionStatus 
 from django.utils.html import strip_tags 
-
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
 
@@ -17,49 +18,39 @@ def home(request):
 
 
 def get_filtered_actions_by_status(request, status):
-    """
-    API endpoint to fetch all approved actions matching a specific status 
-    and return them as JSON data.
-    """
-    # Map the URL string identifier to the actual Django model choice value
+    # Mapping and filtering as before
     status_map = {
         'completed': ActionStatus.COMPLETED,
         'in_progress': ActionStatus.IN_PROGRESS,
         'not_started': ActionStatus.NOT_STARTED,
     }
-
-    # Validate the status provided in the URL
     target_status = status_map.get(status.lower())
-    if not target_status:
-        return JsonResponse({'error': 'Invalid status provided.'}, status=400)
-
-    # Fetch approved actions matching the status
-    actions = Action.objects.filter(
-        PUBLIC_ACTIONS_FILTER # from your existing views.py filter
-    ).filter(
-        status=target_status
-    ).select_related('objective') # Optimise query to get objective title later
-
-    # Format the data into a simple list of dictionaries for the frontend JS
-    data = []
-    for action in actions:
-        data.append({
-            'title': action.title,
-            'small_description': action.small_description,
-            # Use strip_tags because SummernoteTextField might contain HTML you don't want in a raw JSON list
-            'description': strip_tags(action.description), 
-            # Return the raw status code (e.g. NOT_STARTED, IN_PROGRESS, COMPLETED)
-            # so the frontend can reliably build CSS classes like "status-in_progress".
-            'status': action.status,
-            'status_display': action.get_status_display(),
-            'objective_title': action.objective.title, # Access the related objective title
-        })
+    
+    # Order by ID or date to ensure consistent pagination
+    actions_list = Action.objects.filter(is_approved=True, status=target_status).order_by('id')
+    
+    # Paginate: 10 actions per page
+    paginator = Paginator(actions_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
+    data = [{
+        'id': action.id,
+        'title': action.title,
+        'small_description': action.small_description,
+        'description': action.description,
+        'status': action.status,
+        'objective_title': action.objective.title,
+    } for action in page_obj]
 
     return JsonResponse({
-        'status_requested': status.lower(),
         'status_title': status.replace('_', ' ').title(),
-        'count': len(data),
-        'actions': data
+        'actions': data,
+        'count': paginator.count,
+        'current_page': page_obj.number,
+        'total_pages': paginator.num_pages,
+        'has_next': page_obj.has_next(),
+        'has_previous': page_obj.has_previous(),
     })
 
 def get_theme_details(request, theme_id):

@@ -108,6 +108,7 @@
                             <thead>
                                 <tr>
                                     <th>Action</th>
+                                    <th>Description</th>
                                     <th>Status</th>
                                     <th class="text-right">Details</th>
                                 </tr>
@@ -118,7 +119,9 @@
                                     <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}"> 
                                         <td class="title-col">
                                             <strong>{{ action.title }}</strong><br>
-                                            <p class="text-muted">{{ action.small_description }}</p>
+                                        </td>
+                                         <td class="title-col">
+                                            <p >{{ action.small_description }}</p>
                                         </td>
                                         <td class="status-col">
                                             <!-- Status Badge using status-specific color classes -->
