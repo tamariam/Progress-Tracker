@@ -22,7 +22,8 @@ header.masthead .masthead-heading {
 
 
 .mcc-blue {
-  background-color: rgb(0, 38, 58) !important; /* or any color you want */
+  /* background-color: rgb(0, 38, 58) !important;  */
+  background: rgb(2, 24, 50)!important;
 }
 .mcc-yellow{
   background-color: rgb(254, 186, 53) !important;

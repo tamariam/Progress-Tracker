@@ -10,13 +10,14 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
          <link href="{% static 'css/style.css' %}" rel="stylesheet" />
          <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/other.css' %}" rel="stylesheet" />
     </head>
     
     <body id="page-top">
@@ -309,7 +310,7 @@
       
    
         <!-- Footer-->
-        <footer class="footer py-4">
+        <!-- <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
@@ -324,11 +325,36 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
+
+     <footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <small>
+          <span class="footer-right">
+            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/accessibility-statement" rel="noopener" aria-label="Accessibility Statement (opens in a new tab)">Accessibility</a>
+            <a target="_blank" href="https://www.meath.ie/disclaimer" rel="noopener" aria-label="Disclaimer Statement (opens in a new tab)">Disclaimer</a>
+            <a target="_blank" href="https://www.meath.ie/council/your-council/customer-service-and-communications/data-protection-privacy-statement-for-meath-county-council" rel="noopener" aria-label="Privacy Statement (opens in a new tab)">Privacy</a>
+            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/freedom-of-information" rel="noopener" aria-label="Freedom of Information Statement (opens in a new tab)">Freedom of Information</a>
+            <a target="_blank" href="https://www.meath.ie/sitemap" rel="noopener" aria-label="Meath Sitemap (opens in a new tab)">Sitemap</a>
+          </span>
+          <div class="social-icons">
+            <a href="https://www.youtube.com/channel/UCxcwtis5gp3GOYRRxJerMKA" target="_blank" rel="noopener"> <i class="fa-brands fa-youtube" aria-label="YouTube"></i></a>
+            <a href="https://www.facebook.com/MeathCountyCouncil/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" aria-label="Facebook"></i></a>
+            <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"  aria-label="Facebook"></i></a>
+            <a href="https://ie.linkedin.com/company/meath-county-council" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in" aria-label="LinkedIn"></i></a>
+            <a href="https://www.instagram.com/meathcoco/?hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-label="Instagram"></i></a>
+          </div>
+        </small>
+      </div>
+    </div>
+  </div>
+</footer>
    
   
     
-            <!-- <!- Custom Header will be populated by JS--> -->
+            <!-- Custom Header will be populated by JS -->
              <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
