@@ -10,10 +10,7 @@ header.masthead {
 }
 
 
-section#contact {
-    background-image: url("../assets/img/contact-bg.png") ;
-    background-color: rgb(0, 38, 58);
-}
+
 
 header.masthead .masthead-heading {
   font-size: 2.5rem !important;
@@ -22,7 +19,7 @@ header.masthead .masthead-heading {
 
 
 .mcc-blue {
-  /* background-color: rgb(0, 38, 58) !important;  */
+ 
   background: rgb(2, 24, 50)!important;
 }
 .mcc-yellow{
@@ -32,7 +29,7 @@ header.masthead .masthead-heading {
 /* -------------------------MODAL ACCORDION------------------------------------modal */
 :root {
     /* Core MCC Colors */
-    --mcc-blue: #00263A;
+    --mcc-blue:  rgb(2, 24, 50)!important; /* Pantone 2965 RGB: 2, 24, 50 */
     --mcc-yellow: #FEBA35;
     --mcc-light-blue: #71C5E8;
     --mcc-green-lime: #B5BD00;
@@ -123,7 +120,7 @@ header.masthead .masthead-heading {
 /* --------------------------------- */
 /* Specific styles to override the generic Bootstrap modal styles */
 .modal-header-custom {
-    /* background-color: var(--mcc-blue); */
+    background-color: RGB(2, 24, 50)!important;
     color: var(--mcc-yellow);
     padding: 20px;
     /* Helvetica Light font requirement */
@@ -134,6 +131,7 @@ header.masthead .masthead-heading {
 #modalThemeTitle{
     color: var(--mcc-yellow);
     font-size:1.5rem;
+    background-color:RGB(2, 24, 50)
 
 }
 
@@ -266,7 +264,7 @@ header.masthead .masthead-heading {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    background-color: var(--mcc-blue);
+    background-color: RGB(2, 24, 50);
 }
 
 /* Hover and Focus States (Accessibility) */
@@ -338,7 +336,7 @@ header.masthead .masthead-heading {
     color:var(--mcc-blue);
 }
 .header-summary{
-    color:var(--mcc-blue);
+    color: rgb(2, 24, 50);
     font-size:1rem;
 }
 @media (min-width: 768px) {
@@ -363,7 +361,7 @@ header.masthead .masthead-heading {
 
 /* Specific styles to override the generic Bootstrap modal styles */
 .modal-header-custom {
-    background-color: var(--mcc-blue);
+    background-color: RGB(2, 24, 50);
     color: var(--text-white);
     padding: 20px;
     font-family: "Helvetica Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -388,7 +386,7 @@ header.masthead .masthead-heading {
 }
 
 .header-summary {
-    color: var(--mcc-blue); 
+    color: rgb(2, 24, 50); 
     margin: 0;
     line-height: 1.5;
 }
@@ -608,6 +606,24 @@ padding:0 !important;
     text-transform: uppercase;
 }
 
+.scroll-down-btn {
+  /* Initial state */
+  transition: transform 0.3s ease-in-out;
+}
+
+.scroll-down-btn:hover {
+  /* Move down 5px and scale up by 10% */
+  transform: translateY(5px) scale(1.1);
+  
+}
+.scroll-down-btn:active{
+    border:none;
+
+}
+
+.strategy-icon{
+    color:var(--mcc-yellow)
+}
 /* Color codes for your statuses (use your MCC colors if available) */ 
 .status-completed { background-color: rgb(113, 153, 73); }
 .status-in_progress { background-color: rgb(254, 186, 53); }

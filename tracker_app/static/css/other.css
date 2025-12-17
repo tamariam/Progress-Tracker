@@ -2,11 +2,19 @@
 /*! FOOTER */
 
 #footer {
-  background-color: RGB(2, 24, 50) !important;
+  /* background-color: RGB(2, 24, 50) !important; */
   width: 100%;
   color: #fff;
   font-size: 0.8rem;
+  background-color: RGB(2, 24, 50);
 
+}
+
+/* Ensure main navigation uses the exact same background colour as the footer */
+/* Overrides Bootstrap / theme rules and JS-driven .navbar-shrink state */
+#mainNav,
+#mainNav.navbar-shrink {
+  background-color: RGB(2, 24, 50) !important;
 }
 
 #footer a {
