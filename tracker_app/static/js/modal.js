@@ -129,27 +129,36 @@ function fetchAndDisplayActions(status, page = 1) {
             
             // 2. Loop through Actions
             data.actions.forEach(action => {
+                const statusLower = action.status.toLowerCase();
+                const showUpdates = statusLower === 'in_progress' || statusLower === 'completed';
                 htmlOutput += `
-                    <tr class="action-summary-row status-${action.status.toLowerCase()}">
+                    <tr class="action-summary-row status-${statusLower}">
                         <td class="title-col"><strong>${action.title}</strong></td>
                         <td class="objective-col">${action.small_description}</td>
                         <td class="details-col text-right">
                             <button class="btn btn-sm view-button" onclick="handleDetailsToggle(this)">Show More</button>
+                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                         </td>
                     </tr>
                     <tr class="full-details" style="display: none;">
                         <td colspan="3">
                             <div class="details-content">
                                 <h5>Action Description:</h5>
-                                <p>${action.description}</p>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
+                                <div>${action.description}</div>
+                    ${showUpdates ? `
+                        <hr class="bg-light">
+                        <h5>Latest Update:</h5>
+                        <div>${action.update || 'No update recorded yet.'}</div>
+                    ` : ''} <!-- Fixed: Backtick before the colon -->
+                </div>
+            </td>
+        </tr>
+    `;
+});
+                 
             
             htmlOutput += '</tbody></table></div>';
-            
+   
             // 3. Add Pagination Controls (if more than 1 page)
             if (data.total_pages > 1) {
                 htmlOutput += `<div class="pagination-controls text-center mt-3">`;
@@ -166,7 +175,7 @@ function fetchAndDisplayActions(status, page = 1) {
             // 4. Add the Centered "Go Back" Button
             htmlOutput += `
                 <p class="text-center">
-                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">← Objectives</button>
+                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">← Back</button>
                 </p>
             `;
             
@@ -179,7 +188,7 @@ function fetchAndDisplayActions(status, page = 1) {
             tableArea.innerHTML = `
                 <div class="text-center py-4">
                     <p class="text-danger">Error loading content. Please try again.</p>
-                    <button class="btn btn-secondary btn-back" onclick="hideFilteredActions()">Objectives</button>
+                    <button class="btn btn-secondary btn-back" onclick="history.back()">Back</button>
                 </div>
             `;
         });

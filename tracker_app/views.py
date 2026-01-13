@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Count, Q, Prefetch 
-# Ensure you import your models:
 from .models import Theme, Action, ActionStatus 
 from django.utils.html import strip_tags 
 from django.core.paginator import Paginator
@@ -11,14 +10,14 @@ from django.http import JsonResponse
 
 PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
 
-# Create your views here.
+
 def home(request):
     # This view displays the main home page
     return render(request, 'tracker_app/home.html', {})
 
 
 def get_filtered_actions_by_status(request, status):
-    # Mapping and filtering as before
+    # Mapping and filtering
     status_map = {
         'completed': ActionStatus.COMPLETED,
         'in_progress': ActionStatus.IN_PROGRESS,
@@ -41,6 +40,7 @@ def get_filtered_actions_by_status(request, status):
         'description': action.description,
         'status': action.status,
         'objective_title': action.objective.title,
+        'update': action.update  if action.update else ""
     } for action in page_obj]
 
     return JsonResponse({
@@ -59,7 +59,7 @@ def get_theme_details(request, theme_id):
     Fetches ONLY approved actions that are ready for public view.
     """
     
-    # Define a base queryset filter for "publicly visible" actions
+    # Define a base queryset filter for  publicly visible actions
     PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
 
     # 1. Fetch the theme, but restrict the prefetched actions to only approved ones.
@@ -78,8 +78,8 @@ def get_theme_details(request, theme_id):
             'title': 'Theme Not Found'
         }, status=404)
 
-    # 2. Calculate counts based *only* on the publicly visible actions
-    # The counts here will match the totals displayed by the progress bars in the template
+    # 2. Calculate counts based only  on the publicly visible actions
+    
     theme_actions = Action.objects.filter(objective__theme=theme).filter(PUBLIC_ACTIONS_FILTER)
     action_counts = theme_actions.aggregate(
         completed=Count('id', filter=Q(status=ActionStatus.COMPLETED)),
@@ -89,7 +89,7 @@ def get_theme_details(request, theme_id):
     
     # Render the HTML fragment using the theme object and the counts
     html_content = render_to_string(
-        'tracker_app/modal_content_fragment.html', # <-- Make sure this is your correct template path
+        'tracker_app/modal_content_fragment.html',
         {'theme': theme, 'counts': action_counts},
         request=request
     )
