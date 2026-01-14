@@ -14,11 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls.i18n import i18n_patterns
 
+# urlpatterns = [
+#     path('i18n/', include('django.conf.urls.i18n')),  #for language switching
+#     path('admin/', admin.site.urls),
+#     path('summernote/', include('django_summernote.urls')),
+#     path('', include('tracker_app.urls')),
+# ]
+
+# 2. URLs that NEVER change (The language switcher logic)
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+# 3. URLs that WILL change (Your Home Page)
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('', include('tracker_app.urls')),
-]
+    path('', include('tracker_app.urls')), # This is your Home Page
+    prefix_default_language=True # This forces /en/ or /ga/ to show in the bar
+)
