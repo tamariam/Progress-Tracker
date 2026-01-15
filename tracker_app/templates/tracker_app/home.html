@@ -33,7 +33,8 @@
         
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="{% static 'assets/img/logo.svg' %}" alt="mcc logo" /></a>
+                <a class="navbar-brand" href="#page-top"><img src="{% static 'assets/img/logo.svg' %}" alt="{% trans 'Meath County Council logo' %}"
+ /></a>
              
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -91,7 +92,7 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                        <span class="fa-stack fa-4x" aria-hidden="true">
                             <i class="fas fa-circle fa-stack-2x strategy-icon "></i>
                             <i class="fas fa-chart-line fa-stack-1x fa-inverse"></i>
                         </span>
@@ -99,7 +100,7 @@
                         <p class="text-muted text-left">{% blocktrans %}Expectations for what IT should deliver have risen exponentially over the last decade. Technology has fundamentally changed how we interact, raising the bar for how Meath County Council engages with citizens as a public service body.{% endblocktrans %}</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                        <span class="fa-stack fa-4x" aria-hidden="true">
                             <i class="fas fa-circle fa-stack-2x  strategy-icon"></i>
                             <i class="fas fa-road  fa-stack-1x fa-inverse"></i>
                         </span>
@@ -108,7 +109,7 @@
 </p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                        <span class="fa-stack fa-4x" aria-hidden="true">
                             <i class="fas fa-circle fa-stack-2x strategy-icon "></i>
                             <i class="fas fa-users fa-stack-1x fa-inverse "></i>
                         </span>
@@ -186,7 +187,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/assets/img/portfolio/digital.jpg" alt="digital services image" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services image' %}" />
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Explore</div>
@@ -202,7 +203,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/assets/img/portfolio/digital-w.jpg" alt="digital workforce image" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce image' %}" />
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Explore</div>
@@ -217,7 +218,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/assets/img/portfolio/digital-s.jpg" alt="digital systems image" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems image' %}" />
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Finish</div>
@@ -232,7 +233,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/assets/img/portfolio/digital-c.jpg" alt="digital communities image" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities image' %}" />
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Lines</div>
@@ -253,7 +254,7 @@
                 </div>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="static/assets/img/about/website.png" alt="website image" /></div>
+                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/website.png' %}" alt="{% trans 'website image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Website" %}</h4>
@@ -262,7 +263,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="static/assets/img/about/consultation-portal.png" alt="..." /></div>
+                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/consultation-portal.png' %}" alt="{% trans 'consultation portal image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Consultation Portal" %}</h4>
@@ -271,7 +272,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/crm-solution.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/crm-solution.jpg' %}" alt="{% trans 'CRM website image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Enterprise CRM solution" %}</h4>
@@ -280,7 +281,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/GIS.png" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/GIS.png' %}" alt="{% trans 'GIS website image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "GIS" %}</h4>
@@ -294,7 +295,7 @@
                         </div>
                     </li>
                        <li class="timeline">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/security.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/security.jpg' %}" alt="{% trans 'image of authentication' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Cyber Security" %}</h4>
@@ -303,7 +304,7 @@
                         </div>
                     </li>
                      <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/2.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/2.jpg' %}" alt="{% trans 'Home office image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Covid-19" %}</h4>
@@ -312,7 +313,7 @@
                         </div>
                     </li>
                     <li class="timeline">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/selection.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/selection.jpg' %}" alt="{% trans 'Selection of Services' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Selection of Services" %}</h4>
@@ -327,7 +328,7 @@
                         </div>
                     </li>
                      <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/modernisation.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/modernisation.jpg' %}" alt="{% trans 'technology image' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Modernisation of Services" %}</h4>
@@ -362,7 +363,7 @@
           <div class="social-icons">
             <a href="https://www.youtube.com/channel/UCxcwtis5gp3GOYRRxJerMKA" target="_blank" rel="noopener"> <i class="fa-brands fa-youtube" aria-label="YouTube"></i></a>
             <a href="https://www.facebook.com/MeathCountyCouncil/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" aria-label="Facebook"></i></a>
-            <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"  aria-label="Facebook"></i></a>
+            <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"  aria-label="X"></i></a>
             <a href="https://ie.linkedin.com/company/meath-county-council" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in" aria-label="LinkedIn"></i></a>
             <a href="https://www.instagram.com/meathcoco/?hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-label="Instagram"></i></a>
           </div>

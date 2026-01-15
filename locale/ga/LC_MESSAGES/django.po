@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-15 15:40+0000\n"
+"POT-Creation-Date: 2026-01-15 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,43 +63,47 @@ msgstr ""
 msgid "MeathDigital"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:47
+#: .\tracker_app\templates\tracker_app\home.html:36
+msgid "Meath County Council logo"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:48
 msgid "Strategy"
 msgstr "Straitéis"
 
-#: .\tracker_app\templates\tracker_app\home.html:48
-#: .\tracker_app\templates\tracker_app\home.html:141
-#: .\tracker_app\templates\tracker_app\home.html:172
+#: .\tracker_app\templates\tracker_app\home.html:49
+#: .\tracker_app\templates\tracker_app\home.html:142
+#: .\tracker_app\templates\tracker_app\home.html:173
 msgid "Themes"
 msgstr "Téamaí"
 
-#: .\tracker_app\templates\tracker_app\home.html:49
+#: .\tracker_app\templates\tracker_app\home.html:50
 msgid "Looking Back"
 msgstr "Scrollaigh Síos"
 
-#: .\tracker_app\templates\tracker_app\home.html:81
+#: .\tracker_app\templates\tracker_app\home.html:82
 msgid "Actions for Digital <br>Transformation"
 msgstr "Gníomhartha don <br>Trasfhoirmiú Digiteach"
 
-#: .\tracker_app\templates\tracker_app\home.html:82
+#: .\tracker_app\templates\tracker_app\home.html:83
 msgid "Scroll Down"
 msgstr "Scrollaigh Síos"
 
-#: .\tracker_app\templates\tracker_app\home.html:89
+#: .\tracker_app\templates\tracker_app\home.html:90
 msgid "Our Digital & ICT Strategy"
 msgstr "Ár Straitéis Dhigiteach & TFC"
 
-#: .\tracker_app\templates\tracker_app\home.html:90
+#: .\tracker_app\templates\tracker_app\home.html:91
 msgid ""
 "Driving digital innovation and transformation for all <strong>Meath County "
 "Council</strong> services."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:98
+#: .\tracker_app\templates\tracker_app\home.html:99
 msgid "Evolving Expectations"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:99
+#: .\tracker_app\templates\tracker_app\home.html:100
 msgid ""
 "Expectations for what IT should deliver have risen exponentially over the "
 "last decade. Technology has fundamentally changed how we interact, raising "
@@ -107,13 +111,13 @@ msgid ""
 "service body."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:106
+#: .\tracker_app\templates\tracker_app\home.html:107
 #, fuzzy
 #| msgid "Our Digital & ICT Strategy"
 msgid "Our Digital Strategy"
 msgstr "Ár Straitéis Dhigiteach & TFC"
 
-#: .\tracker_app\templates\tracker_app\home.html:107
+#: .\tracker_app\templates\tracker_app\home.html:108
 msgid ""
 "The Meath County Council Digital and ICT Strategy is an ambitious roadmap to "
 "harness technology's potential. Following 4 main themes-Digital Services, "
@@ -121,11 +125,11 @@ msgid ""
 "services."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:115
+#: .\tracker_app\templates\tracker_app\home.html:116
 msgid "People at the Centre"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:116
+#: .\tracker_app\templates\tracker_app\home.html:117
 msgid ""
 "We are committed to putting people at the core of our processes. This "
 "ensures all services are simple, integrated, seamless, and accessible. We "
@@ -133,35 +137,55 @@ msgid ""
 "and alternate channels to ensure we leave no one behind."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:131
+#: .\tracker_app\templates\tracker_app\home.html:132
 msgid ""
 "To achieve our goal, our ambitious strategy is divided into the following "
 "key metrics:"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:149
+#: .\tracker_app\templates\tracker_app\home.html:150
 msgid "Objectives"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:157
+#: .\tracker_app\templates\tracker_app\home.html:158
 msgid "Actions"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:251
-msgid "Celebrating past achievements"
+#: .\tracker_app\templates\tracker_app\home.html:190
+msgid "digital services image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:206
+msgid "digital workforce image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:221
+msgid "digital systems image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:236
+msgid "digital communities image"
 msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:252
+msgid "Celebrating past achievements"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:253
 msgid ""
 "This section summarises a selection of Digital and ICT projects delivered "
 "during the Council Term <strong>2019-2024.</strong>"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:259
+#: .\tracker_app\templates\tracker_app\home.html:257
+msgid "website image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:260
 msgid "Website"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:261
+#: .\tracker_app\templates\tracker_app\home.html:262
 msgid ""
 "In partnership with Corporate, in 2019 a totally redeveloped, customer-"
 "centric and responsive website was launched. In the last 12 months alone "
@@ -170,11 +194,15 @@ msgid ""
 "to ensure ongoing accessibility compliance on our website."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:268
+#: .\tracker_app\templates\tracker_app\home.html:266
+msgid "consultation portal image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:269
 msgid "Consultation Portal"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:270
+#: .\tracker_app\templates\tracker_app\home.html:271
 msgid ""
 "There has been a strong focus on the use of our online consultation portal "
 "consult.meath.ie/en/ with the County Development Plan and Meath’s Digital "
@@ -183,11 +211,15 @@ msgid ""
 "184 consultations, 10 corporate surveys and 12 application forms."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:277
+#: .\tracker_app\templates\tracker_app\home.html:275
+msgid "CRM website image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:278
 msgid "Enterprise CRM solution"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:279
+#: .\tracker_app\templates\tracker_app\home.html:280
 msgid ""
 "The IT team played a pivotal role in the successful procurement, "
 "implementation and rollout of a new Corporate Enterprise CRM. This supports "
@@ -196,39 +228,47 @@ msgid ""
 "over 240,000 cases processed through the CRM."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:286
+#: .\tracker_app\templates\tracker_app\home.html:284
+msgid "GIS website image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:287
 msgid "GIS"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:288
+#: .\tracker_app\templates\tracker_app\home.html:289
 msgid "Projects delivered by the GIS team include:"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:289
+#: .\tracker_app\templates\tracker_app\home.html:290
 msgid ""
 "significant assistance on the 2021-2027 County Development Plan (CDP) "
 "including interactive mapping portfolio for public display."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:290
+#: .\tracker_app\templates\tracker_app\home.html:291
 msgid ""
 "4,569 RZLT land parcels digitised with automated site assessment reports."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:291
+#: .\tracker_app\templates\tracker_app\home.html:292
 msgid "spatial reporting services for all departments"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:292
+#: .\tracker_app\templates\tracker_app\home.html:293
 msgid ""
 "assistance on the Community Fire Safety initiative and Major Emergency Plans."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:300
+#: .\tracker_app\templates\tracker_app\home.html:298
+msgid "image of authentication"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:301
 msgid "Cyber Security"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:302
+#: .\tracker_app\templates\tracker_app\home.html:303
 msgid ""
 "There has been a continuous focus on cyber security including enhancements "
 "to network infrastructure, SOC\\SIEM, vulnerability and patch management, "
@@ -237,11 +277,15 @@ msgid ""
 "to oversee Meath County Councils Cyber Security posture."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:309
+#: .\tracker_app\templates\tracker_app\home.html:307
+msgid "Home office image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:310
 msgid "Covid-19"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:311
+#: .\tracker_app\templates\tracker_app\home.html:312
 msgid ""
 "As with all organisations we had to quickly adapt to agile working "
 "arrangements in a very short timeframe, and the IT department played a key "
@@ -251,39 +295,44 @@ msgid ""
 "increased staff support and managing additional security risks."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:318
+#: .\tracker_app\templates\tracker_app\home.html:316
+#: .\tracker_app\templates\tracker_app\home.html:319
 msgid "Selection of Services"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:320
+#: .\tracker_app\templates\tracker_app\home.html:321
 msgid "The provision of numerous solutions including:"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:321
+#: .\tracker_app\templates\tracker_app\home.html:322
 msgid ""
 "Online services for the provision of the allocation of housing units and the "
 "processing of the Affordable House Purchase scheme"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:322
+#: .\tracker_app\templates\tracker_app\home.html:323
 msgid "The rollout of the national ePlanning Portal"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:323
+#: .\tracker_app\templates\tracker_app\home.html:324
 msgid "Healthy Age Friendly Shared Services."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:324
+#: .\tracker_app\templates\tracker_app\home.html:325
 msgid ""
 "Mobile solutions facilitating thousands of inspections across multiple "
 "departments in the Council."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:333
+#: .\tracker_app\templates\tracker_app\home.html:331
+msgid "technology image"
+msgstr ""
+
+#: .\tracker_app\templates\tracker_app\home.html:334
 msgid "Modernisation of Services"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:335
+#: .\tracker_app\templates\tracker_app\home.html:336
 msgid ""
 "Continued modernisation of processes, technology, devices, operating "
 "systems, and software within the Council. This includes but is not limited "
@@ -291,31 +340,31 @@ msgid ""
 "replace legacy SAN, virtual environment and backup technology.."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:356
+#: .\tracker_app\templates\tracker_app\home.html:357
 msgid "Accessibility"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:357
+#: .\tracker_app\templates\tracker_app\home.html:358
 msgid "Disclaimer"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:358
+#: .\tracker_app\templates\tracker_app\home.html:359
 msgid "Privacy"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:359
+#: .\tracker_app\templates\tracker_app\home.html:360
 msgid "Freedom of Information"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:360
+#: .\tracker_app\templates\tracker_app\home.html:361
 msgid "Sitemap"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:387
+#: .\tracker_app\templates\tracker_app\home.html:388
 msgid "Loading Theme Details..."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:405
+#: .\tracker_app\templates\tracker_app\home.html:406
 msgid "Please wait while content loads..."
 msgstr ""
 
