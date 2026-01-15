@@ -30,7 +30,7 @@ header.masthead .masthead-heading {
 :root {
     /* Core MCC Colors */
     --mcc-blue:  rgb(2, 24, 50)!important; /* Pantone 2965 RGB: 2, 24, 50 */
-    --mcc-yellow: #FEBA35;
+    --mcc-yellow: #feba35;
     --mcc-light-blue: #71C5E8;
     --mcc-green-lime: #B5BD00;
     --mcc-purple-pink: #C6579A;
@@ -605,11 +605,32 @@ padding:0 !important;
     color: white;
     text-transform: uppercase;
 }
-
+.lang-switcher-btn{
+    background-color: rgb(254, 186, 53) !important; 
+    border-color: rgb(254, 186, 53) !important;
+    color: rgb(2, 24, 50) !important;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+  
+}
+.lang-switcher-btn:hover {
+    /* This is a specifically lightened version of your gold */
+    background-color: #ffd175 !important; 
+    border-color: #ffd175 !important;
+    transition: 0.3s ease;
+}
 .scroll-down-btn {
   /* Initial state */
   transition: transform 0.3s ease-in-out;
 }
+@media screen and (max-width: 365px){
+      .lang-switcher-btn{
+        padding: 4px 2px;
+        font-size:0.8rem;
+      }
+
 
 .scroll-down-btn:hover {
   /* Move down 5px and scale up by 10% */
