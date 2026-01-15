@@ -17,7 +17,7 @@
       <!-- LEFT COLUMN -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
-          In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:
+          {% blocktrans %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktrans %}
         </p>
       </div>
 
@@ -30,12 +30,12 @@
             <div class="card mcc-green text-white shadow-sm p-3 status-card" data-status="COMPLETED">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="card-text uppercase-class mb-0 fw-bold">
-                  <i class="fas fa-check-circle icon-spacing fa-2x"></i> Actions Completed
+                  <i class="fas fa-check-circle icon-spacing fa-2x"></i> {% trans "Actions Completed" %}
                 </p>
                 <h2 class="display-6 mb-0 counter-value"
                     data-target="{{ counts.completed }}"
                     aria-label="Completed actions">
-                  {{ counts.completed }}
+                          {{ counts.completed }}
                     
                 </h2>
               </div>
@@ -47,7 +47,7 @@
             <div class="card mcc-yellow text-dark shadow-sm p-3 status-card" data-status="IN_PROGRESS">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="card-text uppercase-class mb-0 fw-bold">
-                  <i class="fas fa-hourglass-half icon-spacing fa-2x"></i> Actions In Progress
+                  <i class="fas fa-hourglass-half icon-spacing fa-2x"></i> {% trans "Actions In Progress" %}
                 </p>
                 <h2 class="display-6 mb-0 counter-value"
                     data-target="{{ counts.in_progress }}"
@@ -63,7 +63,7 @@
             <div class="card mcc-red text-white shadow-sm p-3 status-card" data-status="NOT_STARTED">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="card-text uppercase-class mb-0 fw-bold">
-                  <i class="fas fa-times-circle icon-spacing fa-2x"></i> Actions Not Started
+                  <i class="fas fa-times-circle icon-spacing fa-2x"></i> {% trans "Actions Not Started" %}
                 </p>
                 <h2 class="display-6 mb-0 counter-value"
                     data-target="{{ counts.not_started }}"
@@ -89,7 +89,7 @@
     {% for objective in theme.objectives.all %}
         <div class="accordion-item">
             <button class="accordion-title" onclick="toggleAccordion(this)">
-                Objective - {{ objective.title }}
+               {% trans "Objective" %} - {{ objective.title }}
                 <i class="fa-solid fa-angle-down"></i>
             </button>
             
@@ -107,10 +107,10 @@
                         <table class="action-table">
                             <thead>
                                 <tr>
-                                    <th>Action</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <th class="text-right">Details</th>
+                                    <th>{% trans "Action" %}</th>
+                                    <th>{% trans "Description" %}</th>
+                                    <th>{% trans "Status" %}</th>
+                                    <th class="text-right">{% trans "Details" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -128,7 +128,7 @@
                                             <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
                                         </td>
                                         <td class="details-col text-right">
-                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">Show More</button>
+                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "Show More" %}</button>
                                             <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                                         </td>
                                     </tr>
@@ -137,12 +137,12 @@
                                     <tr class="full-details" style="display: none;">
                                         <td colspan="3"> <!-- Span across all three columns -->
                                             <div class="details-content">
-                                                <h5>Action Description:</h5>
+                                                <h5>{% trans "Action Description:" %}</h5>
                                                 <p>{{ action.description|safe }}</p>
                                                 
                                                 {% if action.status != 'NOT_STARTED' %}
                                                     <hr class="bg-light">
-                                                    <h5>Latest Update:</h5>
+                                                    <h5>{% trans "Latest Update:" %}</h5>
                                                     <p>{{ action.update|safe }}</p>
                                                 {% endif %}
                                             </div>
@@ -155,12 +155,12 @@
                     <!--  TABLE STRUCTURE ENDS HERE -->
 
                 {% else %}
-                    <p>There are no actions for this objective yet.</p>
+                    <p>{% trans "There are no actions for this objective yet." %}</p>
                 {% endif %}
             </div>
         </div>
     {% empty %}
-        <p>No objectives found for this theme yet.</p>
+        <p>{% trans "No objectives found for this theme yet." %}</p>
     {% endfor %}
 </div>
 

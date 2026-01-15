@@ -6,10 +6,10 @@
             <table class="action-table table table-striped table-hover table-borderless">
                 <thead>
                     <tr>
-                        <th>Action Title & Description</th>
-                        <th>Objective</th>
-                        <th>Status</th>
-                        <th class="text-right">Details</th>
+                        <th>{% trans "Action Title & Description" %}</th>
+                        <th>{% trans "Objective" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th class="text-right">{% trans "Details" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,12 +34,12 @@
                         <tr class="full-details status-{{ action.status|lower }}" style="display: none;">
                             <td colspan="4">
                                 <div class="details-content">
-                                    <h5>Action Description:</h5>
+                                    <h5>{% trans "Action Description:" %}</h5>
                                     <p>{{ action.description|safe }}</p>
                                     
                                     {% if action.status != 'NOT_STARTED' %}
                                         <hr>
-                                        <h5>Latest Update:</h5>
+                                        <h5>{% trans "Latest Update:" %}</h5>
                                         <p>{{ action.update|safe }}</p>
                                     {% endif %}
                                 </div>
@@ -50,6 +50,6 @@
             </table>
         </div>
     {% else %}
-        <p>No actions found matching that status for this theme yet.</p>
+        <p>{% trans "No actions found matching that status for this theme yet." %}</p>
     {% endif %}
 </div>
