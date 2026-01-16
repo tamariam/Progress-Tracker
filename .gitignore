@@ -34,3 +34,5 @@ Thumbs.db # Windows
 .coverage
 .pytest_cache/
 htmlcov/
+
+*.mo

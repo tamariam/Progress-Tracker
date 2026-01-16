@@ -122,9 +122,7 @@
             </div>
             </section>
 
-
-    
-  <section class="page-section mcc-blue pb-2 " id="strategy-counter">
+<section class="page-section mcc-blue pb-2 " id="strategy-counter">
             <div class="container">
          <div class="row mb-5">
             <div class="col-lg-4 mx-auto">
@@ -187,7 +185,12 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services image' %}" />
+                                   
+                                {% if LANGUAGE_CODE == 'en' %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services ' %}" />
+                                {% else %}
+                                 <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                {% endif %}
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Explore</div>
@@ -203,7 +206,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce image' %}" />
+                                {% if LANGUAGE_CODE == 'en' %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce ' %}" />
+                                {% else %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                {% endif %}
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Explore</div>
@@ -218,7 +225,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems image' %}" />
+                                {% if LANGUAGE_CODE == 'en' %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems' %}" />
+                                {% else %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                {% endif %}
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Finish</div>
@@ -233,7 +244,11 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities image' %}" />
+                                {% if LANGUAGE_CODE == 'en' %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities' %}" />
+                                {% else %}
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                {% endif %}
                             </a>
                             <!-- <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Lines</div>
