@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 # urlpatterns = [
 #     path('i18n/', include('django.conf.urls.i18n')),  #for language switching
@@ -29,7 +31,7 @@ from django.conf.urls.i18n import i18n_patterns
 # 2. URLs that NEVER change (The language switcher logic)
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Serve static files here!
 
 # 3. URLs that WILL change (Your Home Page)
 urlpatterns += i18n_patterns(

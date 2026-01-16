@@ -402,7 +402,7 @@
                 <div class="modal-header-custom">
                 <h2 class="modal-title-custom" id="modalThemeTitle">{% trans "Loading Theme Details..." %}</h2>
             </div>
-             <button onclick="closeMCCModal()"  aria-label="Close Modal" id="close-modal-top-right">
+             <button onclick="closeMCCModal()"  aria-label="{% trans "Close Modal" %}" id="close-modal-top-right">
                 <!-- <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" /> -->
                  <i class="fa-solid fa-x"></i>
             </button>
@@ -440,20 +440,26 @@
 
         
         <!-- Core theme JS-->
-        <script src="static/js/scripts.js"></script>
+        <!-- <script src="static/js/scripts.js"></script> -->
+         <script src="{% static 'js/scripts.js' %}"></script>
+
         <!-- <script src="{% static 'js/scripts.js' %}"></script> -->
         <!-- <div id="api-url-template" data-url-template="{% url 'tracker_app:get_theme_details' 0 %}"></div> -->
          <!-- <div id="api-url-template" data-url-template="/api/theme/"></div> -->
           <!-- <div id="api-url-template" data-url-template="/tracker_app/get_theme_details/__ID__/"></div> -->
     
-           <div id="api-url-template" data-url-template="/api/theme-details/__ID__/"></div>
+           <!-- <div id="api-url-template" data-url-template="/api/theme-details/__ID__/"></div> -->
+           <div id="api-url-template" data-url-template="/{{ LANGUAGE_CODE }}/api/theme-details/__ID__/"></div>
+
+
           
 
         <!-- <script src="static/js/custom.js"></script> -->
         <!-- <script src="{% static 'js/custom.js' %}"></script> -->
         <!-- <script src="{% static 'js/modal.js' %}"></script> -->
          <!-- <script src="{% static 'js/modal.js' %}"></script> -->
-         <script src="static/js/modal.js"></script>
+         <!-- <script src="static/js/modal.js"></script> -->
+            <script src="{% static 'js/modal.js' %}"></script>
        
          
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
