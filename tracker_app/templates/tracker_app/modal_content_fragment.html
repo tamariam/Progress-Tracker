@@ -1,20 +1,12 @@
-<!-- <div class="modal-header-summary py-4">
-    <strong><p class="header-summary">
-     {{ theme.title|title }} theme has <strong>{{ theme.objectives.count }}</strong> objectives. 
-       Expand the objectives below to see associated actions and view the latest progress updates.
-    </p></strong>
-</div> -->
-
-
-<!-- sjsjsjsjjsjsjsfinish -->
-
 {% load i18n %}
 {% load static %}
-<!-- templates/dashboard.html -->
-<section class="page-section  mcc-blue my-2 py-5 rounded">
+
+<!-- s -->
+
+<!-- STATUS COUNTERS SECTION -->
+<section class="page-section mcc-blue my-2 py-5 rounded">
   <div class="container">
     <div class="row align-items-center">
-
       <!-- LEFT COLUMN -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
@@ -25,7 +17,6 @@
       <!-- RIGHT COLUMN -->
       <div class="col-lg-7">
         <div class="row g-3">
-          
           <!-- Completed -->
           <div class="col-12">
             <div class="card mcc-green text-white shadow-sm p-3 status-card" data-status="COMPLETED">
@@ -33,11 +24,8 @@
                 <p class="card-text uppercase-class mb-0 fw-bold">
                   <i class="fas fa-check-circle icon-spacing fa-2x"></i> {% trans "Actions Completed" %}
                 </p>
-                <h2 class="display-6 mb-0 counter-value"
-                    data-target="{{ counts.completed }}"
-                    aria-label="Completed actions">
+                <h2 class="display-6 mb-0 counter-value" data-target="{{ counts.completed }}" aria-label="Completed actions">
                           {{ counts.completed }}
-                    
                 </h2>
               </div>
             </div>
@@ -50,9 +38,7 @@
                 <p class="card-text uppercase-class mb-0 fw-bold">
                   <i class="fas fa-hourglass-half icon-spacing fa-2x"></i> {% trans "Actions In Progress" %}
                 </p>
-                <h2 class="display-6 mb-0 counter-value"
-                    data-target="{{ counts.in_progress }}"
-                    aria-label="In-progress actions">
+                <h2 class="display-6 mb-0 counter-value" data-target="{{ counts.in_progress }}" aria-label="In-progress actions">
                   {{ counts.in_progress }}
                 </h2>
               </div>
@@ -66,95 +52,88 @@
                 <p class="card-text uppercase-class mb-0 fw-bold">
                   <i class="fas fa-times-circle icon-spacing fa-2x"></i> {% trans "Actions Not Started" %}
                 </p>
-                <h2 class="display-6 mb-0 counter-value"
-                    data-target="{{ counts.not_started }}"
-                    aria-label="Not started actions">
+                <h2 class="display-6 mb-0 counter-value" data-target="{{ counts.not_started }}" aria-label="Not started actions">
                   {{ counts.not_started }}
                 </h2>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-
-
-<!-- START of the new table layout for actions -->
+<!-- MAIN ACCORDION AND TABLE SECTION -->
 <div class="modal-body-content" id="accordion-view-container">
 
     {% for objective in theme.objectives.all %}
         <div class="accordion-item">
             <button class="accordion-title" onclick="toggleAccordion(this)">
-               {% trans "Objective" %} - {{ objective.title }}
+               {% trans "Objective" %} - {{ objective.display_title }}
                 <i class="fa-solid fa-angle-down"></i>
             </button>
             
             <div class="accordion-content">
                 <div>
-                {% if objective.description %}
-                   <strong> <p class="objective-p">{{ objective.description|safe }}</p></strong>
+                {% if objective.display_description %}
+                   <strong> <p class="objective-p">{{ objective.display_description|safe }}</p></strong>
                 {% endif %}
                 </div>
 
                 {% if objective.approved_actions %}
-                    
-                    <!--  TABLE STRUCTURE STARTS HERE -->
                     <div class="action-table-container">
                         <table class="action-table">
                             <thead>
                                 <tr>
-                                    <th>{% trans "Action" %}</th>
-                                    <th>{% trans "Description" %}</th>
-                                    <th>{% trans "Status" %}</th>
-                                    <th class="text-right">{% trans "Details" %}</th>
+                                    <th style="width: 25%;">{% trans "Action" %}</th>
+                                    <th style="width: 40%;">{% trans "Description" %}</th>
+                                    <th style="width: 20%;">{% trans "Status" %}</th>
+                                    <th style="width: 15%;" class="text-right">{% trans "Details" %}</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for action in objective.actions.all %}
-                                    <!-- This is the main TR that holds the summary row -->
+                             <tbody>
+                                {% for action in objective.approved_actions %}
                                     <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}"> 
                                         <td class="title-col">
                                             <strong>{{ action.title }}</strong><br>
                                         </td>
-                                         <td class="title-col">
-                                            <p >{{ action.small_description }}</p>
+                                         <td class="objective-col">
+                                            <p>{{ action.display_small_description }}</p>
                                         </td>
                                         <td class="status-col">
-                                            <!-- Status Badge using status-specific color classes -->
                                             <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
                                         </td>
                                         <td class="details-col text-right">
                                             <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "Show More" %}</button>
                                             <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                                         </td>
-                                    </tr>
+                                    </tr> 
                                     
-                                    <!-- Details Content (Hidden TR) -->
-                                    <tr class="full-details" style="display: none;">
-                                        <td colspan="3"> <!-- Span across all three columns -->
-                                            <div class="details-content">
-                                                <h5>{% trans "Action Description:" %}</h5>
-                                                <p>{{ action.description|safe }}</p>
+                                   
+                                      <tr class="full-details" style="display: none;">
+                                        
+                                        <td colspan="4" style="padding: 0;"> 
+                                            <div class="details-content" style="padding: 20px; background-color: #fff; border-bottom: 2px solid #ddd;">
+                                                <h5 class="fw-bold">{% trans "Action Description:" %}</h5>
+                                                <div>{{ action.display_description|safe }}</div>
                                                 
                                                 {% if action.status != 'NOT_STARTED' %}
                                                     <hr class="bg-light">
-                                                    <h5>{% trans "Latest Update:" %}</h5>
-                                                    <p>{{ action.update|safe }}</p>
+                                                    <h5 class="fw-bold">{% trans "Latest Update:" %}</h5>
+                                                    <div>{{ action.display_update|safe }}</div>
                                                 {% endif %}
                                             </div>
                                         </td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--  TABLE STRUCTURE ENDS HERE -->
+                            </tbody>   
 
+
+                        </table>
+
+
+                    </div>
                 {% else %}
                     <p>{% trans "There are no actions for this objective yet." %}</p>
                 {% endif %}
@@ -165,9 +144,4 @@
     {% endfor %}
 </div>
 
-<!-- filtered list -->
- <div id="filtered-table-view-container" style="display: none;">
-    <!-- The filtered list HTML will be injected here by JavaScript -->
-</div>
-
-
+ <div id="filtered-table-view-container" style="display: none;"></div> 

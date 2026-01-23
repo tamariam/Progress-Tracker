@@ -154,21 +154,33 @@ header.masthead .masthead-heading {
     justify-content: space-between;
     align-items: center;
     min-height: 44px; /* Large clickable area */
+    
 }
+
+
 .accordion-title:hover, .accordion-title.active { background-color: #f1f1f1; }
 .accordion-content {
     padding: 0 18px;
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.4s ease-out; /* Smooth expand/collapse */
-    box-sizing: border-box; /* keep width/padding stable during transitions */
+    display: none; /* Keeps modal clean on load */
+    transition: max-height 0.4s ease-out;
     width: 100%;
 }
+
 .accordion-content.show {
-    max-height: 2000px;
+    display: block !important;
+    /* We remove the 'max-height' restriction here so it can grow */
+    max-height: none !important; 
+    height: auto !important;
+    overflow: visible !important;
     padding-bottom: 18px;
-    overflow: visible;
 }
+
+
+
+
+
 
 /* Action Cards Styles: White background, rounded corners, subtle shadow */
 
@@ -315,9 +327,7 @@ header.masthead .masthead-heading {
     transition: max-height 0.4s ease-in-out;
 }
 
-/* .action-sub-content.show-action {
-    max-height: 2000px;
-} */
+
 .modal-body{
     box-sizing: content-box;
 }
@@ -440,13 +450,7 @@ padding:0 !important;
     border-bottom: none; 
 }
 
-.accordion-content {
-    padding: 0 18px;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease-out; 
-    background-color: var(--background-light-gray);
-}
+
 
 .objective-p {
     padding-top: 15px;
@@ -676,7 +680,7 @@ padding:0 !important;
     border-bottom: 2px solid #ddd;
 }
 
-.action-table-row td {
+.action-summary-row td {
     padding: 10px;
     border-bottom: 1px solid #eee;
     vertical-align: top;
@@ -764,6 +768,7 @@ padding:0 !important;
     border-left: 8px solid transparent; /* Base style, will be overridden */
 }
 
+
 /* Color codes for the left border (use your MCC colors) */
 /* The class name must match action.status|lower exactly */
 .status-completed { border-left-color: #719949; /* Green */ }
@@ -842,10 +847,6 @@ padding:0 !important;
 
 /* anmotherr oneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee /////////////////////*/
 /* --- General Accordion Styles --- */
-/* .accordion-content.show {
-
-    overflow: visible;
-} */
 
 
 
@@ -889,6 +890,8 @@ padding:0 !important;
 .action-table-container {
     overflow-x: auto; /* Makes the table scrollable horizontally on small screens */
     margin-top: 15px;
+    
+
 }
 
 .action-table {
@@ -916,6 +919,7 @@ padding:0 !important;
 .action-summary-row {
     cursor: pointer;
     background-color: #fff; /* Explicitly ensure white background */
+    
 }
 
 /* REMOVE hover effect as requested */
@@ -1114,3 +1118,16 @@ color: #333;
         right: 10px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

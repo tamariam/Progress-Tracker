@@ -255,11 +255,17 @@
                                 <div class="portfolio-caption-subheading text-muted">Branding</div>
                             </div> -->
                         </div>
+                        <!-- etst -->
+                        
+                         <!--  -->
                     </div>
               
                 </div>
             </div>
         </section>
+
+
+
         <!-- About-->
         <section class="page-section bg-light" id="about">
             <div class="container">
@@ -355,8 +361,8 @@
             </div>
         </section>
     
-    <button onclick="scrollToTopFunction()" id="scrollToTopBtn" title="Go to top">
-    <i class="fas fa-arrow-up"></i>
+    <button onclick="scrollToTopFunction()" id="scrollToTopBtn"  aria-label="{% trans 'Scroll to top' %}">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </button>
    
       
@@ -392,8 +398,23 @@
     
             <!-- Custom Header will be populated by JS -->
              <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div id="js-table-labels" style="display: none;"
+     data-action-header="{% trans 'Action' %}"
+     data-description-header="{% trans 'Description' %}"
+     data-details-header="{% trans 'Details' %}"
+     data-show-more="{% trans 'Show More' %}"
+     data-action-desc="{% trans 'Action Description:' %}"
+     data-latest-update="{% trans 'Latest Update:' %}"
+     data-no-update="{% trans 'No update recorded yet.' %}"
+     data-back="{% trans '← Back' %}"
+     data-loading="{% trans 'Loading...' %}"
+     data-fetching="{% trans 'Please wait while content loads...' %}"
+     data-error="{% trans 'Error loading content. Please try again.' %}">
+</div>
     <div class="modal-dialog">
         <div class="modal-content">
+          
+        
             <!-- <div class="close-modal" data-bs-dismiss="modal">
                 <!- <!- Ensure your static tag works for the close icon -->
                 <!-- <img src="{% static 'assets/img/close-icon.svg' %}" alt="Close modal" /> -->
@@ -430,6 +451,9 @@
                 </div>
             </div>
         </div>
+        <!-- cheat sheet for JS to create actions table (dual language) -->
+
+
     </div>
 </div>
 

@@ -40,15 +40,52 @@ if (counterSection) {
 }
 
 // Accordion Functionality (for Objectives)
-function toggleAccordion(button) {
-    document.querySelectorAll('.accordion-title.active').forEach(activeButton => {
-        if (activeButton !== button) { activeButton.classList.remove("active"); const activeContent = activeButton.nextElementSibling; activeContent.classList.remove("show"); activeContent.style.maxHeight = null; }
+function toggleAccordion(element) {
+    const currentContent = element.nextElementSibling;
+    const allContents = document.querySelectorAll('.accordion-content');
+    const allTitles = document.querySelectorAll('.accordion-title');
+
+    const isOpening = !currentContent.classList.contains('show');
+
+    // 1. CLOSE EVERYTHING 
+    allContents.forEach(content => {
+        // --- NEW RESET LOGIC FOR INTERNAL ACTIONS ---
+        // Find every detail row inside this specific objective and hide it
+        const internalDetails = content.querySelectorAll('.full-details');
+        const viewButtons = content.querySelectorAll('.view-button');
+        const closeButtons = content.querySelectorAll('.close-button');
+
+        internalDetails.forEach(detail => {
+            detail.style.display = 'none'; // Hide the expanded row
+        });
+        
+        viewButtons.forEach(btn => {
+            btn.style.display = 'inline-block'; // Show "Show More"
+        });
+
+        closeButtons.forEach(btn => {
+            btn.style.display = 'none'; // Hide the minus icon
+        });
+        // --- END OF INTERNAL RESET ---
+
+        content.classList.remove('show');
+        content.style.maxHeight = "0px";
+        content.style.display = "none";
     });
-    button.classList.toggle("active");
-    const content = button.nextElementSibling;
-    content.classList.toggle("show");
-    if (content.style.maxHeight) { content.style.maxHeight = null; } else { content.style.maxHeight = content.scrollHeight + "px"; }
+
+    allTitles.forEach(title => title.classList.remove('active'));
+
+    // 2. OPEN ONLY THE CLICKED ONE
+    if (isOpening) {
+        element.classList.add('active');
+        currentContent.classList.add('show');
+        currentContent.style.display = "block";
+        
+        // Dynamic scrollHeight + buffer for 2026 table growth
+        currentContent.style.maxHeight = (currentContent.scrollHeight + 1000) + "px";
+    }
 }
+
 
 
 // --- JAVASCRIPT FOR THE FLEXBOX CARD LAYOUT ---
@@ -58,28 +95,58 @@ function toggleAccordion(button) {
 
 
 
-function handleDetailsToggle(clickedElement) {
-    // Determine which action row (TR) we are working with
-    const summaryRow = clickedElement.closest('tr.action-summary-row'); 
+// function handleDetailsToggle(clickedElement) {
+//     // Determine which action row (TR) we are working with
+//     const summaryRow = clickedElement.closest('tr.action-summary-row'); 
     
-    // The details row is the very next TR sibling (this is the one we hide/show)
-    const detailsDiv = summaryRow.nextElementSibling; 
+//     // The details row is the very next TR sibling (this is the one we hide/show)
+//     const detailsDiv = summaryRow.nextElementSibling; 
 
-    // Get the specific buttons within the summary row
+//     // Get the specific buttons within the summary row
+//     const viewButton = summaryRow.querySelector('.view-button');
+//     const closeButton = summaryRow.querySelector('.close-button');
+    
+//     // Check if currently hidden
+//     const isHidden = detailsDiv.style.display === 'none';
+    
+//     if (isHidden) {
+//         // Switch to details view - use class instead of inline display style
+//         detailsDiv.classList.add('expanded');
+//         detailsDiv.style.display = ''; // Clear display to allow CSS to work
+//         viewButton.classList.add('hidden');
+//         closeButton.classList.remove('hidden');
+//     } else {
+//         // Switch back to summary view
+//         detailsDiv.classList.remove('expanded');
+//         detailsDiv.style.display = 'none'; // Hide the table row
+//         viewButton.classList.remove('hidden');
+//         closeButton.classList.add('hidden');
+//     }
+// }
+
+function handleDetailsToggle(clickedElement) {
+    const summaryRow = clickedElement.closest('tr.action-summary-row'); 
+    const detailsRow = summaryRow.nextElementSibling; 
+
     const viewButton = summaryRow.querySelector('.view-button');
     const closeButton = summaryRow.querySelector('.close-button');
     
-    // Toggle visibility ('' shows the TR, 'none' hides it)
-    if (detailsDiv.style.display === 'none') {
-        // Switch to details view
-        detailsDiv.style.display = ''; // Show the table row
-        viewButton.style.display = 'none'; // Hide "Show More"
-        closeButton.style.display = 'inline-block'; // Show "Minus Icon"
+    // Check computed style for accuracy
+    const isHidden = window.getComputedStyle(detailsRow).display === 'none';
+    
+    if (isHidden) {
+        detailsRow.classList.add('expanded');
+        // THE FIX: Explicitly use 'table-row' to prevent overlapping/floating
+        detailsRow.style.display = 'table-row'; 
+        
+        viewButton.style.display = 'none';
+        closeButton.style.display = 'inline-block';
     } else {
-        // Switch back to summary view
-        detailsDiv.style.display = 'none'; // Hide the table row
-        viewButton.style.display = 'inline-block'; // Show "Show More"
-        closeButton.style.display = 'none'; // Hide "Minus Icon"
+        detailsRow.classList.remove('expanded');
+        detailsRow.style.display = 'none';
+        
+        viewButton.style.display = 'inline-block';
+        closeButton.style.display = 'none';
     }
 }
 
@@ -87,13 +154,35 @@ function handleDetailsToggle(clickedElement) {
 
 
 // NOTE: The original toggleUpdate function and toggleActionAccordion function have been removed
+// function hideFilteredActions() {
+//     // Show the original accordion/objective view
+//     document.getElementById('accordion-view-container').style.display = ''; 
+//     // Hide the filtered table view
+//     document.getElementById('filtered-table-view-container').style.display = 'none';
+//     // Update the modal title if needed, or close the modal if you prefer
+//     // document.getElementById('modalThemeTitle').textContent = "Meath Digital Strategy"; 
+// }
+
 function hideFilteredActions() {
-    // Show the original accordion/objective view
-    document.getElementById('accordion-view-container').style.display = ''; 
-    // Hide the filtered table view
+    // 1. THE RESET: Force all objectives to close before returning
+    // This ensures a "fresh start" for the user
+    document.querySelectorAll('.accordion-content').forEach(content => {
+        content.classList.remove('show');
+        content.style.display = 'none'; // Re-hides the container
+        content.style.maxHeight = '0';   // Resets the height to match your CSS
+    });
+
+    document.querySelectorAll('.accordion-title').forEach(title => {
+        title.classList.remove('active'); // Removes the #f1f1f1 highlight
+    });
+
+    // 2. Switch the view back to the main list
+    document.getElementById('accordion-view-container').style.display = 'block'; 
     document.getElementById('filtered-table-view-container').style.display = 'none';
-    // Update the modal title if needed, or close the modal if you prefer
-    // document.getElementById('modalThemeTitle').textContent = "Meath Digital Strategy"; 
+
+    // 3. Reset Scroll: Keeps the user at the top of the modal
+    const modalBody = document.querySelector('.modal-body');
+    if (modalBody) modalBody.scrollTop = 0;
 }
 
 function fetchAndDisplayActions(status, page = 1) {
@@ -129,10 +218,12 @@ function fetchAndDisplayActions(status, page = 1) {
             
             // 2. Loop through Actions
             data.actions.forEach(action => {
-                const statusLower = action.status.toLowerCase();
+                const statusLower = action.status.toLowerCase().replace(/\s+/g, '_');
+                
+                
                 const showUpdates = statusLower === 'in_progress' || statusLower === 'completed';
                 htmlOutput += `
-                    <tr class="action-summary-row status-${statusLower}">
+                    <tr class="action-summary-row  status-${statusLower}">
                         <td class="title-col"><strong>${action.title}</strong></td>
                         <td class="objective-col">${action.small_description}</td>
                         <td class="details-col text-right">
@@ -193,6 +284,8 @@ function fetchAndDisplayActions(status, page = 1) {
             `;
         });
 }
+
+
 
 let currentModalThemeTitle = ''; 
 // ggggggggggggggggggggggggggggg

@@ -7,6 +7,11 @@ from .models import Theme, Action, ActionStatus
 from django.utils.html import strip_tags 
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.utils import translation
+from django.utils.translation import get_language
+# Change your translation import to this:
+from django.utils.translation import gettext as _ 
+
 
 PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
 
@@ -16,8 +21,13 @@ def home(request):
     return render(request, 'tracker_app/home.html', {})
 
 
+
+
 def get_filtered_actions_by_status(request, status):
-    # Mapping and filtering
+    """
+    Fetches filtered actions for the status cards (Completed, In Progress, etc.)
+    with automatic Irish Fallback logic.
+    """
     status_map = {
         'completed': ActionStatus.COMPLETED,
         'in_progress': ActionStatus.IN_PROGRESS,
@@ -25,26 +35,35 @@ def get_filtered_actions_by_status(request, status):
     }
     target_status = status_map.get(status.lower())
     
-    # Order by ID or date to ensure consistent pagination
     actions_list = Action.objects.filter(is_approved=True, status=target_status).order_by('id')
     
-    # Paginate: 10 actions per page
     paginator = Paginator(actions_list, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     
-    data = [{
-        'id': action.id,
-        'title': action.title,
-        'small_description': action.small_description,
-        'description': action.description,
-        'status': action.status,
-        'objective_title': action.objective.title,
-        'update': action.update  if action.update else ""
-    } for action in page_obj]
+    # 2026 Dual Language Logic
+    current_lang = get_language()
+    is_ga = current_lang == 'ga'
+
+    data = []
+    for action in page_obj:
+        # FIREWALL: Use Irish only if on Irish site AND superuser approved the translation
+        show_ga = is_ga and action.is_ga_approved
+
+        data.append({
+            'id': action.id,
+            'title': action.title, # Remains same for both
+            # DUALITY: Fetch _ga field if approved, else fallback to English
+            'small_description': action.small_description_ga if show_ga and action.small_description_ga else action.small_description,
+            'description': action.description_ga if show_ga and action.description_ga else action.description,
+            # STATUS: .get_status_display() pulls the translation from your .po file automatically
+            'status': action.get_status_display(),
+            'objective_title': action.objective.title,
+            'update': action.update_ga if show_ga and action.update_ga else (action.update if action.update else "")
+        })
 
     return JsonResponse({
-        'status_title': status.replace('_', ' ').title(),
+        'status_title': _(status.replace('_', ' ').title()),
         'actions': data,
         'count': paginator.count,
         'current_page': page_obj.number,
@@ -55,31 +74,28 @@ def get_filtered_actions_by_status(request, status):
 
 def get_theme_details(request, theme_id):
     """ 
-    API endpoint to fetch a single theme's details and return HTML/JSON.
-    Fetches ONLY approved actions that are ready for public view.
+    API endpoint to fetch a single theme's details.
+    Handles the Irish Title and the Modal Accordion content.
     """
-    
-    # Define a base queryset filter for  publicly visible actions
     PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
-
-    # 1. Fetch the theme, but restrict the prefetched actions to only approved ones.
-    # This uses the Prefetch object to apply the filter when fetching related data.
+    current_language = get_language()
+    
+    # Fetch theme with prefetched approved actions
     theme = Theme.objects.filter(pk=theme_id).prefetch_related(
        Prefetch(
            'objectives__actions', 
-           queryset=Action.objects.filter(PUBLIC_ACTIONS_FILTER), # Apply the approved filter here
-           to_attr='approved_actions' # We use 'approved_actions' in the template now
+           queryset=Action.objects.filter(PUBLIC_ACTIONS_FILTER),
+           to_attr='approved_actions'
        )
     ).first()
     
     if not theme:
         return JsonResponse({
-            'html_content': '<p>This strategic theme does not exist or has been removed.</p>',
-            'title': 'Theme Not Found'
+            'html_content': '<p>Strategic theme not found.</p>',
+            'title': 'Error'
         }, status=404)
 
-    # 2. Calculate counts based only  on the publicly visible actions
-    
+    # Calculate counts for the status cards inside the modal
     theme_actions = Action.objects.filter(objective__theme=theme).filter(PUBLIC_ACTIONS_FILTER)
     action_counts = theme_actions.aggregate(
         completed=Count('id', filter=Q(status=ActionStatus.COMPLETED)),
@@ -87,11 +103,18 @@ def get_theme_details(request, theme_id):
         not_started=Count('id', filter=Q(status=ActionStatus.NOT_STARTED)),
     )
     
-    # Render the HTML fragment using the theme object and the counts
+    # Activate translation so the fragment template sees the correct language
+    translation.activate(current_language)
+    
     html_content = render_to_string(
         'tracker_app/modal_content_fragment.html',
         {'theme': theme, 'counts': action_counts},
         request=request
     )
     
-    return JsonResponse({'html_content': html_content, 'title': theme.title})
+    # DUALITY for the Modal Header Title
+    theme_title = theme.title_ga if current_language == 'ga' and theme.title_ga else theme.title
+    
+    translation.deactivate()
+    
+    return JsonResponse({'html_content': html_content, 'title': theme_title})

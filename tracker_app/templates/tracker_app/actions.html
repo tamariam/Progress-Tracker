@@ -1,5 +1,8 @@
 
-<div class="modal-body-content">
+{% load i18n %}
+{% load static %}
+
+<!-- <div class="modal-body-content">
     
     {% if actions_list %}
         <div class="action-table-container">
@@ -17,7 +20,7 @@
                         <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}"> 
                             <td class="title-col" data-label="Action Title & Description">
                                 <strong>{{ action.title }}</strong><br>
-                                <p class="text-muted">{{ action.small_description }}</p>
+                                <p class="text-muted">{{ action.display_small_description }}</p>
                             </td>
                             <td data-label="Objective">
                                 {{ action.objective.title }}
@@ -35,12 +38,12 @@
                             <td colspan="4">
                                 <div class="details-content">
                                     <h5>{% trans "Action Description:" %}</h5>
-                                    <p>{{ action.description|safe }}</p>
+                                    <p>{{ action.display_description|safe }}</p>
                                     
                                     {% if action.status != 'NOT_STARTED' %}
                                         <hr>
                                         <h5>{% trans "Latest Update:" %}</h5>
-                                        <p>{{ action.update|safe }}</p>
+                                        <p>{{ action.display_update|safe }}</p>
                                     {% endif %}
                                 </div>
                             </td>
@@ -52,4 +55,4 @@
     {% else %}
         <p>{% trans "No actions found matching that status for this theme yet." %}</p>
     {% endif %}
-</div>
+</div> -->
