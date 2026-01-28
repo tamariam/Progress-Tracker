@@ -51,7 +51,7 @@
                         
                     </ul>
                 </div>
-                                             {% if LANGUAGE_CODE == 'en' %}
+        {% if LANGUAGE_CODE == 'en' %}
         <!-- If in English, link DIRECTLY to the Irish URL --> 
          <div>
         <a href="/ga/" class=" mcc-yellow lang-switcher-btn">
@@ -79,7 +79,7 @@
         <header class="masthead">
             <div class="container">
                 <!-- <div class="masthead-subheading">Welcome To Our Studio!</div> -->
-                <div class="masthead-heading  ">{% trans "Actions for Digital <br>Transformation" %}</div>
+                <div class="masthead-heading  ">{% blocktrans %}Actions for Digital <br>Transformation{% endblocktrans %}</div>
                 <a class="btn  btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#services">{% trans "Scroll Down" %}</a>
             </div>
         </header>
@@ -87,7 +87,7 @@
         <section class="page-section bg-light pb-0" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{% blocktrans %}Our Digital & ICT Strategy{% endblocktrans %}</h2>
+                    <h2 class="section-heading text-uppercase">{% trans "Our Digital & ICT Strategy" %}</h2>
                     <h3 class="section-subheading text-muted">{% blocktrans %}Driving digital innovation and transformation for all <strong>Meath County Council</strong> services.{% endblocktrans %}</h3>
                 </div>
                 <div class="row text-center">
@@ -97,7 +97,7 @@
                             <i class="fas fa-chart-line fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">{% trans "Evolving Expectations" %}</h4>
-                        <p class="text-muted text-left">{% blocktrans %}Expectations for what IT should deliver have risen exponentially over the last decade. Technology has fundamentally changed how we interact, raising the bar for how Meath County Council engages with citizens as a public service body.{% endblocktrans %}</p>
+                        <p class="text-muted text-left">{% blocktranslate trimmed %}Expectations for what IT should deliver have risen exponentially over the last decade. Technology has fundamentally changed how we interact, raising the bar for how Meath County Council engages with citizens as a public service body.{% endblocktranslate %}</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x" aria-hidden="true">
@@ -105,7 +105,7 @@
                             <i class="fas fa-road  fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">{% trans "Our Digital Strategy" %}</h4>
-                        <p class="text-muted text-left">{% blocktrans %}The Meath County Council Digital and ICT Strategy is an ambitious roadmap to harness technology's potential. Following 4 main themes-Digital Services, Workforce, Systems, and Communities-it helps us modernise and improve our services.{% endblocktrans %}
+                        <p class="text-muted text-left">{% blocktranslate trimmed %}The Meath County Council Digital and ICT Strategy is an ambitious roadmap to harness technology's potential. Following 4 main themes-Digital Services, Workforce, Systems, and Communities-it helps us modernise and improve our services.{% endblocktranslate %}
 </p>
                     </div>
                     <div class="col-md-4">
@@ -114,7 +114,7 @@
                             <i class="fas fa-users fa-stack-1x fa-inverse "></i>
                         </span>
                         <h4 class="my-3">{% trans "People at the Centre" %}</h4>
-                        <p class="text-muted text-left">{% blocktrans %}We are committed to putting people at the core of our processes. This ensures all services are simple, integrated, seamless, and accessible. We aim to deliver services digitally while still offering essential in-person and alternate channels to ensure we leave no one behind.{% endblocktrans %}
+                        <p class="text-muted text-left">{% blocktranslate trimmed %}We are committed to putting people at the core of our processes. This ensures all services are simple, integrated, seamless, and accessible. We aim to deliver services digitally while still offering essential in-person and alternate channels to ensure we leave no one behind.{% endblocktranslate %}
 </p>
 
                     </div>
@@ -127,7 +127,7 @@
          <div class="row mb-5">
             <div class="col-lg-4 mx-auto">
                 <p class="text-center counter-text">
-                  {% blocktrans %}To achieve our goal, our ambitious strategy is divided into the following key metrics:{% endblocktrans %}
+                  {% blocktranslate trimmed %}To achieve our goal, our ambitious strategy is divided into the following key metrics:{% endblocktranslate %}
                 </p>
             </div>
             
@@ -187,7 +187,7 @@
                                 </div>
                                    
                                 {% if LANGUAGE_CODE == 'en' %}
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services ' %}" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services' %}" />
                                 {% else %}
                                  <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
                                 {% endif %}
@@ -207,7 +207,7 @@
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
                                 {% if LANGUAGE_CODE == 'en' %}
-                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce ' %}" />
+                                <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce' %}" />
                                 {% else %}
                                 <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
                                 {% endif %}
@@ -271,38 +271,38 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercases">{% trans "Celebrating past achievements" %}</h2>
-                    <h3 class="section-subheading text-muted">{% blocktrans %}This section summarises a selection of Digital and ICT projects delivered during the Council Term <strong>2019-2024.</strong>{% endblocktrans %}</h3>
+                    <h3 class="section-subheading text-muted">{% blocktranslate trimmed %}This section summarises a selection of Digital and ICT projects delivered during the Council Term <strong>2019-2024.</strong>{% endblocktranslate %}</h3>
                 </div>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/website.png' %}" alt="{% trans 'website image' %}" /></div>
+                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/website.png' %}" alt="{% trans 'website' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Website" %}</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">{% blocktrans %}In partnership with Corporate, in 2019 a totally redeveloped, customer-centric and responsive website was launched. In the last 12 months alone there have been over 371,000 unique visitors to the site and approximately 1.3 million page views! A substantial programme of work was also undertaken to ensure ongoing accessibility compliance on our website.{% endblocktrans %}</p></div>
+                            <div class="timeline-body"><p class="text-muted">{% blocktranslate trimmed %}In partnership with Corporate, in 2019 a totally redeveloped, customer-centric and responsive website was launched. In the last 12 months alone there have been over 371,000 unique visitors to the site and approximately 1.3 million page views! A substantial programme of work was also undertaken to ensure ongoing accessibility compliance on our website.{% endblocktranslate %}</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/consultation-portal.png' %}" alt="{% trans 'consultation portal image' %}" /></div>
+                        <div class="timeline-image img-background"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/consultation-portal.png' %}" alt="{% trans 'consultation portal' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Consultation Portal" %}</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">{% blocktrans %}There has been a strong focus on the use of our online consultation portal consult.meath.ie/en/ with the County Development Plan and Meath’s Digital Strategy being the first major consultations on the portal. The portal has over 5,700 registered users and since June 2019, the Council have published 184 consultations, 10 corporate surveys and 12 application forms.{% endblocktrans %}</p></div>
+                            <div class="timeline-body"><p class="text-muted">{% blocktranslate trimmed %}There has been a strong focus on the use of our online consultation portal consult.meath.ie/en/ with the County Development Plan and Meath’s Digital Strategy being the first major consultations on the portal. The portal has over 5,700 registered users and since June 2019, the Council have published 184 consultations, 10 corporate surveys and 12 application forms.{% endblocktranslate %}</p></div>
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/crm-solution.jpg' %}" alt="{% trans 'CRM website image' %}" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/crm-solution.jpg' %}" alt="{% trans 'CRM website' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Enterprise CRM solution" %}</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">{% blocktrans %}The IT team played a pivotal role in the successful procurement, implementation and rollout of a new Corporate Enterprise CRM. This supports back office administrative functions, analytical dashboards, and a Portal for Elected Members. Between Jan 2019 and September 2025 there have been over 240,000 cases processed through the CRM.{% endblocktrans %}</p></div>
+                            <div class="timeline-body"><p class="text-muted">{% blocktranslate trimmed %}The IT team played a pivotal role in the successful procurement, implementation and rollout of a new Corporate Enterprise CRM. This supports back office administrative functions, analytical dashboards, and a Portal for Elected Members. Between Jan 2019 and September 2025 there have been over 240,000 cases processed through the CRM.{% endblocktranslate %}</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/GIS.png' %}" alt="{% trans 'GIS website image' %}" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/GIS.png' %}" alt="{% trans 'GIS website' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "GIS" %}</h4>
@@ -316,21 +316,21 @@
                         </div>
                     </li>
                        <li class="timeline">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/security.jpg' %}" alt="{% trans 'image of authentication' %}" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/security.jpg' %}" alt="{% trans 'authentication' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Cyber Security" %}</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">{% blocktrans %}There has been a continuous focus on cyber security including enhancements to network infrastructure, SOC\SIEM, vulnerability and patch management, network penetration testing, email validation, web filtering, cyber security awareness initiatives and the creation of the Information Security Committee to oversee Meath County Councils Cyber Security posture.{% endblocktrans %}</p></div>
+                            <div class="timeline-body"><p class="text-muted">{% blocktranslate trimmed %}There has been a continuous focus on cyber security including enhancements to network infrastructure, SOC\SIEM, vulnerability and patch management, network penetration testing, email validation, web filtering, cyber security awareness initiatives and the creation of the Information Security Committee to oversee Meath County Councils Cyber Security posture.{% endblocktranslate %}</p></div>
                         </div>
                     </li>
                      <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/2.jpg' %}" alt="{% trans 'Home office image' %}" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/2.jpg' %}" alt="{% trans 'Home office' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Covid-19" %}</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">{% blocktrans %}As with all organisations we had to quickly adapt to agile working arrangements in a very short timeframe, and the IT department played a key role in ensuing business continuity within the Council and to ensuring delivery of services to the public. This included remote working arrangements, adoption of video conferencing to support remote meetings, increased staff support and managing additional security risks.{% endblocktrans %}</p></div>
+                            <div class="timeline-body"><p class="text-muted">{% blocktranslate trimmed %}As with all organisations we had to quickly adapt to agile working arrangements in a very short timeframe, and the IT department played a key role in ensuing business continuity within the Council and to ensuring delivery of services to the public. This included remote working arrangements, adoption of video conferencing to support remote meetings, increased staff support and managing additional security risks.{% endblocktranslate %}</p></div>
                         </div>
                     </li>
                     <li class="timeline">
@@ -349,7 +349,7 @@
                         </div>
                     </li>
                      <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/modernisation.jpg' %}" alt="{% trans 'technology image' %}" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'assets/img/about/modernisation.jpg' %}" alt="{% trans 'technology' %}" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4 class="subheading">{% trans "Modernisation of Services" %}</h4>
@@ -375,18 +375,18 @@
       <div class="col-md-12">
         <small>
           <span class="footer-right">
-            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/accessibility-statement" rel="noopener" aria-label="Accessibility Statement (opens in a new tab)">{% trans "Accessibility" %}</a>
-            <a target="_blank" href="https://www.meath.ie/disclaimer" rel="noopener" aria-label="Disclaimer Statement (opens in a new tab)">{% trans "Disclaimer" %}</a>
-            <a target="_blank" href="https://www.meath.ie/council/your-council/customer-service-and-communications/data-protection-privacy-statement-for-meath-county-council" rel="noopener" aria-label="Privacy Statement (opens in a new tab)">{% trans "Privacy" %}</a>
-            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/freedom-of-information" rel="noopener" aria-label="Freedom of Information Statement (opens in a new tab)">{% trans "Freedom of Information" %}</a>
-            <a target="_blank" href="https://www.meath.ie/sitemap" rel="noopener" aria-label="Meath Sitemap (opens in a new tab)">{% trans "Sitemap" %}</a>
+            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/accessibility-statement" rel="noopener" aria-label="{% trans 'Accessibility Statement (opens in a new tab)' %}">{% trans "Accessibility" %}</a>
+            <a target="_blank" href="https://www.meath.ie/disclaimer" rel="noopener" aria-label="{% trans 'Disclaimer Statement (opens in a new tab)' %}">{% trans "Disclaimer" %}</a>
+            <a target="_blank" href="https://www.meath.ie/council/your-council/customer-service-and-communications/data-protection-privacy-statement-for-meath-county-council" rel="noopener" aria-label="{% trans 'Privacy Statement (opens in a new tab)' %}">{% trans "Privacy" %}</a>
+            <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/freedom-of-information" rel="noopener" aria-label="{% trans 'Freedom of Information Statement (opens in a new tab)' %}">{% trans "Freedom of Information" %}</a>
+            <a target="_blank" href="https://www.meath.ie/sitemap" rel="noopener" aria-label="{% trans 'Meath Sitemap (opens in a new tab)' %}">{% trans "Sitemap" %}</a>
           </span>
           <div class="social-icons">
-            <a href="https://www.youtube.com/channel/UCxcwtis5gp3GOYRRxJerMKA" target="_blank" rel="noopener"> <i class="fa-brands fa-youtube" aria-label="YouTube"></i></a>
-            <a href="https://www.facebook.com/MeathCountyCouncil/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" aria-label="Facebook"></i></a>
-            <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"  aria-label="X"></i></a>
-            <a href="https://ie.linkedin.com/company/meath-county-council" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in" aria-label="LinkedIn"></i></a>
-            <a href="https://www.instagram.com/meathcoco/?hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-label="Instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCxcwtis5gp3GOYRRxJerMKA" target="_blank" rel="noopener"> <i class="fa-brands fa-youtube" aria-label="{% trans 'YouTube' %}"></i></a>
+            <a href="https://www.facebook.com/MeathCountyCouncil/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" aria-label="{% trans 'Facebook' %}"></i></a>
+            <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"  aria-label="{% trans 'X' %}"></i></a>
+            <a href="https://ie.linkedin.com/company/meath-county-council" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in" aria-label="{% trans 'LinkedIn' %}"></i></a>
+            <a href="https://www.instagram.com/meathcoco/?hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-label="{% trans 'Instagram' %}"></i></a>
           </div>
         </small>
       </div>
@@ -397,19 +397,20 @@
   
     
             <!-- Custom Header will be populated by JS -->
-             <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div id="js-table-labels" style="display: none;"
+    <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="js-table-labels" style="display: none;"
      data-action-header="{% trans 'Action' %}"
      data-description-header="{% trans 'Description' %}"
      data-details-header="{% trans 'Details' %}"
-     data-show-more="{% trans 'Show More' %}"
+     data-view="{% trans 'View' %}"
      data-action-desc="{% trans 'Action Description:' %}"
      data-latest-update="{% trans 'Latest Update:' %}"
      data-no-update="{% trans 'No update recorded yet.' %}"
      data-back="{% trans '← Back' %}"
      data-loading="{% trans 'Loading...' %}"
      data-fetching="{% trans 'Please wait while content loads...' %}"
-     data-error="{% trans 'Error loading content. Please try again.' %}">
+     data-error="{% trans 'Error loading content. Please try again.' %}"
+     data-no-actions="{% trans 'No projects have reached this stage of the strategy yet.' %}">
 </div>
     <div class="modal-dialog">
         <div class="modal-content">

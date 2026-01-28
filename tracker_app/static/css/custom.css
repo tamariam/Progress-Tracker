@@ -1,42 +1,16 @@
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  
-}
-
-header.masthead {
-  /* Change only this line to your new image path */
-  background-image: url("../assets/img/bggg.jpg"); 
-}
-
-
-
-
-header.masthead .masthead-heading {
-  font-size: 2.5rem !important;
-  /* font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
-}
-
-
-.mcc-blue {
- 
-  background: rgb(2, 24, 50)!important;
-}
-.mcc-yellow{
-  background-color: rgb(254, 186, 53) !important;
-
-}
-/* -------------------------MODAL ACCORDION------------------------------------modal */
+/* =====================================================
+   CSS Variables - MCC Color Palette & Neutrals
+   ===================================================== */
 :root {
     /* Core MCC Colors */
-    --mcc-blue:  rgb(2, 24, 50)!important; /* Pantone 2965 RGB: 2, 24, 50 */
+    --mcc-blue: rgb(2, 24, 50) !important;
     --mcc-yellow: #feba35;
     --mcc-light-blue: #71C5E8;
     --mcc-green-lime: #B5BD00;
     --mcc-purple-pink: #C6579A;
     --mcc-dark-purple: #5D4777;
     --mcc-light-green: #719949;
-    --mcc-red-highlight: #971B2F; /* Pantone 7427 RGB: 151, 27, 47 */
+    --mcc-red-highlight: #971B2F;
     --mcc-dark-blue-light: #004C97;
     --mcc-teal: #007681;
     --mcc-brown-orange: #A15602;
@@ -49,97 +23,194 @@ header.masthead .masthead-heading {
     --background-light-gray: #f9f9f9;
 }
 
-
-
-.yellow-color{
-    color: rgb(254, 186, 53);
-    font-weight:bold;
+/* =====================================================
+   Base Styles
+   ===================================================== */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
-.mcc-green{
+
+hr {
+    border: none !important;
+}
+
+/* =====================================================
+   Header & Masthead
+   ===================================================== */
+header.masthead {
+    /* Change only this line to your new image path */
+    background-image: url("../assets/img/bggg.jpg");
+}
+
+header.masthead .masthead-heading {
+    font-size: 2.5rem !important;
+}
+
+.section-heading {
+    font-size: 1.8rem !important;
+}
+
+/* =====================================================
+   Color Utility Classes
+   ===================================================== */
+.mcc-blue {
+    background: rgb(2, 24, 50) !important;
+}
+
+.mcc-yellow {
+    background-color: rgb(254, 186, 53) !important;
+}
+
+.mcc-green {
     background-color: rgb(113, 153, 73);
 }
-.mcc-red{
+
+.mcc-red {
     background-color: rgb(151, 27, 47);
 }
 
 .mcc-blue-transparent {
-    /* Example: Sets the background to 70% opacity */
-    background-color: rgba(0, 123, 255, 0.1) !important; 
+    background-color: rgba(0, 123, 255, 0.1) !important;
 }
-/*  -------------------------*/
-/* scrollbarrr colour */
-/* Custom Scrollbar Styles for .modal-body */
 
-/* For Chrome, Safari, and Edge (Webkit) */
+.yellow-color {
+    color: rgb(254, 186, 53);
+    font-weight: bold;
+}
+
+.strategy-icon {
+    color: var(--mcc-yellow);
+}
+
+/* =====================================================
+   Scrollbar Styles
+   ===================================================== */
+/* =====================================================
+   Scrollbar Styles
+   ===================================================== */
 .modal-body::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 .modal-body::-webkit-scrollbar-track {
-  background: #FFFFFF; /* White background/track */
+    background: #FFFFFF;
 }
 
 .modal-body::-webkit-scrollbar-thumb {
-  background-color: #FFFFFF; /* White thumb/handle */
-  border-radius: 6px;
-  /* Optional border to define the thumb against the white background */
-  border: 1px solid #eee; 
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    border: 1px solid #eee;
 }
 
-/* For Firefox */
 .modal-body {
-  scrollbar-width: thin;
-  /* Syntax: scrollbar-color: [thumb-color] [track-color]; */
-  scrollbar-color: #FFFFFF #FFFFFF; 
-}
-
-
-.modal-body {
-    /* Ensure the padding doesn't push the content down out of view */
-    padding: 0px 20px 20px 20px; 
-    
-    /* Ensure height is dynamic and overflow allows content to show */
-    height: auto; 
-    overflow-y: auto; /* Adds a scrollbar if the modal is very long */
-    /* Reserve scrollbar gutter to avoid layout shift when scrollbar appears */
+    scrollbar-width: thin;
+    scrollbar-color: #FFFFFF #FFFFFF;
+    padding: 0px 20px 20px 20px;
+    height: auto;
+    overflow-y: auto;
     scrollbar-gutter: stable;
-    
-    /* Ensure nothing is stacking on top of it */
     position: relative;
     z-index: 1;
+    box-sizing: content-box;
 }
-.portfolio-item img{
-    border-radius: 8px !important;
+
+/* =====================================================
+   Modal Styles
+   ===================================================== */
+.modal-content {
+    box-shadow: 0 10px 30px var(--shadow-color);
+    padding: 0 !important;
+    position: relative;
 }
-/* Ensure dynamic content container allows flow */
+
+.modal-content h2 {
+    font-size: 2rem;
+}
+
+.modal-content p {
+    text-align: left;
+}
+
+.modal-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: RGB(2, 24, 50);
+}
+
+.modal-header-custom {
+    background-color: RGB(2, 24, 50) !important;
+    color: var(--mcc-yellow);
+    padding: 20px;
+    font-family: "Helvetica Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+
+.modal-title-custom {
+    margin: 0;
+    color: inherit;
+    font-size: 1.5rem;
+}
+
+#modalThemeTitle {
+    color: var(--mcc-yellow);
+    font-size: 1.5rem;
+    background-color: RGB(2, 24, 50);
+}
+
+.modal-header-summary {
+    background-color: var(--background-light-gray);
+    padding: 20px;
+    border-bottom: 3px solid var(--mcc-yellow);
+}
+
+.header-summary {
+    color: rgb(2, 24, 50);
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+/* Modal Close Button */
+#close-modal-top-right {
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    margin-right: 5px;
+    background-color: var(--mcc-yellow);
+    min-width: 29px;
+    min-height: 29px;
+    border-radius: 6px;
+    border: none;
+}
+
+#close-modal-top-right:hover,
+#close-modal-top-right:focus {
+    color: var(--mcc-yellow);
+    outline: 2px solid var(--mcc-yellow);
+    border-radius: 4px;
+}
+
 #dynamicModalContent {
     position: relative;
     z-index: 1;
 }
 
-/* --------------------------------- */
-/* Specific styles to override the generic Bootstrap modal styles */
-.modal-header-custom {
-    background-color: RGB(2, 24, 50)!important;
-    color: var(--mcc-yellow);
-    padding: 20px;
-    /* Helvetica Light font requirement */
-    font-family: "Helvetica Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    min-height: 70px; /* Ensures high contrast and large clickable area */
+/* =====================================================
+   Accordion Styles - Objectives
+   ===================================================== */
+.accordion-item {
+    border-bottom: 1px solid var(--border-light);
+    background-color: var(--background-white);
 }
 
-#modalThemeTitle{
-    color: var(--mcc-yellow);
-    font-size:1.5rem;
-    background-color:RGB(2, 24, 50)
-
-}
-
-/* Overriding the default close button icon positioning */
-
-
-/* Accordion Styles (Objectives): Clean design, hover effects, MCC Blue titles */
-.accordion-item { border-bottom: 1px solid #eee; }
 .accordion-title {
     background-color: var(--background-white);
     color: var(--mcc-blue);
@@ -149,149 +220,84 @@ header.masthead .masthead-heading {
     border: none;
     cursor: pointer;
     font-size: 1.1em;
+    font-weight: bold;
     transition: background-color 0.3s, color 0.3s;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 44px; /* Large clickable area */
-    
+    min-height: 44px;
 }
 
+.accordion-title:hover {
+    background-color: #f1f1f1;
+}
 
-.accordion-title:hover, .accordion-title.active { background-color: #f1f1f1; }
+.accordion-title.active {
+    background-color: var(--background-light-gray);
+    color: var(--mcc-red-highlight);
+    border-bottom: none;
+}
+
+.accordion-title .fa-solid,
+.action-sub-title .fa-solid {
+    transition: transform 0.3s ease;
+    color: var(--mcc-light-blue);
+}
+
+.accordion-title.active .fa-solid {
+    transform: rotate(180deg);
+    color: var(--mcc-red-highlight);
+}
+
 .accordion-content {
-    padding: 0 18px;
     overflow: hidden;
     max-height: 0;
-    display: none; /* Keeps modal clean on load */
+    display: none;
     transition: max-height 0.4s ease-out;
     width: 100%;
 }
 
 .accordion-content.show {
     display: block !important;
-    /* We remove the 'max-height' restriction here so it can grow */
-    max-height: none !important; 
+    max-height: none !important;
     height: auto !important;
     overflow: visible !important;
     padding-bottom: 18px;
 }
 
-
-
-
-
-
-/* Action Cards Styles: White background, rounded corners, subtle shadow */
-
-.action-card {
-    background-color: var(--background-white);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px var(--shadow-color); /* Subtle shadow for depth */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.accordion-content .objective-p {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
 }
-.card-title { color: var(--mcc-blue); font-size: 1.2em; margin-bottom: 10px; }
-.card-description { margin-bottom: 15px; flex-grow: 1; }
-.badge {
-    background-color: var(--mcc-yellow); 
+
+.objective-p {
+    font-size: 1rem;
+    padding-top: 15px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
     color: var(--mcc-blue);
-    padding: 5px 10px;
+    line-height: 1.4;
+}
+
+/* =====================================================
+   Action Sub-Accordions
+   ===================================================== */
+.action-accordion-container {
+    border: 1px solid var(--border-light);
     border-radius: 4px;
-    font-size: 0.8em;
-    font-weight: bold;
-} 
-
-/* Expandable Update Section Styles */
- .view-update-btn {
-    background-color: var(--mcc-yellow); 
-    color: var(--mcc-blue); 
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    min-height: 44px;
-} 
-.update-content {
-   display: block; /* Keep as block for transition compatibility */
-    padding-top: 10px;
-    max-height: 0; /* Starts at zero height */
-    /* Use a standard, reliable transition timing */
-    transition: max-height 0.8s ease-in-out; 
-    
-}
-.update-content.show-update {
-     display: block; 
-     max-height:2000px;
- } 
-
-/* Responsive Design (1 column mobile) */
-@media (max-width: 768px) {
-    .card-grid { grid-template-columns: 1fr; } 
+    background-color: var(--background-white);
 }
 
-/* ---------------------------MODAL CARD---------------------------------- */
-.modal-content {
-    position: relative; /* CRITICAL: Must be relative */
-}
-/* .portfolio-modal .close-modal{
-    width:1rem !important;
-    height:1rem !important;
-} */
-#close-modal-top-right {
-    /* position: absolute; 
-    top: 10px; 
-    right: 10px;  */
-    
-    /* Styling the button itself */
-    background: none; /* No background */
-    /* border: none;       */
-    cursor: pointer;   /* Hand icon on hover */
-    font-size: 20px;   /* Large X symbol */
-    line-height: 1;    /* Adjusts vertical alignment */
-    margin-right:5px;
-    /* MCC Colors */
-    background-color:var(--mcc-yellow); /* Default MCC Blue color */
-    
-    /* Accessibility and user experience */
-    /* z-index: 1050;      */
-     /* Makes it easier to click */
-    min-width: 29px;   
-    min-height: 29px;
-    border-radius:6px;
-    
-}
-@media (min-width: 768px) {
-    #close-modal-top-right {
-        min-width: 44px;   
-    min-height: 44px;
-    }
-    #modalThemeTitle{
-        font-size: 2rem;
-    }}
-.modal-header-wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    background-color: RGB(2, 24, 50);
-}
-
-/* Hover and Focus States (Accessibility) */
-#close-modal-top-right:hover,
-#close-modal-top-right:focus {
-    color: var(--mcc-yellow); /* Change color to MCC Yellow on hover/focus */
-    outline: 2px solid var(--mcc-yellow); /* Accessibility focus indicator */
-    border-radius: 4px;
-}
-
-/* -------------------------------------------- */
-/* Sub-Accordion for Actions */
-.action-sub-item  {
+.action-sub-item {
     overflow-x: hidden;
-    padding: 10px 0;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.action-sub-item:last-child {
+    border-bottom: none;
 }
 
 .action-sub-title {
@@ -303,291 +309,79 @@ header.masthead .masthead-heading {
     font-size: 1em;
     font-weight: bold;
     color: var(--mcc-blue);
-    padding: 0;
+    padding: 5px;
     min-height: 44px;
     display: flex;
     justify-content: space-between;
-    /* background-color: RGB(113,197,232); */
-    background-color: rgb(254,186,53);
-
-
-    padding:5px;
+    background-color: rgb(254, 186, 53);
     border-radius: 5px;
-}
-
-.action-sub-title.active-action {
-    color:  #971B2F;
-    
-}
-
-.action-sub-content {
-    /* padding: 0 0 10px 0; */
-    overflow-y: auto;
-    max-height: 0;
-    transition: max-height 0.4s ease-in-out;
-}
-
-
-.modal-body{
-    box-sizing: content-box;
-}
-.modal-content p{
-    margin-top:10px;
-    text-align:left;
-}
-
-.objective-p {
-    font-size:1rem;
-    padding-top: 15px;
-    white-space:normal;
-    word-wrap:break-word;
-    overflow-wrap: break-word;
-    min-width:0;
-    color:var(--mcc-blue);
-}
-.header-summary{
-    color: rgb(2, 24, 50);
-    font-size:1rem;
-}
-@media (min-width: 768px) {
-    .objective-p, .header-summary{
-        font-size:1.25rem;
-    }
-}
-
-/*-------------------------------------- */
-/* -------------------------MODAL GENERAL STYLES------------------------------------ */
-.modal-body {
-    padding: 0px 20px 20px 20px; 
-    height: auto; 
-    overflow-y: auto; 
-    position: relative;
-    z-index: 1;
-}
-
-.modal-content {
-    box-shadow: 0 10px 30px var(--shadow-color); /* Stronger shadow for modern depth */
-}
-
-/* Specific styles to override the generic Bootstrap modal styles */
-.modal-header-custom {
-    background-color: RGB(2, 24, 50);
-    color: var(--text-white);
-    padding: 20px;
-    font-family: "Helvetica Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    min-height: 70px;
-    display: flex;
-    justify-content: center; /* Centers the title within the header */
-    align-items: center;
-    border-top-left-radius: 0.3rem; /* Match Bootstrap default radius */
-    border-top-right-radius: 0.3rem;
-}
-.modal-title-custom {
-    margin: 0;
-    color: inherit;
-    font-size: 1.5rem;
-}
-
-/* Modal Header Summary Section */
-.modal-header-summary {
-    background-color: var(--background-light-gray);
-    padding: 20px;
-    border-bottom: 3px solid var(--mcc-yellow); /* A strong yellow accent line */
-}
-
-.header-summary {
-    color: rgb(2, 24, 50); 
-    margin: 0;
-    line-height: 1.5;
-}
-
-/* .modal-body ol, .modal-body ul{
-padding:0 !important;
-} */
-/* ------------------------- OBJECTIVE ACCORDIONS ------------------------- */
-
-/* Icon rotation transition */
-.accordion-title .fa-solid,
-.action-sub-title .fa-solid {
-    transition: transform 0.3s ease;
-    color: var(--mcc-light-blue); /* Use a light blue icon for visual appeal */
-}
-
-.accordion-title.active .fa-solid {
-    transform: rotate(180deg);
-    color: var(--mcc-red-highlight); /* Red icon when open */
-}
-
-.accordion-item { 
-    border-bottom: 1px solid var(--border-light); 
-    background-color: var(--background-white);
-}
-
-.accordion-title {
-    color: var(--mcc-blue);
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 44px;
-}
-
-.accordion-title:hover { 
-    background-color: #f1f1f1; 
-}
-
-/* Active State: Use the Highlight Red for the open objective title */
-.accordion-title.active { 
-    background-color: var(--background-light-gray); /* Lighter background when open */
-    color: var(--mcc-red-highlight); 
-    border-bottom: none; 
-}
-
-
-
-.objective-p {
-    padding-top: 15px;
-    color: var(--mcc-blue); 
-    line-height: 1.4;
-}
-
-/* ------------------------- ACTION SUB-ACCORDIONS ------------------------- */
-
-.action-accordion-container {
-    /* Optional border for definition */
-    border: 1px solid var(--border-light); 
-    border-radius: 4px;
-    background-color: var(--background-white); /* White background for action cards */
- 
-}
-
-.action-sub-item {
-    border-bottom: 1px solid var(--border-light);
-    padding: 10px 15px; /* Added padding to align with container borders */
-}
-.action-sub-item:last-child {
-    border-bottom: none; 
-}
-
-/* Action Titles: Highlight with Yellow */
-.action-sub-title {
-    /* ... existing styles ... */
-    color: var(--mcc-blue);
-    font-size: 1em;
-    font-weight: bold;
 }
 
 .action-sub-title:hover,
 .action-sub-title.active-action {
-    color: var(--mcc-blue); 
-}
-
-.action-sub-content {
-    padding: 0 15px 10px 15px; /* Added padding to align with action item padding */
     color: var(--mcc-blue);
 }
 
-.update-section h4,.action-sub-content h4 {
-    color: var(--mcc-red-highlight); /* Use red for emphasis on updates */
+.action-sub-content {
+    padding: 0 15px 10px 15px;
+    overflow-y: auto;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+    color: var(--mcc-blue);
+}
+
+.update-section h4,
+.action-sub-content h4 {
+    color: var(--mcc-red-highlight);
     margin-top: 15px;
     font-size: 1em;
     font-weight: bold;
 }
-.update-section ul{
-    text-align:left;
-}
-.modal-content{
-    padding: 0  !important;
-}
 
-/* ??????????????????????????????????????? */
-
-     .modal-content h2{
-        font-size:2rem;
-     }
-
-    
-    
-/* sucecess section */
-.section-heading{
-    font-size: 1.8rem !important;
-}
-/* TIMELINE */
-.img-background{
-    background:none !important;
-}
-/* Strategy */
-@media(min-width:768px){
-.text-left{
+.update-section ul {
     text-align: left;
 }
 
-
-@media (min-width:768px){
-    .timeline > li .timeline-panel {
-    padding: 0 20px 20px 5px;
-    text-align: left 
-    
-  }}
+/* =====================================================
+   Action Cards
+   ===================================================== */
+.action-card {
+    background-color: var(--background-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* ////COUNTER */
-
-/*  Counter Section  */
-.counter-div{
-    max-width: 416px;
-    margin:auto;
-}
-.counter-text{
-    color: var(--mcc-yellow);
-   font-weight:bold;
-}
-@media (min-width:768px){
-    .counter-text{
-        font-size:1.4rem;
-    }
-    /* module section left column  text size for larger screens */
-    
-    .bigger-font{
-        font-size:1.5rem !important;
-    }
-    .uppercase-class{
-        text-transform:uppercase;
-    }
+.card-title {
+    color: var(--mcc-blue);
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }
 
-/* modal counter icons */
-    /* Custom styles for counter card colors and icon spacing */
-        .mcc-green { background-color: rgb(113, 153, 73); }
-        .mcc-yellow { background-color: rgb(254, 186, 53); }
-        .mcc-red { background-color: rgb(151, 27, 47); }
-        
-        /* CSS to ensure space next to the bigger icon */
-        .icon-spacing {
-            margin-right: 15px; /* Increased space since icons are bigger */
-        }
-        
-        /* Ensures text and icons are aligned nicely within the card */
-        .d-flex p {
-            display: flex;
-            align-items: center;
-        }
+.card-description {
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
 
-        /* progress module new layout */
-    .action-card-item {
+.action-card-item {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.action-card-item p {
+    margin-top: 10px;
+    color: #555;
+}
+
+.action-card-item .btn-primary {
+    margin-top: 10px;
 }
 
 .action-header {
@@ -601,261 +395,62 @@ padding:0 !important;
     font-size: 1.1rem;
 }
 
-.status-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
-}
-.lang-switcher-btn{
-    background-color: rgb(254, 186, 53) !important; 
-    border-color: rgb(254, 186, 53) !important;
-    color: rgb(2, 24, 50) !important;
-    font-weight: bold;
-    padding: 4px 12px;
+/* =====================================================
+   Badges & Status Indicators
+   ===================================================== */
+.badge {
+    background-color: var(--mcc-yellow);
+    color: var(--mcc-blue);
+    padding: 5px 10px;
     border-radius: 4px;
-    text-decoration: none;
-  
-}
-.lang-switcher-btn:hover {
-    /* This is a specifically lightened version of your gold */
-    background-color: #ffd175 !important; 
-    border-color: #ffd175 !important;
-    transition: 0.3s ease;
-}
-.scroll-down-btn {
-  /* Initial state */
-  transition: transform 0.3s ease-in-out;
-}
-@media screen and (max-width: 365px){
-      .lang-switcher-btn{
-        padding: 8px 2px;
-        font-size:0.8rem;
-      }
-    }
-
-
-.scroll-down-btn:hover {
-  /* Move down 5px and scale up by 10% */
-  transform: translateY(5px) scale(1.1);
-  
-}
-.scroll-down-btn:active{
-    border:none;
-
-}
-
-.strategy-icon{
-    color:var(--mcc-yellow)
-}
-/* Color codes for your statuses (use your MCC colors if available) */ 
-.status-completed { background-color: rgb(113, 153, 73); }
-.status-in_progress { background-color: rgb(254, 186, 53); }
-.status-not_started { background-color: rgb(151, 27, 47); /* Red */ }
-
-.action-card-item p {
-    margin-top: 10px;
-    color: #555;
-}
-
-.action-card-item .btn-primary {
-    margin-top: 10px;
-    /* Style this button using your existing CSS framework styles if you have one */
-}
-
-/* /////another version of progress section */
-.action-table {
-    width: 100%;
-    border-collapse: collapse; /* Removes space between borders */
-    margin-top: 15px;
-}
-
-.action-table th {
-    text-align: left;
-    padding: 10px 10px;
-    background-color:var(--mcc-blue);
+    font-size: 0.8em;
     font-weight: bold;
-    border-bottom: 2px solid #ddd;
 }
 
-.action-summary-row td {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+    color: white;
+    text-transform: capitalize;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* Add striped rows for better readability */
-.action-table tbody tr:nth-child(4n+1), .action-table tbody tr:nth-child(4n+2) {
-    background-color: #fafafa;
+.badge-completed,
+.header-completed {
+    background-color: #719949;
 }
 
-/* Style for the hidden details row */
-.full-details td {
-    padding: 20px 10px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-
-.details-content h5 {
-    margin-top: 0;
-    margin-bottom: 5px;
+.badge-in_progress,
+.header-in_progress {
+    background-color: rgb(254, 186, 53);
     color: #333;
 }
 
-.details-content p {
-    margin-bottom: 10px;
+.badge-not_started,
+.header-not_started {
+    background-color: rgb(151, 27, 47);
 }
 
-/* Status badge styles remain the same as before */
-.status-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
+.status-completed {
+    background-color: rgb(113, 153, 73);
+    border-left-color: #719949;
 }
 
-/* .status-completed { background-color: #28a745; }
-.status-in_progress { background-color: #ffc107; color: #333; }
-.status-not_started { background-color: #dc3545; } */
-/* aqnotheer versionnnnnnnnnnnnnnnnnnnnn */
-.action-table {
-    width: 100%;
-    border-collapse: collapse; 
-    margin-top: 15px;
+.status-in_progress {
+    background-color: rgb(254, 186, 53);
+    border-left-color: rgb(254, 186, 53);
 }
 
-.action-table th {
-    text-align: left;
-    padding: 10px 10px;
-    background-color: #f2f2f2;
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
+.status-not_started {
+    background-color: rgb(151, 27, 47);
+    border-left-color: rgb(151, 27, 47);
 }
 
-.action-table-row td {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-    cursor: pointer;
-}
-
-/* Add striped rows for better readability */
-.action-table tbody tr:nth-child(4n+1) td, .action-table tbody tr:nth-child(4n+2) td {
-    background-color: #fafafa;
-}
-/* Ensure details rows don't have the striped background */
-.full-details td {
-     background-color: #fff !important;
-}
-
-/* Style for the hidden details row */
-.full-details td {
-    padding: 20px 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.details-content h5 { margin-top: 0; margin-bottom: 5px; color: #333; }
-.details-content p { margin-bottom: 10px; }
-
-
-/* --- NEW BORDER STYLING --- */
-
-.action-table-row {
-    border-left: 8px solid transparent; /* Base style, will be overridden */
-}
-
-
-/* Color codes for the left border (use your MCC colors) */
-/* The class name must match action.status|lower exactly */
-.status-completed { border-left-color: #719949; /* Green */ }
-.status-in_progress { border-left-color: #FEBA35; /* Yellow */ }
-.status-not_started { border-left-color: rgb(151, 27, 47); /* Red */ }
-
-/* Ensure the bottom border of the details row matches the status color for continuity */
-.full-details.status-completed td { border-bottom: 3px solid #719949; }
-.full-details.status-in_progress td { border-bottom: 3px solid #FEBA35; }
-.full-details.status-not_started td { border-bottom: 3px solid rgb(151, 27, 47); }
-
-;
-
-/* Remove status badge styles, no longer needed */
-.status-badge { display: none; }
-
-/* anotherrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr */
-/* Styles for the new table layout (updated for borders and no row backgrounds) */
-.action-table {
-    width: 100%;
-    border-collapse: collapse; 
-    margin-top: 15px;
-}
-
-.action-table th {
-    text-align: left;
-    padding: 10px 10px;
-    background-color: #f2f2f2; /* Heading background color kept */
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
-}
-
-.action-table-row td {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-    cursor: pointer;
-    background-color: #fff; /* ENSURE background is white */
-}
-
-/* REMOVE the striped rows CSS rule: */
-/* .action-table tbody tr:nth-child(4n+1) td, .action-table tbody tr:nth-child(4n+2) td {
-    background-color: #fafafa;
-} */
-
-
-/* Style for the hidden details row */
-.full-details td {
-    padding: 20px 10px;
-    background-color: #fff !important; /* ENSURE background is white */
-    border-bottom: 1px solid #ddd;
-}
-
-.details-content h5 { margin-top: 0; margin-bottom: 5px; color: #333; }
-.details-content p { margin-bottom: 10px; }
-
-
-/* --- NEW BORDER STYLING --- */
-
-.action-table-row {
-    border-left: 15px solid transparent; /* Base style, will be overridden */
-}
-
-/* Color codes for the left border */
-.status-completed { border-left-color: #28a745; /* Green */ }
-.status-in_progress { border-left-color: #FEBA35; /* Yellow */ }
-.status-not_started { border-left-color: rgb(151, 27, 47); /* Red */ }
-
-/* Ensure the bottom border of the details row matches the status color for continuity */
-.full-details.status-completed td { border-bottom: 5px solid #28a745; }
-.full-details.status-in_progress td { border-bottom: 5px solid #FEBA35; }
-.full-details.status-not_started td { border-bottom: 5px solid rgb(151, 27, 47); }
-
-/* Remove status badge styles, no longer needed */
-.status-badge { display: none; }
-
-/* anmotherr oneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee /////////////////////*/
-/* --- General Accordion Styles --- */
-
-
-
-.accordion-content .objective-p {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-}
-
-/* --- Status Legend (Keep if used elsewhere) --- */
+/* Status Legend */
 .status-legend {
     margin-bottom: 15px;
     font-size: 0.9rem;
@@ -879,30 +474,63 @@ padding:0 !important;
     background-color: currentColor;
 }
 
-/* Color codes for the legend items (Keep if needed) */
-.status-completed-border::before { background-color: rgb(113, 153, 73); }
-.status-in_progress-border::before { background-color: rgb(254, 186, 53); }
-.status-not_started-border::before { background-color: rgb(151, 27, 47); }
+.status-completed-border::before {
+    background-color: rgb(113, 153, 73);
+}
 
+.status-in_progress-border::before {
+    background-color: rgb(254, 186, 53);
+}
 
-/* --- TABLE STYLING --- */
+.status-not_started-border::before {
+    background-color: rgb(151, 27, 47);
+}
 
+/* =====================================================
+   Update Section & View Update Button
+   ===================================================== */
+.view-update-btn {
+    background-color: var(--mcc-yellow);
+    color: var(--mcc-blue);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    min-height: 44px;
+}
+
+.update-content {
+    display: block;
+    padding-top: 10px;
+    max-height: 0;
+    transition: max-height 0.8s ease-in-out;
+}
+
+.update-content.show-update {
+    display: block;
+    max-height: 2000px;
+}
+
+/* =====================================================
+   Table Styles
+   ===================================================== */
 .action-table-container {
-    overflow-x: auto; /* Makes the table scrollable horizontally on small screens */
+    overflow-x: auto;
     margin-top: 15px;
-    
-
 }
 
 .action-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 15px;
     margin-bottom: 1rem;
     border-radius: 4px;
     overflow: hidden;
 }
 
-.action-table th, .action-table td {
+.action-table th,
+.action-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -910,97 +538,111 @@ padding:0 !important;
 }
 
 .action-table th {
-    background-color:var(--mcc-blue); /* Heading background color */
+    background-color: var(--mcc-blue);
     font-weight: bold;
-    color:var(--mcc-yellow);
+    color: var(--mcc-yellow);
+    padding: 10px 10px;
+    border-bottom: 2px solid #ddd;
 }
 
-/* Style for the summary rows */
-.action-summary-row {
-    cursor: pointer;
-    background-color: #fff; /* Explicitly ensure white background */
-    
-}
-
-/* REMOVE hover effect as requested */
-/* .action-summary-row:hover { background-color: #f9f9f9; } */
-
-/* iI MIGHT NEED IT FOR MOBILE SCREEN SIZE FOR TABLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
-
-/* Status Colors for Table Rows (Left Border only) */
-/* .action-summary-row {
-    border-left: 10px solid transparent; 
-} */
-.status-completed { border-left-color:  #719949; }
-.status-in_progress { border-left-color: rgb(254, 186, 53); }
-.status-not_started { border-left-color: rgb(151, 27, 47); }
-
-
-/* --- Status Badge Styling (Pill shape - these are now used in the HTML) --- */
-.status-badge {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    display: inline-block;
+.action-table thead.header-completed th {
+    background-color: #719949;
     color: white;
-    text-transform: capitalize;
 }
 
-/* Background colors for badges using new distinct classes (Requires HTML update as previously specified) */
-.badge-completed,.header-completed { background-color: #719949; }
-.badge-in_progress,.header-in_progress { background-color: rgb(254, 186, 53); color: #333; }
-.badge-not_started,.header-not_started { background-color: rgb(151, 27, 47); }
+.action-table thead.header-in_progress th {
+    background-color: rgb(254, 186, 53);
+    color: #333;
+}
 
+.action-table thead.header-not_started th {
+    background-color: #971B2F;
+    color: white;
+}
 
-/* Style for the hidden details section (full row spanning all columns) */
+.action-summary-row,
+.action-table-row {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.action-table-row {
+    border-left: 15px solid transparent;
+}
+
+.action-table-row td,
+.action-summary-row td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    background-color: #fff;
+}
+
 .full-details td {
-    background-color: #fafafa !important; /* Slight off-white for details area */
+    padding: 20px 10px;
+    background-color: #fafafa !important;
+    border-bottom: 1px solid #ddd;
     padding-top: 0;
 }
 
-/* Ensure the bottom border of the details row matches the status color for continuity */
-.full-details.status-completed td { border-bottom: 5px solid ; }
-.full-details.status-in_progress td { border-bottom: 5px solid var(--mcc-yellow); }
-.full-details.status-not_started td { border-bottom: 5px solid  mcc-red; }
+.full-details.status-completed td {
+    border-bottom: 5px solid #719949;
+}
 
+.full-details.status-in_progress td {
+    border-bottom: 5px solid var(--mcc-yellow);
+}
+
+.full-details.status-not_started td {
+    border-bottom: 5px solid #971B2F;
+}
 
 .details-content {
     padding: 15px 0 0 0;
 }
 
-/* Target elements inside the details content area */
-.full-details h5, .full-details p {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
+.details-content h5,
+.full-details h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
 }
 
-/* Target the <small> tag used for the action small description */
+.details-content p,
+.full-details p {
+    margin-bottom: 10px;
+    margin-top: 0 !important;
+}
+
 .title-col small {
     margin-top: 5px !important;
     display: block;
 }
 
-
-/* --- BUTTON STYLING --- */
-
-.toggle-details {
+/* =====================================================
+   Buttons
+   ===================================================== */
+.toggle-details,
+.view-button,
+.close-button {
     color: white;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    display: inline-block;
+    background-color: var(--mcc-blue);
+    font-weight: bold;
+    white-space: nowrap;
+    width:100px;
 }
 
-.view-button, .close-button {
-    display: inline-block; 
-    /* Assuming you defined --mcc-blue and --mcc-yellow elsewhere in your main CSS */
-    background-color: var(--mcc-blue); 
-    color: white;
-}
-.view-button:hover, .close-button:hover {
+.view-button:hover,
+.close-button:hover {
     background-color: var(--mcc-yellow);
+    color: var(--mcc-blue);
+}
 }
 
 .close-button {
@@ -1010,57 +652,46 @@ padding:0 !important;
     padding: 6px 12px;
 }
 
-/* General utility classes */
-.text-right { text-align: right !important; }
-
-hr{
-    border:none !important
-}
-
-/* counter-styles */
-.status-card {
-    cursor: pointer; /* Changes the arrow to a hand icon */
-    transition: transform 0.2s; /* Optional: makes the card slightly interactive on hover */
+.btn-back {
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.status-card:hover {
-    transform: translateY(-2px); /* Optional: lifts the card slightly on hover */
-    transform: scale(0.98);
-}
-
-/* /// counter  */
-.btn-back{
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-.btn-back:hover{
-    background-color:var(--mcc-yellow) !important;
+.btn-back:hover {
+    background-color: var(--mcc-yellow) !important;
     transform: scale(1.2);
-
 }
 
-/* change thead  background accordingly  */
-
-/* Table Header Status Colors */
-/* Target the TH inside the colored THEAD */
-.action-table thead.header-completed th {
-    background-color: #719949 ;
-    color: white ;
+/* Language Switcher Button */
+.lang-switcher-btn {
+    background-color: rgb(254, 186, 53) !important;
+    border-color: rgb(254, 186, 53) !important;
+    color: rgb(2, 24, 50) !important;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
 }
 
-.action-table thead.header-in_progress th {
-   background-color: rgb(254, 186, 53);
-color: #333;
+.lang-switcher-btn:hover {
+    background-color: #ffd175 !important;
+    border-color: #ffd175 !important;
+    transition: 0.3s ease;
 }
 
-.action-table thead.header-not_started th {
-    background-color:  #971B2F ;
-    color: white ;
+/* Scroll Down Button */
+.scroll-down-btn {
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Styling and positioning the scroll button */
+.scroll-down-btn:hover {
+    transform: translateY(5px) scale(1.1);
+}
 
-/* BASE STYLE: Always Blue */
+.scroll-down-btn:active {
+    border: none;
+}
+
+/* Scroll to Top Button */
 #scrollToTopBtn {
     display: none;
     position: fixed;
@@ -1075,15 +706,107 @@ color: #333;
     padding: 15px;
     border-radius: 50%;
     font-size: 18px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    /* Transition makes the color change smooth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.3s;
-    /* Removes the gray/blue box that appears on mobile taps */
-    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* DESKTOP ONLY: Yellow on Hover */
-/* This block will be completely ignored by phones/tablets */
+#scrollToTopBtn:active {
+    background-color: var(--mcc-yellow);
+}
+
+/* =====================================================
+   Counter Section
+   ===================================================== */
+.counter-div {
+    max-width: 416px;
+    margin: auto;
+}
+
+.counter-text {
+    color: var(--mcc-yellow);
+    font-weight: bold;
+}
+
+.icon-spacing {
+    margin-right: 15px;
+}
+
+.d-flex p {
+    display: flex;
+    align-items: center;
+}
+
+.status-card {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.status-card:hover {
+    transform: scale(0.98);
+}
+
+/* =====================================================
+   Portfolio & Images
+   ===================================================== */
+.portfolio-item img {
+    border-radius: 8px !important;
+}
+
+.img-background {
+    background: none !important;
+}
+
+/* =====================================================
+   Utility Classes
+   ===================================================== */
+.text-right {
+    text-align: right !important;
+}
+
+/* =====================================================
+   Media Queries - min-width: 768px (Desktop)
+   ===================================================== */
+@media (min-width: 768px) {
+    #close-modal-top-right {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    #modalThemeTitle {
+        font-size: 2rem;
+    }
+
+    .objective-p,
+    .header-summary {
+        font-size: 1.25rem;
+    }
+
+    .counter-text {
+        font-size: 1.4rem;
+    }
+
+    .bigger-font {
+        font-size: 1.5rem !important;
+    }
+
+    .uppercase-class {
+        text-transform: uppercase;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .timeline > li .timeline-panel {
+        padding: 0 20px 20px 5px;
+        text-align: left;
+    }
+}
+
+/* =====================================================
+   Media Queries - hover support (Desktop hover)
+   ===================================================== */
 @media (hover: hover) {
     #scrollToTopBtn:hover {
         background-color: var(--mcc-yellow);
@@ -1091,25 +814,248 @@ color: #333;
     }
 }
 
-/* MOBILE ONLY: Flash yellow only while finger is touching */
-#scrollToTopBtn:active {
-    background-color: var(--mcc-yellow);
-}
+/* =====================================================
+   Media Queries - max-width: 541px (Mobile Card Layout)
+   ===================================================== */
+@media (max-width: 541px) {
+    /* Hide table display - convert to cards */
+    .action-table {
+        display: block;
+        border-collapse: unset;
+        overflow: visible;
+    }
 
-/* MOBILE SIZING: For screens smaller than 768px */
-@media (max-width: 768px) {
-    #scrollToTopBtn {
-        /* Reduce from 30px/20px to 15px to save space on small screens */
-        bottom: 15px;
-        right: 15px;
-        
-        /* Reduce padding and font-size to make the circle smaller */
-        padding: 12px; 
-        font-size: 15px; 
+    .action-table thead {
+        display: none;
+    }
+
+    .action-table tbody {
+        display: block;
+    }
+
+    /* Card-like layout for table rows */
+    .action-summary-row {
+        display: block;
+        background-color: #fff;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-bottom: none;
+    }
+
+    /* Add colored left border based on status */
+    .action-summary-row.status-completed {
+        border-left: 6px solid #719949;
+    }
+
+    .action-summary-row.status-in_progress {
+        border-left: 6px solid rgb(254, 186, 53);
+    }
+
+    .action-summary-row.status-not_started {
+        border-left: 6px solid rgb(151, 27, 47);
+    }
+
+    /* Table cells become block with labels */
+    .action-summary-row td {
+        display: block;
+        padding: 12px 0;
+        border-bottom: none;
+        text-align: left;
+        background-color: transparent;
+    }
+
+    .action-summary-row td:not(:last-child) {
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
+    /* Add data labels before each cell */
+    .title-col::before {
+        content: "";
+        display: none;
+        font-weight: bold;
+        color: var(--mcc-blue);
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .title-col {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+    }
+
+    .title-col strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-top: 5px;
+        color: var(--mcc-blue);
+    }
+
+    .objective-col::before {
+        content: "";
+        display: none;
+        font-weight: bold;
+        color: var(--mcc-blue);
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .objective-col p {
+        margin: 5px 0 0 0;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .status-col::before {
+        content: "Status: ";
+        font-weight: bold;
+        color: var(--mcc-blue);
+        display: none;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .status-col {
+        display: none !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        display: inline-block;
+        text-transform: capitalize;
+        white-space: nowrap;
+    }
+
+    /* Action buttons container */
+    .details-col {
+        text-align: center !important;
+        padding: 12px 0 !important;
+        margin-top: 10px;
+        padding-top: 15px !important;
+    }
+
+    .details-col::before {
+        content: "";
+        display: none;
+    }
+
+    .view-button,
+    .close-button {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 0;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        background-color: var(--mcc-blue);
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .view-button:hover,
+    .close-button:hover {
+        background-color: var(--mcc-yellow);
+        color: var(--mcc-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Expanded details row */
+    .full-details {
+        display: none;
+        margin-bottom: 15px;
+    }
+
+    .full-details td {
+        display: block;
+        padding: 0 !important;
+        background-color: transparent !important;
+        border-bottom: none !important;
+    }
+
+    .details-content {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 10px;
+    }
+
+    .details-content h5 {
+        font-size: 0.95rem;
+        font-weight: bold;
+        color: var(--mcc-blue);
+        margin: 15px 0 10px 0 !important;
+    }
+
+    .details-content h5:first-child {
+        margin-top: 0 !important;
+    }
+
+    .details-content p,
+    .details-content div {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.6;
+        margin: 0 0 12px 0 !important;
+    }
+
+    .details-content hr {
+        margin: 12px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+
+    /* Container spacing */
+    .action-table-container {
+        overflow-x: visible;
+        overflow-y: visible;
+        padding: 10px 0;
+    }
+
+    /* Responsive text sizes */
+    .action-summary-row td {
+        font-size: 0.95rem;
     }
 }
 
-/* EXTRA SMALL SIZING: For very small phones (under 480px) */
+/* =====================================================
+   Media Queries - max-width: 768px (Mobile & Tablet)
+   ===================================================== */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #scrollToTopBtn {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    /* Remove modal-body padding on mobile/tablet to eliminate white space */
+    .portfolio-modal .modal-body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* =====================================================
+   Media Queries - max-width: 480px (Extra Small Mobile)
+   ===================================================== */
 @media (max-width: 480px) {
     #scrollToTopBtn {
         padding: 10px;
@@ -1118,6 +1064,18 @@ color: #333;
         right: 10px;
     }
 }
+
+/* =====================================================
+   Media Queries - max-width: 365px (Very Small Mobile)
+   ===================================================== */
+@media screen and (max-width: 365px) {
+    .lang-switcher-btn {
+        padding: 8px 2px;
+        font-size: 0.8rem;
+    }
+}
+
+
 
 
 

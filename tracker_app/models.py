@@ -118,12 +118,14 @@ class Action(models.Model):
 
     @property
     def display_update(self):
-        """THE FIREWALL: Only switches to Irish if text exists AND super user approved it."""
+        if not self.is_approved:
+            return "" # Hides the progress text while waiting for approval
         from django.utils.translation import get_language
-        if get_language() == 'ga' and self.update_ga and self.is_ga_approved:
+        if get_language() == 'ga' and self.update_ga:
             return self.update_ga
-        # FALLBACK: If no Irish or not approved, stay in English
         return self.update if self.update else ""
+
+
 
     def __str__(self):
         return self.title

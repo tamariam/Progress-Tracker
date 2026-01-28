@@ -88,41 +88,7 @@ function toggleAccordion(element) {
 
 
 
-// --- JAVASCRIPT FOR THE FLEXBOX CARD LAYOUT ---
 
-// This function is now called directly via onclick="handleDetailsToggle(this)" in the HTML
-
-
-
-
-// function handleDetailsToggle(clickedElement) {
-//     // Determine which action row (TR) we are working with
-//     const summaryRow = clickedElement.closest('tr.action-summary-row'); 
-    
-//     // The details row is the very next TR sibling (this is the one we hide/show)
-//     const detailsDiv = summaryRow.nextElementSibling; 
-
-//     // Get the specific buttons within the summary row
-//     const viewButton = summaryRow.querySelector('.view-button');
-//     const closeButton = summaryRow.querySelector('.close-button');
-    
-//     // Check if currently hidden
-//     const isHidden = detailsDiv.style.display === 'none';
-    
-//     if (isHidden) {
-//         // Switch to details view - use class instead of inline display style
-//         detailsDiv.classList.add('expanded');
-//         detailsDiv.style.display = ''; // Clear display to allow CSS to work
-//         viewButton.classList.add('hidden');
-//         closeButton.classList.remove('hidden');
-//     } else {
-//         // Switch back to summary view
-//         detailsDiv.classList.remove('expanded');
-//         detailsDiv.style.display = 'none'; // Hide the table row
-//         viewButton.classList.remove('hidden');
-//         closeButton.classList.add('hidden');
-//     }
-// }
 
 function handleDetailsToggle(clickedElement) {
     const summaryRow = clickedElement.closest('tr.action-summary-row'); 
@@ -136,8 +102,9 @@ function handleDetailsToggle(clickedElement) {
     
     if (isHidden) {
         detailsRow.classList.add('expanded');
-        // THE FIX: Explicitly use 'table-row' to prevent overlapping/floating
-        detailsRow.style.display = 'table-row'; 
+        // Dynamic display: use 'table-row' for desktop, 'block' for mobile
+        const isMobile = window.innerWidth <= 541;
+        detailsRow.style.display = isMobile ? 'block' : 'table-row'; 
         
         viewButton.style.display = 'none';
         closeButton.style.display = 'inline-block';
@@ -150,22 +117,16 @@ function handleDetailsToggle(clickedElement) {
     }
 }
 
-// --- END JAVASCRIPT ---
 
 
-// NOTE: The original toggleUpdate function and toggleActionAccordion function have been removed
-// function hideFilteredActions() {
-//     // Show the original accordion/objective view
-//     document.getElementById('accordion-view-container').style.display = ''; 
-//     // Hide the filtered table view
-//     document.getElementById('filtered-table-view-container').style.display = 'none';
-//     // Update the modal title if needed, or close the modal if you prefer
-//     // document.getElementById('modalThemeTitle').textContent = "Meath Digital Strategy"; 
-// }
+
+
 
 function hideFilteredActions() {
     // 1. THE RESET: Force all objectives to close before returning
     // This ensures a "fresh start" for the user
+    
+
     document.querySelectorAll('.accordion-content').forEach(content => {
         content.classList.remove('show');
         content.style.display = 'none'; // Re-hides the container
@@ -185,105 +146,116 @@ function hideFilteredActions() {
     if (modalBody) modalBody.scrollTop = 0;
 }
 
+
+// filtered acitons
+
+
 function fetchAndDisplayActions(status, page = 1) {
-    // Include page number in the API request
-    const url = `/api/actions/filter/${status.toLowerCase()}/?page=${page}`; 
+    // 1. BRIDGE: Access your existing HTML data bridge
+    const labels = document.getElementById('js-table-labels').dataset;
+    const currentLang = document.documentElement.lang || 'en';
+    
+    // 2. URL: Prepend language code to ensure Irish database content is returned
+    const url = `/${currentLang}/api/actions/filter/${status.toLowerCase()}/?page=${page}`; 
     
     const tableArea = document.getElementById('filtered-table-view-container');
     const accordionArea = document.getElementById('accordion-view-container');
-    const modalTitle = document.getElementById('modalThemeTitle');
 
-    // Initial UI state
+    // Show initial loading state from bridge
+    tableArea.innerHTML = `<div class="text-center py-4"><p>${labels.loading}</p></div>`;
     accordionArea.style.display = 'none'; 
     tableArea.style.display = ''; 
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            if (!data.actions || data.actions.length === 0) {
+                tableArea.innerHTML = `
+                    <div class="text-center bg-light rounded border p-4">
+                        <i class="fas fa-folder-open fa-3x  "></i>
+                        <p class="lead text-danger text-center text-bold">${labels.noActions}</p>
+                        <p class="text-center">
+                    <button class="btn mcc-blue text-white btn-back" onclick="hideFilteredActions()">${labels.back}</button>
+                </p>
+                    </div>`;
+                return;
+            }
             const statusHeaderClass = `header-${status.toLowerCase()}`;
             
-            // 1. Build the Table Structure
+            // 3. Build Table Headers using BRIDGE
             let htmlOutput = `
                 <div class="action-table-container">
                     <table class="action-table">
                         <thead class="${statusHeaderClass}">
                             <tr>
-                                <th>Action</th>
-                                <th>Description</th>
-                                <th class="text-right">Details</th>
+                                <th>${labels.actionHeader}</th>
+                                <th>${labels.descriptionHeader}</th>
+                                <th class="text-right">${labels.detailsHeader}</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
             
-            // 2. Loop through Actions
+            // 4. Loop through Actions
             data.actions.forEach(action => {
-                const statusLower = action.status.toLowerCase().replace(/\s+/g, '_');
-                
-                
+                const statusLower = status.toLowerCase().replace(/\s+/g, '_');
                 const showUpdates = statusLower === 'in_progress' || statusLower === 'completed';
+
                 htmlOutput += `
-                    <tr class="action-summary-row  status-${statusLower}">
+                    <tr class="action-summary-row status-${statusLower}">
                         <td class="title-col"><strong>${action.title}</strong></td>
                         <td class="objective-col">${action.small_description}</td>
                         <td class="details-col text-right">
-                            <button class="btn btn-sm view-button" onclick="handleDetailsToggle(this)">Show More</button>
-                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
+                            <button class="btn btn-sm view-button" onclick="handleDetailsToggle(this)">${labels.view}</button>
+                            <button class="btn btn-sm toggle-details close-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                         </td>
                     </tr>
                     <tr class="full-details" style="display: none;">
                         <td colspan="3">
                             <div class="details-content">
-                                <h5>Action Description:</h5>
+                                <h5>${labels.actionDesc}</h5>
                                 <div>${action.description}</div>
-                    ${showUpdates ? `
-                        <hr class="bg-light">
-                        <h5>Latest Update:</h5>
-                        <div>${action.update || 'No update recorded yet.'}</div>
-                    ` : ''} <!-- Fixed: Backtick before the colon -->
-                </div>
-            </td>
-        </tr>
-    `;
-});
-                 
+                                ${showUpdates ? `
+                                    <hr class="bg-light">
+                                    <h5>${labels.latestUpdate}</h5>
+                                    <div>${action.update || labels.noUpdate}</div>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
             
             htmlOutput += '</tbody></table></div>';
    
-            // 3. Add Pagination Controls (if more than 1 page)
+            // 5. Pagination
             if (data.total_pages > 1) {
                 htmlOutput += `<div class="pagination-controls text-center mt-3">`;
                 if (data.has_previous) {
-                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page - 1})">Previous</button>`;
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page - 1})">${currentLang === 'ga' ? 'Roimhe seo' : 'Previous'}</button>`;
                 }
-                htmlOutput += `<span class="mx-2">Page ${data.current_page} of ${data.total_pages}</span>`;
+                htmlOutput += `<span class="mx-2">${currentLang === 'ga' ? 'Leathanach' : 'Page'} ${data.current_page} / ${data.total_pages}</span>`;
                 if (data.has_next) {
-                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page + 1})">Next</button>`;
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page + 1})">${currentLang === 'ga' ? 'Ar aghaidh' : 'Next'}</button>`;
                 }
                 htmlOutput += `</div>`;
             }
             
-            // 4. Add the Centered "Go Back" Button
+            // 6. Centered "Go Back" Button from BRIDGE
             htmlOutput += `
                 <p class="text-center">
-                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">← Back</button>
+                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">${labels.back}</button>
                 </p>
             `;
             
-            // 5. Inject final HTML and update title
             tableArea.innerHTML = htmlOutput;
-           
         })
         .catch(error => {
             console.error('Error fetching filtered actions:', error);
-            tableArea.innerHTML = `
-                <div class="text-center py-4">
-                    <p class="text-danger">Error loading content. Please try again.</p>
-                    <button class="btn btn-secondary btn-back" onclick="history.back()">Back</button>
-                </div>
-            `;
+            tableArea.innerHTML = `<div class="text-center py-4"><p class="text-danger">${labels.error}</p></div>`;
         });
 }
+
 
 
 

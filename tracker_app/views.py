@@ -11,9 +11,9 @@ from django.utils import translation
 from django.utils.translation import get_language
 # Change your translation import to this:
 from django.utils.translation import gettext as _ 
+from django.utils.translation import get_language, activate
 
-
-PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
+PUBLIC_ACTIONS_FILTER = Q()
 
 
 def home(request):
@@ -28,6 +28,8 @@ def get_filtered_actions_by_status(request, status):
     Fetches filtered actions for the status cards (Completed, In Progress, etc.)
     with automatic Irish Fallback logic.
     """
+
+
     status_map = {
         'completed': ActionStatus.COMPLETED,
         'in_progress': ActionStatus.IN_PROGRESS,
@@ -35,7 +37,7 @@ def get_filtered_actions_by_status(request, status):
     }
     target_status = status_map.get(status.lower())
     
-    actions_list = Action.objects.filter(is_approved=True, status=target_status).order_by('id')
+    actions_list = Action.objects.filter( status=target_status).order_by('id')
     
     paginator = Paginator(actions_list, 10)
     page_number = request.GET.get('page', 1)
@@ -68,7 +70,7 @@ def get_filtered_actions_by_status(request, status):
         'count': paginator.count,
         'current_page': page_obj.number,
         'total_pages': paginator.num_pages,
-        'has_next': page_obj.has_next(),
+        'has_next': page_obj.has_next(), 
         'has_previous': page_obj.has_previous(),
     })
 
@@ -77,7 +79,7 @@ def get_theme_details(request, theme_id):
     API endpoint to fetch a single theme's details.
     Handles the Irish Title and the Modal Accordion content.
     """
-    PUBLIC_ACTIONS_FILTER = Q(is_approved=True)
+    PUBLIC_ACTIONS_FILTER = Q()
     current_language = get_language()
     
     # Fetch theme with prefetched approved actions

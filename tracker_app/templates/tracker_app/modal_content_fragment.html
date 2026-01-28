@@ -10,7 +10,7 @@
       <!-- LEFT COLUMN -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
-         {% blocktrans %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktrans %}
+         {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktranslate %}
         </p>
       </div>
 
@@ -89,7 +89,7 @@
                                     <th style="width: 25%;">{% trans "Action" %}</th>
                                     <th style="width: 40%;">{% trans "Description" %}</th>
                                     <th style="width: 20%;">{% trans "Status" %}</th>
-                                    <th style="width: 15%;" class="text-right">{% trans "Details" %}</th>
+                                    <th style="width: 15%;" >{% trans "Details" %}</th>
                                 </tr>
                             </thead>
                              <tbody>
@@ -105,7 +105,7 @@
                                             <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
                                         </td>
                                         <td class="details-col text-right">
-                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "Show More" %}</button>
+                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "View" %}</button>
                                             <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                                         </td>
                                     </tr> 
@@ -128,6 +128,8 @@
                                     </tr>
                                 {% endfor %}
                             </tbody>   
+                         
+   
 
 
                         </table>
