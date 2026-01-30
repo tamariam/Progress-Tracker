@@ -51,6 +51,32 @@ header.masthead .masthead-heading {
     font-size: 1.8rem !important;
 }
 
+#services .section-subheading.text-muted {
+    color: #5a6268 !important;
+}
+
+#services .text-muted {
+    color: #5a6268 !important;
+}
+
+#about .section-subheading.text-muted {
+    color: #5a6268 !important;
+}
+
+#about .text-muted {
+    color: #5a6268 !important;
+}
+
+#strategy-counter .card.mcc-yellow .card-text,
+#strategy-counter .card.mcc-yellow .counter-value {
+    color: var(--mcc-blue) !important;
+}
+
+.status-card.mcc-green .card-text,
+.status-card.mcc-green .counter-value {
+    color: var(--mcc-blue) !important;
+}
+
 /* =====================================================
    Color Utility Classes
    ===================================================== */
@@ -626,6 +652,10 @@ header.masthead .masthead-heading {
     margin-top: 0;
     margin-bottom: 5px;
     color: #333;
+}
+
+.bg-light .lead.text-danger {
+    color: #b02a37 !important;
 }
 
 .details-content p,
