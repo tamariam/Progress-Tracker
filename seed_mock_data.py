@@ -40,40 +40,46 @@ def seed():
     ]
 
     print("--- STEP 2: SEEDING DATA WITH SERIAL TITLES ---")
+    total_actions = 122
     action_counter = 1
 
-    for item in themes_data:
+    # Max objectives per theme = 15 (first theme has the most)
+    objectives_per_theme = [15, 8, 6, 5]
+    all_objectives = []
+
+    for item, obj_count in zip(themes_data, objectives_per_theme):
         theme = Theme.objects.create(pk=item["id"], title=item["en"], title_ga=item["ga"])
-        
-        for i in range(1, 3):
+
+        for i in range(1, obj_count + 1):
             obj = Objective.objects.create(
                 title=f"{item['en']} Objective {i}",
                 description=f"<div><p>{mega_text[:150]}...</p></div>",
                 theme=theme
             )
+            all_objectives.append(obj)
 
-            for j in range(1, 6):
-                status = random.choice([ActionStatus.IN_PROGRESS, ActionStatus.COMPLETED])
-                
-                # Format: ACT_ACC_001, ACT_ACC_002, etc.
-                serial_title = f"ACT_ACC_{action_counter:03d}"
-                
-                # Small Description: Exactly 10 words
-                short_desc = "This is a ten word short description for testing purposes."
-                
-                Action.objects.create(
-                    title=serial_title,
-                    small_description=short_desc,
-                    # Real heavy text for the expansion test
-                    description=f"<div><p>{mega_text}</p><p>{mega_text}</p></div>", 
-                    update=f"<div><p> {mega_text}</p></div>",
-                    objective=obj,
-                    status=status,
-                    is_approved=True 
-                )
-                action_counter += 1
+    for i in range(total_actions):
+        obj = all_objectives[i % len(all_objectives)]
 
-    print(f"--- SUCCESS: {action_counter - 1} ACTIONS CREATED (ACT_ACC_001 etc.) ---")
+        # Format: ACT_ACC_001, ACT_ACC_002, etc.
+        serial_title = f"ACT_ACC_{action_counter:03d}"
+
+        # Small Description: Exactly 10 words
+        short_desc = "This is a ten word short description for testing purposes."
+
+        Action.objects.create(
+            title=serial_title,
+            small_description=short_desc,
+            # Real heavy text for the expansion test
+            description=f"<div><p>{mega_text}</p><p>{mega_text}</p></div>",
+            update=f"<div><p> {mega_text}</p></div>",
+            objective=obj,
+            status=ActionStatus.NOT_STARTED,
+            is_approved=True
+        )
+        action_counter += 1
+
+    print(f"--- SUCCESS: {action_counter - 1} ACTIONS CREATED (ALL NOT_STARTED) ---")
 
 if __name__ == '__main__':
     seed()

@@ -15,7 +15,7 @@
         <meta name="author" content="" />
         <title>{% trans "MeathDigital" %}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Font Awesome icons (free version)-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <!-- Google fonts-->
@@ -24,7 +24,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
          <link href="{% static 'css/style.css' %}" rel="stylesheet" />
          <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/other.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
     </head>
     
     <body id="page-top">
@@ -59,7 +59,7 @@
         </a>
         </div>
     {% else %}
-        <!-- < If in Irish, link DIRECTLY to the English URL --> -
+        <!-- < If in Irish, link DIRECTLY to the English URL --> 
          <div>
         <a href="/en/" class="mcc-yellow  lang-switcher-btn " >
             En
@@ -169,7 +169,7 @@
             <div class="container">
                  <div class="text-center">
                     <h2 class="section-heading text-uppercase my-5">{% trans "Themes" %}</h2>
-                    <!-- <h3 class="section-subheading text-muted">Our ambitious strategy follows four main themes, acting as a roadmap to modernize and improve our services over the lifetime of the strategy.</h3> -->
+                    
                 </div>
 
                 
@@ -250,10 +250,7 @@
                                 <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
                                 {% endif %}
                             </a>
-                            <!-- <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Lines</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
-                            </div> -->
+                            
                         </div>
                         <!-- etst -->
                         
@@ -365,11 +362,7 @@
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </button>
    
-      
-   
-       
-
-     <footer id="footer" role="contentinfo">
+  <footer id="footer" role="contentinfo">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

@@ -156,7 +156,8 @@ function fetchAndDisplayActions(status, page = 1) {
     const currentLang = document.documentElement.lang || 'en';
     
     // 2. URL: Prepend language code to ensure Irish database content is returned
-    const url = `/${currentLang}/api/actions/filter/${status.toLowerCase()}/?page=${page}`; 
+    const themeQuery = currentThemeId ? `&theme_id=${currentThemeId}` : '';
+    const url = `/${currentLang}/api/actions/filter/${status.toLowerCase()}/?page=${page}${themeQuery}`; 
     
     const tableArea = document.getElementById('filtered-table-view-container');
     const accordionArea = document.getElementById('accordion-view-container');
@@ -185,12 +186,12 @@ function fetchAndDisplayActions(status, page = 1) {
             // 3. Build Table Headers using BRIDGE
             let htmlOutput = `
                 <div class="action-table-container">
-                    <table class="action-table">
+                    <table class="action-table filtered-action-table">
                         <thead class="${statusHeaderClass}">
                             <tr>
                                 <th>${labels.actionHeader}</th>
                                 <th>${labels.descriptionHeader}</th>
-                                <th class="text-right">${labels.detailsHeader}</th>
+                                <th>${labels.detailsHeader}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -205,7 +206,7 @@ function fetchAndDisplayActions(status, page = 1) {
                     <tr class="action-summary-row status-${statusLower}">
                         <td class="title-col"><strong>${action.title}</strong></td>
                         <td class="objective-col">${action.small_description}</td>
-                        <td class="details-col text-right">
+                        <td class="details-col">
                             <button class="btn btn-sm view-button" onclick="handleDetailsToggle(this)">${labels.view}</button>
                             <button class="btn btn-sm toggle-details close-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
                         </td>
@@ -260,6 +261,7 @@ function fetchAndDisplayActions(status, page = 1) {
 
 
 let currentModalThemeTitle = ''; 
+let currentThemeId = null;
 // ggggggggggggggggggggggggggggg
 document.addEventListener('DOMContentLoaded', (event) => {
 //    new code
@@ -289,6 +291,7 @@ const portfolioModal = document.getElementById('portfolioModal');
         link.addEventListener('click', function(event) {
             event.preventDefault(); 
             const themeId = this.getAttribute('data-theme-id');
+            currentThemeId = themeId;
             const urlTemplate = document.getElementById('api-url-template').getAttribute('data-url-template');
             const url = urlTemplate.replace('__ID__', themeId);
             document.getElementById('modalThemeTitle').textContent = "Loading...";

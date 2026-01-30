@@ -128,9 +128,9 @@ header.masthead .masthead-heading {
     font-size: 2rem;
 }
 
-.modal-content p {
+/* .modal-content p {
     text-align: left;
-}
+} */
 
 .modal-header-wrapper {
     display: flex;
@@ -522,11 +522,31 @@ header.masthead .masthead-heading {
 
 .action-table {
     width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
     margin-top: 15px;
     margin-bottom: 1rem;
     border-radius: 4px;
     overflow: hidden;
+}
+
+.filtered-action-table {
+    table-layout: fixed;
+}
+
+.filtered-action-table th:nth-child(1),
+.filtered-action-table td:nth-child(1) {
+    width: 25%;
+}
+
+.filtered-action-table th:nth-child(2),
+.filtered-action-table td:nth-child(2) {
+    width: 60%;
+}
+
+.filtered-action-table th:nth-child(3),
+.filtered-action-table td:nth-child(3) {
+    width: 15%;
 }
 
 .action-table th,
@@ -643,7 +663,7 @@ header.masthead .masthead-heading {
     background-color: var(--mcc-yellow);
     color: var(--mcc-blue);
 }
-}
+
 
 .close-button {
     font-size: 1.5rem;

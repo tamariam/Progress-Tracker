@@ -72,9 +72,6 @@
 }
 
 
-/* .footer-right {
-  font-size: 1.2rem;
-} */
 
 .footer-left {
   flex-grow: 1000;
@@ -147,9 +144,9 @@
     display: flex;
     flex-direction: column !important;
     flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: center;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
 
   #footer .social-icons {
@@ -184,31 +181,31 @@ i.fa.fa-eye {
 .fa-facebook-f {
   color: white;
   padding: 15px;
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 .fa-x-twitter {
   color: white;
   padding: 15px;
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 .fa-linkedin-in {
   color: white;
   padding: 15px;
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 .fa-youtube {
   color: white;
   padding: 15px;
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 .fa-instagram {
   color: white;
   padding: 15px;
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 /* IMAGE LIST */

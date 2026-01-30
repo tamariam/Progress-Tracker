@@ -37,7 +37,11 @@ def get_filtered_actions_by_status(request, status):
     }
     target_status = status_map.get(status.lower())
     
-    actions_list = Action.objects.filter( status=target_status).order_by('id')
+    actions_list = Action.objects.filter(status=target_status)
+    theme_id = request.GET.get('theme_id')
+    if theme_id:
+        actions_list = actions_list.filter(objective__theme_id=theme_id)
+    actions_list = actions_list.order_by('id')
     
     paginator = Paginator(actions_list, 10)
     page_number = request.GET.get('page', 1)
