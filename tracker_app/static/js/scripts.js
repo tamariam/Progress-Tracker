@@ -7,6 +7,17 @@
 // Scripts
 // 
 
+/* -------------------------------------------------------------------------------------------------------------
+ !!!!!!!!!!!!!!!!!!This project uses a ready-made Bootstrap theme. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     - Do NOT delete the commented-out license/version text at the top of 
+       'style.css' or 'scripts.js'. This is required for compliance.
+  2.  Do NOT modify 'css/style.css'. All custom styles and 
+     overrides must be written in 'css/custom.css'.
+  3.  Do NOT modify 'js/scripts.js'. All AJAX, modal 
+     filtering, and V-Logic (bilingual) is handled in 'js/modal.js'. */
+/* -------------------------------------------------------------------------------------------------------------*/
+
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function

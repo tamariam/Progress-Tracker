@@ -1,6 +1,24 @@
 /* =====================================================
-   CSS Variables - MCC Color Palette & Neutrals
-   ===================================================== */
+    Custom Stylesheet
+    -----------------------------------------------------
+    Structure:
+    1) CSS Variables
+    2) Base Styles
+    3) Header & Masthead
+    4) Utility Colors
+    5) Scrollbars
+    6) Modal Styles
+    7) Accordions & Tables
+    8) Buttons & Utilities
+    9) Responsive Layout
+    -----------------------------------------------------
+    Formatting Note: 4-space indentation with a single
+    blank line between rule blocks.
+    ===================================================== */
+
+/* =====================================================
+    CSS Variables - MCC Color Palette & Neutrals
+    ===================================================== */
 :root {
     /* Core MCC Colors */
     --mcc-blue: rgb(2, 24, 50) !important;
@@ -110,11 +128,8 @@ header.masthead .masthead-heading {
 }
 
 /* =====================================================
-   Scrollbar Styles
-   ===================================================== */
-/* =====================================================
-   Scrollbar Styles
-   ===================================================== */
+    Scrollbar Styles (Modal)
+    ===================================================== */
 .modal-body::-webkit-scrollbar {
     width: 10px;
 }
@@ -234,6 +249,7 @@ header.masthead .masthead-heading {
    ===================================================== */
 .accordion-item {
     border-bottom: 1px solid var(--border-light);
+    border-top: none;
     background-color: var(--background-white);
 }
 
@@ -556,28 +572,10 @@ header.masthead .masthead-heading {
     overflow: hidden;
 }
 
-.filtered-action-table {
-    table-layout: fixed;
-}
-
-.filtered-action-table th:nth-child(1),
-.filtered-action-table td:nth-child(1) {
-    width: 25%;
-}
-
-.filtered-action-table th:nth-child(2),
-.filtered-action-table td:nth-child(2) {
-    width: 60%;
-}
-
-.filtered-action-table th:nth-child(3),
-.filtered-action-table td:nth-child(3) {
-    width: 15%;
-}
 
 .action-table th,
 .action-table td {
-    padding: 12px 15px;
+    padding:12px 15px ;
     text-align: left;
     border-bottom: 1px solid #ddd;
     vertical-align: top;
@@ -589,6 +587,26 @@ header.masthead .masthead-heading {
     color: var(--mcc-yellow);
     padding: 10px 10px;
     border-bottom: 2px solid #ddd;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.action-table-col-25 {
+    width: 25%;
+}
+
+.action-table-col-40 {
+    width: 40%;
+}
+
+.action-table-col-20 {
+    width: 20%;
+}
+
+.action-table-col-15 {
+    width: 15%;
 }
 
 .action-table thead.header-completed th {
@@ -624,6 +642,10 @@ header.masthead .masthead-heading {
     background-color: #fff;
 }
 
+.full-details {
+    display: none;
+}
+
 .full-details td {
     padding: 20px 10px;
     background-color: #fafafa !important;
@@ -647,6 +669,22 @@ header.masthead .masthead-heading {
     padding: 15px 0 0 0;
 }
 
+.details-content-panel {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+}
+
+.full-details td.details-cell-reset {
+    padding: 0;
+}
+
+#filtered-table-view-container .full-details .details-content {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+}
+
 .details-content h5,
 .full-details h5 {
     margin-top: 0;
@@ -654,6 +692,21 @@ header.masthead .masthead-heading {
     color: #333;
 }
 
+.details-content .details-heading,
+.full-details .details-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    background-color: #B5BD00;
+    text-align: center;
+    border-radius:6px;
+}
+
+.details-heading{
+    font-size:1.1rem!important;
+    padding:4px 0;
+}
 .bg-light .lead.text-danger {
     color: #b02a37 !important;
 }
@@ -687,6 +740,20 @@ header.masthead .masthead-heading {
     white-space: nowrap;
     width:100px;
 }
+
+@media (min-width: 542px) {
+    #filtered-table-view-container .details-col {
+        width: 120px;
+        min-width: 120px;
+    }
+
+    #filtered-table-view-container .view-button,
+    #filtered-table-view-container .close-button {
+        width: 100px;
+        text-align: center;
+    }
+}
+
 
 .view-button:hover,
 .close-button:hover {
@@ -1014,6 +1081,7 @@ header.masthead .masthead-heading {
         cursor: pointer;
     }
 
+
     .view-button:hover,
     .close-button:hover {
         background-color: var(--mcc-yellow);
@@ -1078,6 +1146,19 @@ header.masthead .masthead-heading {
     /* Responsive text sizes */
     .action-summary-row td {
         font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 542px) {
+    .full-details.expanded {
+        display: table-row !important;
+    }
+
+    .full-details.expanded td {
+        display: table-cell !important;
+        padding: 20px 10px !important;
+        background-color: #fafafa !important;
+        border-bottom: 1px solid #ddd !important;
     }
 }
 

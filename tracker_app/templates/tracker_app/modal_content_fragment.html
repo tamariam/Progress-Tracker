@@ -1,20 +1,18 @@
 {% load i18n %}
 {% load static %}
 
-<!-- s -->
-
-<!-- STATUS COUNTERS SECTION -->
+<!-- Status Counters Section -->
 <section class="page-section mcc-blue my-2 py-5 rounded">
   <div class="container">
     <div class="row align-items-center">
-      <!-- LEFT COLUMN -->
+      <!-- Left Summary Column -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
-         {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktranslate %}
+          {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktranslate %}
         </p>
       </div>
 
-      <!-- RIGHT COLUMN -->
+      <!-- Right Status Counters Column -->
       <div class="col-lg-7">
         <div class="row g-3">
           <!-- Completed -->
@@ -25,7 +23,7 @@
                   <i class="fas fa-check-circle icon-spacing fa-2x"></i> {% trans "Actions Completed" %}
                 </p>
                 <h2 class="display-6 mb-0 counter-value" data-target="{{ counts.completed }}" aria-label="Completed actions">
-                          {{ counts.completed }}
+                  {{ counts.completed }}
                 </h2>
               </div>
             </div>
@@ -64,86 +62,80 @@
   </div>
 </section>
 
-<!-- MAIN ACCORDION AND TABLE SECTION -->
+<!-- Objectives Accordion + Actions Table Section -->
 <div class="modal-body-content" id="accordion-view-container">
+  <!-- Maintenance Note: Objectives are managed in the admin and rendered via theme.objectives.all. -->
+  {% for objective in theme.objectives.all %}
+    <div class="accordion-item">
+      <button class="accordion-title" onclick="toggleAccordion(this)">
+        {% trans "Objective" %} - {{ objective.display_title }}
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
 
-    {% for objective in theme.objectives.all %}
-        <div class="accordion-item">
-            <button class="accordion-title" onclick="toggleAccordion(this)">
-               {% trans "Objective" %} - {{ objective.display_title }}
-                <i class="fa-solid fa-angle-down"></i>
-            </button>
-            
-            <div class="accordion-content">
-                <div>
-                {% if objective.display_description %}
-                   <strong> <p class="objective-p">{{ objective.display_description|safe }}</p></strong>
-                {% endif %}
-                </div>
-
-                {% if objective.approved_actions %}
-                    <div class="action-table-container">
-                        <table class="action-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">{% trans "Action" %}</th>
-                                    <th style="width: 40%;">{% trans "Description" %}</th>
-                                    <th style="width: 20%;">{% trans "Status" %}</th>
-                                    <th style="width: 15%;" >{% trans "Details" %}</th>
-                                </tr>
-                            </thead>
-                             <tbody>
-                                {% for action in objective.approved_actions %}
-                                    <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}"> 
-                                        <td class="title-col">
-                                            <strong>{{ action.title }}</strong><br>
-                                        </td>
-                                         <td class="objective-col">
-                                            <p>{{ action.display_small_description }}</p>
-                                        </td>
-                                        <td class="status-col">
-                                            <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
-                                        </td>
-                                        <td class="details-col">
-                                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "View" %}</button>
-                                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
-                                        </td>
-                                    </tr> 
-                                    
-                                   
-                                      <tr class="full-details" style="display: none;">
-                                        
-                                        <td colspan="4" style="padding: 0;"> 
-                                            <div class="details-content" style="padding: 20px; background-color: #fff; border-bottom: 2px solid #ddd;">
-                                                <h5 class="fw-bold">{% trans "Action Description:" %}</h5>
-                                                <div>{{ action.display_description|safe }}</div>
-                                                
-                                                {% if action.status != 'NOT_STARTED' %}
-                                                    <hr class="bg-light">
-                                                    <h5 class="fw-bold">{% trans "Latest Update:" %}</h5>
-                                                    <div>{{ action.display_update|safe }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>   
-                         
-   
-
-
-                        </table>
-
-
-                    </div>
-                {% else %}
-                    <p>{% trans "There are no actions for this objective yet." %}</p>
-                {% endif %}
-            </div>
+      <div class="accordion-content">
+        <div>
+          {% if objective.display_description %}
+            <strong><p class="objective-p">{{ objective.display_description|safe }}</p></strong>
+          {% endif %}
         </div>
-    {% empty %}
-        <p>{% trans "No objectives found for this theme yet." %}</p>
-    {% endfor %}
+
+        {% if objective.approved_actions %}
+          <!-- Maintenance Note: Actions appear here only when approved (objective.approved_actions). -->
+          <div class="action-table-container">
+            <table class="action-table">
+              <thead>
+                <tr>
+                  <th class="action-table-col-25">{% trans "Action" %}</th>
+                  <th class="action-table-col-40">{% trans "Description" %}</th>
+                  <th class="text-center action-table-col-20">{% trans "Status" %}</th>
+                  <th class="action-table-col-15 text-center">{% trans "Details" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for action in objective.approved_actions %}
+                  <tr class="action-summary-row status-{{ action.status|lower }}" data-action-id="{{ action.id }}">
+                    <td class="title-col">
+                      <strong>{{ action.title }}</strong><br>
+                    </td>
+                    <td class="objective-col">
+                      <p>{{ action.display_small_description }}</p>
+                    </td>
+                    <td class="status-col text-center">
+                      <span class="status-badge status-{{ action.status|lower }}">{{ action.get_status_display }}</span>
+                    </td>
+                    <td class="details-col text-center">
+                      <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">{% trans "View" %}</button>
+                      <button class="btn btn-sm toggle-details close-button universal-action-button is-hidden" onclick="handleDetailsToggle(this)">&minus;</button>
+                    </td>
+                  </tr>
+
+                  <tr class="full-details">
+                    <td colspan="4" class="details-cell-reset">
+                      <div class="details-content details-content-panel">
+                        <p class="fw-bold details-heading">{% trans "Action Overview" %}</p>
+                        <div>{{ action.display_description|safe }}</div>
+
+                        {% if action.status != 'NOT_STARTED' %}
+                          <hr class="bg-light">
+                          <p class="fw-bold details-heading">{% trans "Action Progress" %}</p>
+                          <div>{{ action.display_update|safe }}</div>
+                        {% endif %}
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p>{% trans "There are no actions for this objective yet." %}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p>{% trans "No objectives found for this theme yet." %}</p>
+  {% endfor %}
 </div>
 
- <div id="filtered-table-view-container" style="display: none;"></div> 
+<!-- Filtered Actions View (populated via modal.js) -->
+<div id="filtered-table-view-container" style="display: none;"></div>

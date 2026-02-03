@@ -1,232 +1,180 @@
+/* =====================================================
+   Footer Styles
+   ===================================================== */
 
-/*! FOOTER */
-
+/* Core footer layout and typography */
 #footer {
-  /* background-color: RGB(2, 24, 50) !important; */
-  width: 100%;
-  color: #fff;
-  font-size: 0.8rem;
-  background-color: RGB(2, 24, 50);
-
+    /* background-color: RGB(2, 24, 50) !important; */
+    width: 100%;
+    color: #fff;
+    font-size: 0.8rem;
+    background-color: RGB(2, 24, 50);
 }
 
 /* Ensure main navigation uses the exact same background colour as the footer */
 /* Overrides Bootstrap / theme rules and JS-driven .navbar-shrink state */
 #mainNav,
 #mainNav.navbar-shrink {
-  background-color: RGB(2, 24, 50) !important;
+    background-color: RGB(2, 24, 50) !important;
 }
 
+/* Footer links */
 #footer a {
-  color: #fff;
-  text-decoration: none;
-  line-height: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    line-height: 2.5rem;
 }
 
-#footer  a:hover {
-  color: #fff;
-  text-decoration: underline;
+#footer a:hover {
+    color: #fff;
+    text-decoration: underline;
 }
 
-#footer .social-icons a:hover 
-{ border-bottom: 1px solid #fff;
-  padding-bottom: 1px; }
+#footer .social-icons a:hover {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1px;
+}
 
+/* Legacy grid helper (span12) */
 #footer .span12 {
-  margin-right: auto !important;
-  margin-left: auto !important;
-  padding-left: 15px;
-  padding-right: 15px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 @media (min-width: 768px) {
-  #footer .span12 {
-    width: 750px;
-  }
+    #footer .span12 {
+        width: 750px;
+    }
 }
 
 @media (min-width: 992px) {
-  #footer .span12 {
-    width: 970px;
-  }
+    #footer .span12 {
+        width: 970px;
+    }
 }
 
 @media (min-width: 1200px) {
-  #footer .span12 {
-    width: 1170px;
-  }
+    #footer .span12 {
+        width: 1170px;
+    }
 }
 
+/* Utility overrides */
 #helpText_Email_Address1 {
-  display: none;
+    display: none;
 }
 
+/* Footer layout containers */
 #footer small {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem 1rem;
 }
-
-
 
 .footer-left {
-  flex-grow: 1000;
-  font-weight: 600;
+    flex-grow: 1000;
+    font-weight: 600;
 }
 
 .footer-right {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-grow: 0;
-  font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-grow: 0;
+    font-weight: 400;
 }
 
-.footer-right a:nth-child(1)::after {
-  content: "\007c";
-  color: #fcb900;
-  margin: 0 1.5rem;
-}
-
-.footer-right a:nth-child(2)::after {
-  content: "\007c";
-  color: #fcb900;
-  margin: 0 1.5rem;
-}
-
-.footer-right a:nth-child(3)::after {
-  content: "\007c";
-  color: #fcb900;
-  margin: 0 1.5rem;
-}
-
+/* Footer separators */
+.footer-right a:nth-child(1)::after,
+.footer-right a:nth-child(2)::after,
+.footer-right a:nth-child(3)::after,
 .footer-right a:nth-child(4)::after {
-  content: "\007c";
-  color: #fcb900;
-  margin: 0 1.5rem;
+    content: "\007c";
+    color: #fcb900;
+    margin: 0 1.5rem;
 }
 
+/* Footer layout on small screens */
 @media only print, only screen and (max-width: 600px) {
-  .footer-left,
-  .footer-right {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-  }
+    .footer-left,
+    .footer-right {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
 
-  .footer-left {
-    border-bottom: 1px solid #fcb900;
-    padding-bottom: 0.5rem;
-  }
+    .footer-left {
+        border-bottom: 1px solid #fcb900;
+        padding-bottom: 0.5rem;
+    }
 
-  .footer-right a:nth-child(1)::after {
-    display: none;
-  }
+    .footer-right a:nth-child(1)::after,
+    .footer-right a:nth-child(2)::after,
+    .footer-right a:nth-child(3)::after,
+    .footer-right a:nth-child(4)::after {
+        display: none;
+    }
 
-  .footer-right a:nth-child(2)::after {
-    display: none;
-  }
+    #footer small {
+        display: flex;
+        flex-direction: column !important;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
 
-  .footer-right a:nth-child(3)::after {
-    display: none;
-  }
-
-  .footer-right a:nth-child(4)::after {
-    display: none;
-  }
-
-  #footer small {
-    display: flex;
-    flex-direction: column !important;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #footer .social-icons {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
+    #footer .social-icons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+    }
 }
 
+/* Social icon base styles */
 .fa {
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-  border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
 }
 
 .fa:hover {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
-i.fa.fa-eye-slash {
-    margin: 0px -5px;
-}
-
+i.fa.fa-eye-slash,
 i.fa.fa-eye {
     margin: 0px -5px;
 }
 
-.fa-facebook-f {
-  color: white;
-  padding: 15px;
-  font-size: 1.3rem !important;
-}
-
-.fa-x-twitter {
-  color: white;
-  padding: 15px;
-  font-size: 1.3rem !important;
-}
-
-.fa-linkedin-in {
-  color: white;
-  padding: 15px;
-  font-size: 1.3rem !important;
-}
-
-.fa-youtube {
-  color: white;
-  padding: 15px;
-  font-size: 1.3rem !important;
-}
-
+/* Social icon variants */
+.fa-facebook-f,
+.fa-x-twitter,
+.fa-linkedin-in,
+.fa-youtube,
 .fa-instagram {
-  color: white;
-  padding: 15px;
-  font-size: 1.3rem !important;
+    color: white;
+    padding: 15px;
+    font-size: 1.3rem !important;
 }
 
-/* IMAGE LIST */
+/* Footer separators: tighter spacing on mid-size screens */
 @media screen and (min-width: 600px) and (max-width: 820px) {
-  .footer-right a:nth-child(1)::after {
- 
-  margin: 0 0.5rem;
-}
-
-.footer-right a:nth-child(2)::after {
- 
-  margin: 0 0.5rem;
-}
-
-.footer-right a:nth-child(3)::after {
-
-  margin: 0 0.5rem;
-}
-
-.footer-right a:nth-child(4)::after {
-
-  margin: 0 0.5rem;
-}
+    .footer-right a:nth-child(1)::after,
+    .footer-right a:nth-child(2)::after,
+    .footer-right a:nth-child(3)::after,
+    .footer-right a:nth-child(4)::after {
+        margin: 0 0.5rem;
+    }
 }

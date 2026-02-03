@@ -10,6 +10,15 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+/* -------------------------------------------------------------------------------------------------------------
+ !!!!!!!!!!!!!!!!!!This project uses a ready-made Bootstrap theme. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     - Do NOT delete the commented-out license/version text at the top of 
+       'style.css' or 'scripts.js'. This is required for compliance.
+  2.  Do NOT modify 'css/style.css'. All custom styles and 
+     overrides must be written in 'css/custom.css'.
+  3.  Do NOT modify 'js/scripts.js'. All AJAX, modal 
+     filtering, and V-Logic (bilingual) is handled in 'js/modal.js'. */
+/* -------------------------------------------------------------------------------------------------------------*/
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -101,6 +110,7 @@ body {
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%; 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -324,6 +334,7 @@ caption {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+  text-align: match-parent;  
 }
 
 thead,

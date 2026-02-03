@@ -41,6 +41,8 @@ def seed():
 
     print("--- STEP 2: SEEDING DATA WITH SERIAL TITLES ---")
     total_actions = 122
+    completed_target = 40
+    in_progress_target = 40
     action_counter = 1
 
     # Max objectives per theme = 15 (first theme has the most)
@@ -67,14 +69,23 @@ def seed():
         # Small Description: Exactly 10 words
         short_desc = "This is a ten word short description for testing purposes."
 
+        if i < completed_target:
+            status = ActionStatus.COMPLETED
+        elif i < completed_target + in_progress_target:
+            status = ActionStatus.IN_PROGRESS
+        else:
+            status = ActionStatus.NOT_STARTED
+
+        update_text = f"<div><p>{mega_text}</p></div>" if status != ActionStatus.NOT_STARTED else ""
+
         Action.objects.create(
             title=serial_title,
             small_description=short_desc,
             # Real heavy text for the expansion test
             description=f"<div><p>{mega_text}</p><p>{mega_text}</p></div>",
-            update=f"<div><p> {mega_text}</p></div>",
+            update=update_text,
             objective=obj,
-            status=ActionStatus.NOT_STARTED,
+            status=status,
             is_approved=True
         )
         action_counter += 1

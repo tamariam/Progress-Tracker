@@ -6,15 +6,18 @@ from django_summernote.fields import SummernoteTextField
 from django.utils.translation import gettext_lazy as _
 
 class Theme(models.Model):
+    """Represents a top-level strategy theme grouping related objectives."""
     title = models.CharField(max_length=200, unique=True)
     # New Irish field for Theme
     title_ga = models.CharField(max_length=200, unique=True, null=True, blank=True, verbose_name=_("Title (Irish)"))
 
     def __str__(self):
+        """Returns the human-readable theme title for admin/display contexts."""
         return self.title
 
 
 class Objective(models.Model):
+    """Defines a single objective within a theme, including bilingual content."""
     title = models.CharField(max_length=200, unique=True)
     description = SummernoteTextField(default="", blank=True)
     # New Irish field for Objective Description
@@ -40,13 +43,16 @@ class Objective(models.Model):
         return self.description
 
     class Meta:
+        """Model metadata for default ordering in querysets."""
         ordering = ['title']
 
     def __str__(self):
+        """Returns the objective title for admin/display contexts."""
         return self.title
 
 
 class ActionStatus(models.TextChoices):
+    """Enumerates the allowed workflow statuses for actions."""
     # We wrap the labels in _() so they appear in your django.po file
     NOT_STARTED = "NOT_STARTED", _("Inactive")
     IN_PROGRESS = "IN_PROGRESS", _("In progress")
@@ -54,6 +60,7 @@ class ActionStatus(models.TextChoices):
 
 
 class Action(models.Model):
+    """Represents a single action item tied to an objective, with bilingual fields."""
     title = models.CharField(max_length=200, unique=True)
 
     # --- Short summary for cards/lists ---
@@ -91,8 +98,9 @@ class Action(models.Model):
 
     # --- Approval workflow ---
     is_approved = models.BooleanField(default=False)
-    # FIREWALL: Irish text only goes live when a Superuser checks this
+    # This field is not in use, i use display_update property instead
     is_ga_approved = models.BooleanField(default=False, verbose_name=_("Irish Content Approved"))
+    # --------------------------------------------------------
 
     # --- Attribution & Timestamps (Existing) ---
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="actions_created")
@@ -118,6 +126,7 @@ class Action(models.Model):
 
     @property
     def display_update(self):
+        """Returns approved update text in the active language, else an empty string."""
         if not self.is_approved:
             return "" # Hides the progress text while waiting for approval
         from django.utils.translation import get_language
@@ -128,6 +137,7 @@ class Action(models.Model):
 
 
     def __str__(self):
+        """Returns the action title for admin/display contexts."""
         return self.title
 
     

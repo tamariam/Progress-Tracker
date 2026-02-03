@@ -21,22 +21,17 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 
-# urlpatterns = [
-#     path('i18n/', include('django.conf.urls.i18n')),  #for language switching
-#     path('admin/', admin.site.urls),
-#     path('summernote/', include('django_summernote.urls')),
-#     path('', include('tracker_app.urls')),
-# ]
+
 
 # 2. URLs that NEVER change (The language switcher logic)
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Serve static files here!
 
-# 3. URLs that WILL change (Your Home Page)
+# 3. URLs that WILL change ( Home Page)
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('', include('tracker_app.urls')), # This is your Home Page
+    path('', include('tracker_app.urls')), # This is  Home Page
     prefix_default_language=True # This forces /en/ or /ga/ to show in the bar
 )
