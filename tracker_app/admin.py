@@ -4,7 +4,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
 from django.utils.html import strip_tags 
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from .models import Theme, Objective, Action, ActionStatus 
@@ -47,9 +46,9 @@ class ActionAdmin(SummernoteModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('title',)}),
-        (_('English Content'), {'fields': ('small_description', 'description', 'update')}),
-        (_('Irish Content'), {'fields': ('small_description_ga', 'description_ga', 'update_ga')}),
-        (_('System Status & Attribution'), {'fields': ('status', 'objective', 'is_approved', 'created_by', 'updated_by', 'created_at', 'updated_at')}),
+        ('English Content', {'fields': ('small_description', 'description', 'update')}),
+        ('Irish Content', {'fields': ('small_description_ga', 'description_ga', 'update_ga')}),
+        ('System Status & Attribution', {'fields': ('status', 'objective', 'is_approved', 'created_by', 'updated_by', 'created_at', 'updated_at')}),
     )
 
     # 1. PERMISSIONS: Lock strategy fields for regular users
@@ -68,45 +67,60 @@ class ActionAdmin(SummernoteModelAdmin):
     def save_model(self, request, obj, form, change):
         is_super = request.user.is_superuser
 
-        # A. Attribution (Who did it)
+        # . Attribution (Who did it)
         if not change and obj.created_by is None:
             obj.created_by = request.user
         obj.updated_by = request.user
 
-        # B. Status Automation: Set "In Progress" if EITHER language has text
-        user_selected_status = form.cleaned_data.get('status')
+        # Extract clean text to check if they actually typed anything
         plain_update_en = strip_tags(form.cleaned_data.get('update') or "").strip()
         plain_update_ga = strip_tags(form.cleaned_data.get('update_ga') or "").strip()
-        
-        if user_selected_status != ActionStatus.COMPLETED:
-            if plain_update_en or plain_update_ga:
-                obj.status = ActionStatus.IN_PROGRESS
-            else:
-                obj.status = ActionStatus.NOT_STARTED
+        user_selected_status = form.cleaned_data.get('status')
 
-        # C. THE FIREWALL LOGIC: Superuser vs Staff
         if is_super:
-            # If YOU (Superuser) save, it is approved INSTANTLY
+            # If Superuser saves, it is approved INSTANTLY
             obj.is_approved = True
+            
+            # AUTOMATION: Only move to 'In Progress' if superuser is approving it now
+            if user_selected_status != ActionStatus.COMPLETED:
+                if plain_update_en or plain_update_ga:
+                    obj.status = ActionStatus.IN_PROGRESS
+                else:
+                    obj.status = ActionStatus.NOT_STARTED
         else:
-            # If STAFF saves, it is hidden for your review
+            # If STAFF saves, hide it for review
             obj.is_approved = False
+            
+            # AUTOMATION: Staff edits move status to NOT_STARTED always
+            if  user_selected_status != ActionStatus.NOT_STARTED: #     
+                obj.status = ActionStatus.NOT_STARTED
         
         # D. Save to Database
         super().save_model(request, obj, form, change)
 
         # E. Notification: Trigger email ONLY if the ENGLISH 'update' changed
         if not is_super:
-            if change and 'update' in form.changed_data:
-                subject = f"Action Update Pending Approval: {obj.title}"
+            update_changed = 'update' in form.changed_data
+            update_ga_changed = 'update_ga' in form.changed_data
+
+            if change and (update_changed or update_ga_changed):
+                subject = f"Meath County Council – Action Update Pending Approval: {obj.title}"
                 
                 # Build the direct admin link
                 admin_url = request.build_absolute_uri(
                     reverse('admin:tracker_app_action_change', args=[obj.id])
                 )
+
+                if update_changed and update_ga_changed:
+                    update_note = "ENGLISH and IRISH"
+                elif update_ga_changed:
+                    update_note = "IRISH"
+                else:
+                    update_note = "ENGLISH"
                 
                 message = (
-                    f"User {request.user.username} has updated the ENGLISH progress for: {obj.title}.\n\n"
+                    "Meath County Council – Digital and ICT Strategy Tracker\n\n"
+                    f"User {request.user.username} has updated the {update_note} progress for: {obj.title}.\n\n"
                     f"Please review and approve the update here: {admin_url}\n\n"
                     f"Note: Updates are hidden from the public until you click Save."
                 )

@@ -1,74 +1,10 @@
+{% extends "base.html" %}
 {% load i18n %}
 {% load static %}
-{% get_current_language as LANGUAGE_CODE %}
 
-<!DOCTYPE html>
-<!-- htmlhint lang-case:false, attr-unsafe-chars:false -->
-<html lang="{{ LANGUAGE_CODE|default:'en' }}">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="title" content="{% trans 'Digital and ICT Strategy 2030' %} | {% trans 'Meath County Council' %}" />
-        <meta name="description" content="{% trans "Explore Meath County Council’s Digital & ICT Strategy, including themes, objectives, and progress updates on actions driving digital transformation." %}" />
-        <meta name="author" content="{% trans 'Meath County Council' %}" />
-        <title>{% trans "MeathDigital" %}</title>
-        <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Font Awesome icons (free version) -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <!-- Google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap) -->
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
-    </head>
+{% block title %}{% trans "MeathDigital" %}{% endblock %}
 
-    <body id="page-top">
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="#page-top">
-                    <img src="{% static 'assets/img/logo.svg' %}" alt="{% trans 'Meath County Council logo' %}" />
-                </a>
-
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarResponsive"
-                    aria-controls="navbarResponsive"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">{% trans "Strategy" %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">{% trans "Themes" %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">{% trans "Looking Back" %}</a></li>
-                    </ul>
-                </div>
-
-                {% if LANGUAGE_CODE == 'en' %}
-                    <!-- V-Logic: When English is active, link directly to the Irish route (/ga/). -->
-                    <div>
-                        <a href="/ga/" class="mcc-yellow lang-switcher-btn">Ga</a>
-                    </div>
-                {% else %}
-                    <!-- V-Logic: When Irish is active, link directly to the English route (/en/). -->
-                    <div>
-                        <a href="/en/" class="mcc-yellow lang-switcher-btn">En</a>
-                    </div>
-                {% endif %}
-            </div>
-        </nav>
-
-        <main>
+{% block content %}
             <!-- Hero / Masthead Section -->
             <header class="masthead">
                 <div class="container">
@@ -392,34 +328,6 @@
             <button onclick="scrollToTopFunction()" id="scrollToTopBtn" aria-label="{% trans 'Scroll to top' %}">
                 <i class="fas fa-arrow-up" aria-hidden="true"></i>
             </button>
-        </main>
-
-        <!-- Footer Section -->
-        <footer id="footer" role="contentinfo">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <small>
-                            <span class="footer-right">
-                                <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/accessibility-statement" rel="noopener" aria-label="{% trans 'Accessibility Statement (opens in a new tab)' %}">{% trans "Accessibility" %}</a>
-                                <a target="_blank" href="https://www.meath.ie/disclaimer" rel="noopener" aria-label="{% trans 'Disclaimer Statement (opens in a new tab)' %}">{% trans "Disclaimer" %}</a>
-                                <a target="_blank" href="https://www.meath.ie/council/your-council/customer-service-and-communications/data-protection-privacy-statement-for-meath-county-council" rel="noopener" aria-label="{% trans 'Privacy Statement (opens in a new tab)' %}">{% trans "Privacy" %}</a>
-                                <a target="_blank" href="https://www.meath.ie/council/your-council/your-data-and-access-to-information/freedom-of-information" rel="noopener" aria-label="{% trans 'Freedom of Information Statement (opens in a new tab)' %}">{% trans "Freedom of Information" %}</a>
-                                <a target="_blank" href="https://www.meath.ie/sitemap" rel="noopener" aria-label="{% trans 'Meath Sitemap (opens in a new tab)' %}">{% trans "Sitemap" %}</a>
-                            </span>
-                            <div class="social-icons">
-                                <a href="https://www.youtube.com/channel/UCxcwtis5gp3GOYRRxJerMKA" target="_blank" rel="noopener"><i class="fa-brands fa-youtube" aria-label="{% trans 'YouTube' %}"></i></a>
-                                <a href="https://www.facebook.com/MeathCountyCouncil/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" aria-label="{% trans 'Facebook' %}"></i></a>
-                                <a href="https://twitter.com/meathcoco" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter" aria-label="{% trans 'X' %}"></i></a>
-                                <a href="https://ie.linkedin.com/company/meath-county-council" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in" aria-label="{% trans 'LinkedIn' %}"></i></a>
-                                <a href="https://www.instagram.com/meathcoco/?hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-label="{% trans 'Instagram' %}"></i></a>
-                            </div>
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
         <!-- Theme Details Modal -->
         <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalThemeTitle">
             <!-- JavaScript Bridge: modal.js reads these data-* labels for localized table headers and messages. -->
@@ -469,13 +377,10 @@
                 </div>
             </div>
         </div>
+{% endblock %}
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{% static 'js/scripts.js' %}"></script>
-
-        <!-- API bridge: modal.js replaces __ID__ with the selected theme id. -->
-        <div id="api-url-template" data-url-template="/{{ LANGUAGE_CODE }}/api/theme-details/__ID__/"></div>
-        <script src="{% static 'js/custom.js' %}"></script>
-    </body>
-</html>
+{% block extra_js %}
+    <!-- API bridge: modal.js replaces __ID__ with the selected theme id. -->
+    <div id="api-url-template" data-url-template="/{{ LANGUAGE_CODE }}/api/theme-details/__ID__/"></div>
+    <script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}

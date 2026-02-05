@@ -1,5 +1,8 @@
+{% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+
+{% block document %}
 
 <!-- Status Counters Section -->
 <section class="page-section mcc-blue my-2 py-5 rounded">
@@ -115,7 +118,7 @@
                         <p class="fw-bold details-heading">{% trans "Action Overview" %}</p>
                         <div>{{ action.display_description|safe }}</div>
 
-                        {% if action.status != 'NOT_STARTED' %}
+                        {% if action.display_update %}
                           <hr class="bg-light">
                           <p class="fw-bold details-heading">{% trans "Action Progress" %}</p>
                           <div>{{ action.display_update|safe }}</div>
@@ -139,3 +142,5 @@
 
 <!-- Filtered Actions View (populated via modal.js) -->
 <div id="filtered-table-view-container" style="display: none;"></div>
+
+{% endblock %}

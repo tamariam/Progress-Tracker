@@ -24,12 +24,15 @@ def seed():
     highest standards of accessibility (WCAG 2.1). By implementing this strategy, we aim to reduce 
     manual processing times by approximately 40% over the next two years. Key deliverables include 
     a centralized user dashboard, real-time application tracking, and automated email notifications 
-    for all planning and housing requests. Furthermore, the system will undergo rigorous security 
-    audits to ensure data protection compliance. We are committed to ensuring that no citizen is 
-    left behind, offering digital-first solutions while maintaining essential traditional 
-    communication channels for those who require them. This long-form text is specifically 
-    designed to test the vertical expansion of the modal and ensure that the accordion handles 
-    large blocks of HTML content without overlapping other elements in the table view.
+    for all planning and housing requests. Explore the draft UX here: 
+    <a href="https://example.com/portal-preview" target="_blank" rel="noopener noreferrer">Portal Preview</a>. 
+    You can also see the accessibility checklist at 
+    <a href="https://example.com/wcag-checklist" target="_blank" rel="noopener noreferrer">WCAG Checklist</a>. 
+    Furthermore, the system will undergo rigorous security audits to ensure data protection compliance. 
+    We are committed to ensuring that no citizen is left behind, offering digital-first solutions while 
+    maintaining essential traditional communication channels for those who require them. This long-form 
+    text is specifically designed to test the vertical expansion of the modal and ensure that the 
+    accordion handles large blocks of HTML content without overlapping other elements in the table view.
     """
 
     themes_data = [
@@ -45,20 +48,25 @@ def seed():
     in_progress_target = 40
     action_counter = 1
 
-    # Max objectives per theme = 15 (first theme has the most)
+    # Max objectives total = 29
     objectives_per_theme = [15, 8, 6, 5]
     all_objectives = []
+    objective_counter = 1
+    max_objectives = 29
 
     for item, obj_count in zip(themes_data, objectives_per_theme):
         theme = Theme.objects.create(pk=item["id"], title=item["en"], title_ga=item["ga"])
 
         for i in range(1, obj_count + 1):
+            if objective_counter > max_objectives:
+                break
             obj = Objective.objects.create(
-                title=f"{item['en']} Objective {i}",
+                title=f"{objective_counter:03d}",
                 description=f"<div><p>{mega_text[:150]}...</p></div>",
                 theme=theme
             )
             all_objectives.append(obj)
+            objective_counter += 1
 
     for i in range(total_actions):
         obj = all_objectives[i % len(all_objectives)]

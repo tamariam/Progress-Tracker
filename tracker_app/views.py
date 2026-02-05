@@ -123,3 +123,15 @@ def get_theme_details(request, theme_id):
     translation.deactivate()
     
     return JsonResponse({'html_content': html_content, 'title': theme_title})
+
+
+def preview_404(request):
+    return render(request, '404.html', status=404)
+
+
+def preview_403(request):
+    return render(request, '403.html', status=403)
+
+
+def preview_500(request):
+    return render(request, '500.html', status=500)

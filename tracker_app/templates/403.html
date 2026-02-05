@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="error-container container text-center my-5 mt-5 pt-5" style="min-height: 84vh;">
+    <h2>{% trans "Access Forbidden" %}</h2>
+    <p>{% trans "You do not have permission to access this page." %}</p>
+</div>
+{% endblock %}

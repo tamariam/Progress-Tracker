@@ -717,6 +717,19 @@ header.masthead .masthead-heading {
     margin-top: 0 !important;
 }
 
+.details-content a,
+.full-details a {
+    color: var(--mcc-brown-orange) !important;
+    text-decoration: underline;
+}
+
+.details-content a:hover,
+.details-content a:focus,
+.full-details a:hover,
+.full-details a:focus {
+    color: #C5792A !important;
+}
+
 .title-col small {
     margin-top: 5px !important;
     display: block;
@@ -1208,7 +1221,13 @@ header.masthead .masthead-heading {
 
 
 
-
+/* ERROR PAGES */
+/* .error-container {
+    margin-top: 50px;
+    min-height: 100vh;
+    text-align: center;
+    padding-top:50px;
+} */
 
 
 
