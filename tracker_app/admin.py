@@ -39,9 +39,7 @@ class ActionAdmin(SummernoteModelAdmin):
     search_fields = ("title", "small_description", "description", "update",
                      "small_description_ga", "description_ga", "update_ga")
     
-    # Base readonly fields for everyone
     readonly_fields = ("created_by", "updated_by", "created_at", "updated_at")
-    
     summernote_fields = ('description', 'update', 'description_ga', 'update_ga') 
 
     fieldsets = (
@@ -51,11 +49,9 @@ class ActionAdmin(SummernoteModelAdmin):
         ('System Status & Attribution', {'fields': ('status', 'objective', 'is_approved', 'created_by', 'updated_by', 'created_at', 'updated_at')}),
     )
 
-    # 1. PERMISSIONS: Lock strategy fields for regular users
     def get_readonly_fields(self, request, obj=None):
         readonly = list(self.readonly_fields)
         if not request.user.is_superuser:
-            # Regular users can ONLY edit the 'update' and 'update_ga' boxes
             readonly.extend([
                 'title', 'objective', 'status', 'is_approved', 
                 'small_description', 'small_description_ga', 
@@ -63,42 +59,32 @@ class ActionAdmin(SummernoteModelAdmin):
             ])
         return readonly
 
-    # 2. THE COMPLETE SAVE LOGIC
     def save_model(self, request, obj, form, change):
         is_super = request.user.is_superuser
 
-        # . Attribution (Who did it)
         if not change and obj.created_by is None:
             obj.created_by = request.user
         obj.updated_by = request.user
 
-        # Extract clean text to check if they actually typed anything
         plain_update_en = strip_tags(form.cleaned_data.get('update') or "").strip()
         plain_update_ga = strip_tags(form.cleaned_data.get('update_ga') or "").strip()
         user_selected_status = form.cleaned_data.get('status')
 
         if is_super:
-            # If Superuser saves, it is approved INSTANTLY
             obj.is_approved = True
-            
-            # AUTOMATION: Only move to 'In Progress' if superuser is approving it now
             if user_selected_status != ActionStatus.COMPLETED:
                 if plain_update_en or plain_update_ga:
                     obj.status = ActionStatus.IN_PROGRESS
                 else:
                     obj.status = ActionStatus.NOT_STARTED
         else:
-            # If STAFF saves, hide it for review
             obj.is_approved = False
-            
-            # AUTOMATION: Staff edits move status to NOT_STARTED always
-            if  user_selected_status != ActionStatus.NOT_STARTED: #     
+            if user_selected_status != ActionStatus.COMPLETED:
                 obj.status = ActionStatus.NOT_STARTED
         
-        # D. Save to Database
         super().save_model(request, obj, form, change)
 
-        # E. Notification: Trigger email ONLY if the ENGLISH 'update' changed
+        # THE NOTIFICATION LOGIC
         if not is_super:
             update_changed = 'update' in form.changed_data
             update_ga_changed = 'update_ga' in form.changed_data
@@ -106,7 +92,6 @@ class ActionAdmin(SummernoteModelAdmin):
             if change and (update_changed or update_ga_changed):
                 subject = f"Meath County Council – Action Update Pending Approval: {obj.title}"
                 
-                # Build the direct admin link
                 admin_url = request.build_absolute_uri(
                     reverse('admin:tracker_app_action_change', args=[obj.id])
                 )
@@ -125,6 +110,7 @@ class ActionAdmin(SummernoteModelAdmin):
                     f"Note: Updates are hidden from the public until you click Save."
                 )
 
+                # FIND THE BOSS: Get all superuser emails
                 superusers = get_user_model().objects.filter(is_superuser=True).values_list('email', flat=True)
                 
                 if superusers:
@@ -135,7 +121,7 @@ class ActionAdmin(SummernoteModelAdmin):
                         list(superusers),
                         fail_silently=True
                     )
+
+    # FIXED INDENTATION: This is now correctly a method of ActionAdmin
     def get_queryset(self, request):
-    # This ensures everyone (Superusers AND Staff) can see the list of Actions
-    # even if the 'Update' is still waiting for approval.
         return super().get_queryset(request)

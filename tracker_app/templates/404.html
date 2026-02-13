@@ -3,8 +3,9 @@
 {% load i18n %}
 
 {% block content %}
-<div class="error-container container">
-    <h2>{% trans "Page Not Found" %}</h2>
+<div class="container error-container ">
+    <hr class="error-hr">
+    <h1>{% trans "Page Not Found" %}</h1>
     <p>{% trans "Oh no! We couldn't find the page you are looking for. Please check the address you are trying to access." %}</p>
 </div>
 {% endblock %}

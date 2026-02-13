@@ -146,6 +146,201 @@ function handleDetailsToggle(clickedElement) {
 }
 
 /* =====================================================
+   Roadmap Chart
+   ===================================================== */
+
+let roadmapChartInstance = null;
+
+/**
+ * Builds or refreshes the Roadmap chart using localized labels and data.
+ */
+function initRoadmapChart() {
+    const chartCanvas = document.getElementById('activityChart');
+    if (!chartCanvas) {
+        return;
+    }
+
+    if (typeof Chart === 'undefined') {
+        window.addEventListener('load', initRoadmapChart, { once: true });
+        return;
+    }
+
+    const labelsEnNode = document.getElementById('activity-chart-labels-en');
+    const labelsGaNode = document.getElementById('activity-chart-labels-ga');
+    const completedNode = document.getElementById('activity-chart-data-completed');
+    const inProgressNode = document.getElementById('activity-chart-data-in-progress');
+
+    if (!labelsEnNode || !labelsGaNode || !completedNode || !inProgressNode) {
+        return;
+    }
+
+    const labelsEn = JSON.parse(labelsEnNode.textContent);
+    const labelsGa = JSON.parse(labelsGaNode.textContent);
+    const completedPoints = JSON.parse(completedNode.textContent);
+    const inProgressPoints = JSON.parse(inProgressNode.textContent);
+
+    const useGa = document.documentElement.lang === 'ga';
+    const chartTitle = chartCanvas.dataset.chartTitle;
+    const labelCompleted = chartCanvas.dataset.labelCompleted;
+    const labelInProgress = chartCanvas.dataset.labelInProgress;
+    const actionsSuffix = chartCanvas.dataset.actionsSuffix;
+
+    const chartContext = chartCanvas.getContext('2d');
+    const gradientCompleted = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    gradientCompleted.addColorStop(0, 'rgba(113, 153, 73, 0.3)');
+    gradientCompleted.addColorStop(1, 'rgba(113, 153, 73, 0.04)');
+
+    const gradientInProgress = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    gradientInProgress.addColorStop(0, 'rgba(254, 186, 53, 0.32)');
+    gradientInProgress.addColorStop(1, 'rgba(254, 186, 53, 0.05)');
+
+    const chartConfig = {
+        type: 'line',
+        data: {
+            labels: useGa ? labelsGa : labelsEn,
+            datasets: [
+                {
+                    label: labelCompleted,
+                    data: completedPoints,
+                    borderColor: 'rgb(113, 153, 73)',
+                    backgroundColor: gradientCompleted,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(113, 153, 73)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    borderWidth: 3,
+                },
+                {
+                    label: labelInProgress,
+                    data: inProgressPoints,
+                    borderColor: 'rgb(254, 186, 53)',
+                    backgroundColor: gradientInProgress,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(254, 186, 53)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    borderWidth: 3,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1200,
+                easing: 'easeOutQuart',
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: chartTitle,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.dataset.label}: ${context.parsed.y} ${actionsSuffix}`,
+                    },
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                    },
+                    grid: {
+                        color: 'rgba(0, 64, 133, 0.08)',
+                    },
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0, 64, 133, 0.06)',
+                    },
+                },
+            },
+        },
+    };
+
+    if (roadmapChartInstance) {
+        roadmapChartInstance.destroy();
+    }
+    roadmapChartInstance = new Chart(chartCanvas, chartConfig);
+}
+
+/**
+ * Fetches updated Roadmap data for a selected year and refreshes the UI.
+ */
+function handleRoadmapYearChange(event) {
+    const select = event.target;
+    const yearValue = select.value;
+
+    // Pull new data without reloading the page.
+    fetch(`/api/roadmap-data/?year=${encodeURIComponent(yearValue)}`)
+        .then(response => response.json())
+        .then(data => {
+            const completedNode = document.getElementById('activity-chart-data-completed');
+            const inProgressNode = document.getElementById('activity-chart-data-in-progress');
+            const labelsEnNode = document.getElementById('activity-chart-labels-en');
+            const labelsGaNode = document.getElementById('activity-chart-labels-ga');
+            const chartCanvas = document.getElementById('activityChart');
+
+            if (!completedNode || !inProgressNode || !labelsEnNode || !labelsGaNode || !chartCanvas) {
+                return;
+            }
+
+            // Sync the JSON data nodes so initRoadmapChart can reuse them.
+            completedNode.textContent = JSON.stringify(data.chart_data_completed);
+            inProgressNode.textContent = JSON.stringify(data.chart_data_in_progress);
+            labelsEnNode.textContent = JSON.stringify(data.chart_labels_en);
+            labelsGaNode.textContent = JSON.stringify(data.chart_labels_ga);
+
+            const completedValue = document.querySelector('.activity-kpi-completed .activity-kpi-value');
+            const inProgressValue = document.querySelector('.activity-kpi-in-progress .activity-kpi-value');
+            // Update the KPI totals in-place.
+            if (completedValue) {
+                completedValue.textContent = data.completed_total_year;
+            }
+            if (inProgressValue) {
+                inProgressValue.textContent = data.in_progress_total_year;
+            }
+
+            const isGa = document.documentElement.lang === 'ga';
+            chartCanvas.dataset.chartTitle = isGa
+                ? `Gníomhartha críochnaithe agus ar siúl in ${data.chart_year}`
+                : `Completed and progressed actions in ${data.chart_year}`;
+
+            // Rebuild the chart with the new data.
+            initRoadmapChart();
+        })
+        .catch(error => {
+            console.error('Error loading roadmap data:', error);
+        });
+}
+
+// Initialize the Roadmap chart once the DOM is ready.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initRoadmapChart();
+        const yearSelect = document.getElementById('activityYear');
+        if (yearSelect) {
+            yearSelect.addEventListener('change', handleRoadmapYearChange);
+        }
+    });
+} else {
+    initRoadmapChart();
+    const yearSelect = document.getElementById('activityYear');
+    if (yearSelect) {
+        yearSelect.addEventListener('change', handleRoadmapYearChange);
+    }
+}
+
+/* =====================================================
    Filtered Actions
    ===================================================== */
 

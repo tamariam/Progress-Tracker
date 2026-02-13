@@ -47,6 +47,21 @@
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+#footer {
+    margin-top: auto;
 }
 
 hr {
@@ -104,6 +119,11 @@ header.masthead .masthead-heading {
 
 .mcc-yellow {
     background-color: rgb(254, 186, 53) !important;
+}
+
+.mcc-yellow:hover,
+.mcc-yellow:focus {
+    background-color: #ffd175 !important;
 }
 
 .mcc-green {
@@ -242,6 +262,209 @@ header.masthead .masthead-heading {
 #dynamicModalContent {
     position: relative;
     z-index: 1;
+}
+
+/* =====================================================
+   Activity Graph
+   ===================================================== */
+.activity-chart-wrapper {
+    position: relative;
+    min-height: 360px;
+}
+
+.activity-graph-section {
+    position: relative;
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(0, 64, 133, 0.08), rgba(254, 186, 53, 0.08));
+}
+
+.activity-graph-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 64, 133, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(254, 186, 53, 0.18), transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(113, 153, 73, 0.16), transparent 55%);
+    pointer-events: none;
+}
+
+.activity-graph-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.activity-graph-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.activity-graph-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(0, 64, 133, 0.12);
+    color: #004085;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin-bottom: 0.6rem;
+}
+
+.activity-graph-subheading {
+    color: #334155;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.activity-graph-controls {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: min(100%, 420px);
+    min-width: 220px;
+    max-width: 100%;
+    padding: 0.85rem 1.1rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.activity-graph-controls.activity-graph-controls-center {
+    width: min(100%, 420px);
+    margin: 0 auto 1.6rem;
+    align-self: center;
+    align-items: center;
+    display: block;
+}
+
+.activity-graph-controls .form-label {
+    margin: 0;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.activity-graph-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.activity-graph-select .form-select {
+    min-width: 260px;
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    min-height: 44px;
+    font-size: 0.95rem;
+}
+
+.activity-graph-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.activity-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+}
+
+.activity-kpi-card {
+    padding: 1.1rem 1.3rem;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.activity-kpi-card.activity-kpi-completed {
+    background: rgb(113, 153, 73);
+    border-color: rgb(113, 153, 73);
+}
+
+.activity-kpi-card.activity-kpi-in-progress {
+    background: rgb(254, 186, 53);
+    border-color: rgb(254, 186, 53);
+}
+
+.activity-kpi-card.activity-kpi-completed .activity-kpi-title,
+.activity-kpi-card.activity-kpi-in-progress .activity-kpi-title,
+.activity-kpi-card.activity-kpi-completed .activity-kpi-value,
+.activity-kpi-card.activity-kpi-in-progress .activity-kpi-value {
+    color: #0f172a;
+}
+
+.activity-kpi-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.activity-kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 0.35rem;
+}
+
+
+@media (max-width: 991.98px) {
+    .activity-graph-header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .activity-graph-controls {
+        width: min(100%, 360px);
+        justify-self: stretch;
+    }
+
+    .activity-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: stretch;
+    }
+}
+
+@media (max-width: 576px) {
+    .activity-graph-controls {
+        width: 100%;
+    }
+
+    .activity-graph-select {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .activity-graph-select .form-select,
+    .activity-graph-select .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .activity-graph-card {
+        padding: 1.1rem;
+    }
+
+    .activity-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-kpi-value {
+        font-size: 1.6rem;
+    }
 }
 
 /* =====================================================
@@ -1037,7 +1260,7 @@ header.masthead .masthead-heading {
 
     .objective-col p {
         margin: 5px 0 0 0;
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: #555;
     }
 
@@ -1137,7 +1360,7 @@ header.masthead .masthead-heading {
 
     .details-content p,
     .details-content div {
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: #555;
         line-height: 1.6;
         margin: 0 0 12px 0 !important;
@@ -1222,12 +1445,16 @@ header.masthead .masthead-heading {
 
 
 /* ERROR PAGES */
-/* .error-container {
-    margin-top: 50px;
-    min-height: 100vh;
-    text-align: center;
-    padding-top:50px;
-} */
+.error-container {
+    margin-top: 200px;
+   
+    
+}
+
+.error-hr{
+    border-top: 3px solid var(--mcc-blue) !important;
+    
+}
 
 
 

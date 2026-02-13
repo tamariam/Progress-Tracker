@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-30 16:36+0000\n"
+"POT-Creation-Date: 2026-02-06 12:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,112 +18,188 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
 "4);\n"
 
-#: .\progresstracker\settings.py:140
+#: .\progresstracker\settings.py:141
 msgid "English"
 msgstr ""
 
-#: .\progresstracker\settings.py:141
+#: .\progresstracker\settings.py:142
 msgid "Gaeilge"
 msgstr ""
 
-#: .\tracker_app\admin.py:50
-msgid "English Content"
-msgstr ""
-
-#: .\tracker_app\admin.py:51
-msgid "Irish Content"
-msgstr ""
-
-#: .\tracker_app\admin.py:52
-msgid "System Status & Attribution"
-msgstr ""
-
-#: .\tracker_app\models.py:11
-msgid "Title (Irish)"
-msgstr ""
-
-#: .\tracker_app\models.py:21 .\tracker_app\models.py:75
-msgid "Description (Irish)"
-msgstr ""
-
-#: .\tracker_app\models.py:51
-msgid "Inactive"
-msgstr "Neamhghníomhach"
-
-#: .\tracker_app\models.py:52
-msgid "In progress"
-msgstr "Ar siúl "
-
-#: .\tracker_app\models.py:53
-msgid "Completed"
-msgstr "Críochnaithe "
-
-#: .\tracker_app\models.py:70
-msgid "Small Description (Irish)"
-msgstr ""
-
-#: .\tracker_app\models.py:78
-msgid "Update (Irish)"
-msgstr ""
-
-#: .\tracker_app\models.py:95
-msgid "Irish Content Approved"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:14
+#: .\templates\base.html:11
 #, fuzzy
 #| msgid "Our Digital & ICT Strategy"
 msgid "Digital and ICT Strategy 2030"
 msgstr "Ár Straitéis Dhigiteach & TFC"
 
-#: .\tracker_app\templates\tracker_app\home.html:14
-#: .\tracker_app\templates\tracker_app\home.html:16
+#: .\templates\base.html:11 .\templates\base.html:13
 #, fuzzy
 #| msgid "Meath County Council logo"
 msgid "Meath County Council"
 msgstr "Lógó Chomhairle Contae na Mí"
 
-#: .\tracker_app\templates\tracker_app\home.html:15
+#: .\templates\base.html:12
 msgid ""
 "Explore Meath County Council’s Digital & ICT Strategy, including themes, "
 "objectives, and progress updates on actions driving digital transformation."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:17
+#: .\templates\base.html:14 .\tracker_app\templates\tracker_app\home.html:5
 msgid "MeathDigital"
 msgstr "MeathDigitigh"
 
-#: .\tracker_app\templates\tracker_app\home.html:37
+#: .\templates\base.html:34
 msgid "Meath County Council logo"
 msgstr "Lógó Chomhairle Contae na Mí"
 
-#: .\tracker_app\templates\tracker_app\home.html:49
+#: .\templates\base.html:52
 msgid "Strategy"
 msgstr "Straitéis"
 
-#: .\tracker_app\templates\tracker_app\home.html:50
-#: .\tracker_app\templates\tracker_app\home.html:143
-#: .\tracker_app\templates\tracker_app\home.html:174
+#: .\templates\base.html:53 .\tracker_app\templates\tracker_app\home.html:77
+#: .\tracker_app\templates\tracker_app\home.html:107
 msgid "Themes"
 msgstr "Téamaí"
 
-#: .\tracker_app\templates\tracker_app\home.html:51
+#: .\templates\base.html:54
 msgid "Looking Back"
 msgstr "Ag Breathnú Siar"
 
-#: .\tracker_app\templates\tracker_app\home.html:85
+#: .\templates\base.html:83
+msgid "Accessibility Statement (opens in a new tab)"
+msgstr ""
+"Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
+"shocruithe oibre solúbtha."
+
+#: .\templates\base.html:83
+msgid "Accessibility"
+msgstr "Cosúil."
+
+#: .\templates\base.html:84
+msgid "Disclaimer Statement (opens in a new tab)"
+msgstr "Cosúil ."
+
+#: .\templates\base.html:84
+msgid "Disclaimer"
+msgstr "Cosúil "
+
+#: .\templates\base.html:85
+msgid "Privacy Statement (opens in a new tab)"
+msgstr "Cosúil"
+
+#: .\templates\base.html:85
+msgid "Privacy"
+msgstr ""
+
+#: .\templates\base.html:86
+msgid "Freedom of Information Statement (opens in a new tab)"
+msgstr ""
+
+#: .\templates\base.html:86
+msgid "Freedom of Information"
+msgstr ""
+
+#: .\templates\base.html:87
+msgid "Meath Sitemap (opens in a new tab)"
+msgstr ""
+
+#: .\templates\base.html:87
+msgid "Sitemap"
+msgstr ""
+
+#: .\templates\base.html:90
+msgid "YouTube"
+msgstr ""
+
+#: .\templates\base.html:91
+msgid "Facebook"
+msgstr ""
+
+#: .\templates\base.html:92
+msgid "X"
+msgstr ""
+
+#: .\templates\base.html:93
+msgid "LinkedIn"
+msgstr ""
+
+#: .\templates\base.html:94
+msgid "Instagram"
+msgstr ""
+
+#: .\tracker_app\models.py:12
+msgid "Title (Irish)"
+msgstr ""
+
+#: .\tracker_app\models.py:24 .\tracker_app\models.py:82
+msgid "Description (Irish)"
+msgstr ""
+
+#: .\tracker_app\models.py:57
+msgid "Inactive"
+msgstr "Neamhghníomhach"
+
+#: .\tracker_app\models.py:58
+msgid "In progress"
+msgstr "Ar siúl "
+
+#: .\tracker_app\models.py:59
+msgid "Completed"
+msgstr "Críochnaithe "
+
+#: .\tracker_app\models.py:77
+msgid "Small Description (Irish)"
+msgstr ""
+
+#: .\tracker_app\models.py:85
+msgid "Update (Irish)"
+msgstr ""
+
+#: .\tracker_app\models.py:102
+msgid "Irish Content Approved"
+msgstr ""
+
+#: .\tracker_app\templates\403.html:8
+msgid "Access Forbidden"
+msgstr ""
+
+#: .\tracker_app\templates\403.html:9
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: .\tracker_app\templates\404.html:8
+msgid "Page Not Found"
+msgstr ""
+
+#: .\tracker_app\templates\404.html:9
+msgid ""
+"Oh no! We couldn't find the page you are looking for. Please check the "
+"address you are trying to access."
+msgstr ""
+
+#: .\tracker_app\templates\500.html:8
+msgid "Internal Server Error"
+msgstr ""
+
+#: .\tracker_app\templates\500.html:9
+#, fuzzy
+#| msgid "Error loading content. Please try again."
+msgid "An error has occurred on our end. Please try again later."
+msgstr "Cosúil CosúilCosúil Cosúil CosúilCosúil"
+
+#: .\tracker_app\templates\tracker_app\home.html:12
 msgid "Actions for Digital <br>Transformation"
 msgstr "Gníomhartha don Chlaochliú Digiteach"
 
-#: .\tracker_app\templates\tracker_app\home.html:86
+#: .\tracker_app\templates\tracker_app\home.html:13
 msgid "Scroll Down"
 msgstr "Scrollaigh Síos"
 
-#: .\tracker_app\templates\tracker_app\home.html:93
+#: .\tracker_app\templates\tracker_app\home.html:21
 msgid "Our Digital & ICT Strategy"
 msgstr "Ár Straitéis Dhigiteach & TFC"
 
-#: .\tracker_app\templates\tracker_app\home.html:94
+#: .\tracker_app\templates\tracker_app\home.html:23
 msgid ""
 "Driving digital innovation and transformation for all <strong>Meath County "
 "Council</strong> services."
@@ -131,11 +207,11 @@ msgstr ""
 "Ag cur nuálaíocht agus claochlú digiteach chun cinn do gach seirbhís de "
 "chuid Chomhairle Contae na Mí."
 
-#: .\tracker_app\templates\tracker_app\home.html:102
+#: .\tracker_app\templates\tracker_app\home.html:32
 msgid "Evolving Expectations"
 msgstr "Ionchais ag Athrú"
 
-#: .\tracker_app\templates\tracker_app\home.html:103
+#: .\tracker_app\templates\tracker_app\home.html:34
 msgid ""
 "Expectations for what IT should deliver have risen exponentially over the "
 "last decade. Technology has fundamentally changed how we interact, raising "
@@ -145,11 +221,11 @@ msgstr ""
 "Tá ionchais maidir leis an méid is féidir le TF a sholáthar tar éis méadú go "
 "mór thar an deich mbliana seo caite.."
 
-#: .\tracker_app\templates\tracker_app\home.html:110
+#: .\tracker_app\templates\tracker_app\home.html:42
 msgid "Our Digital Strategy"
 msgstr "Ár Straitéis Dhigiteach"
 
-#: .\tracker_app\templates\tracker_app\home.html:111
+#: .\tracker_app\templates\tracker_app\home.html:44
 msgid ""
 "The Meath County Council Digital and ICT Strategy is an ambitious roadmap to "
 "harness technology's potential. Following 4 main themes-Digital Services, "
@@ -159,11 +235,11 @@ msgstr ""
 "Is léarscáil uaillmhianach í Straitéis Dhigiteach agus TFC Chomhairle Contae "
 "na Mí chun acmhainneacht na teicneolaíochta a ghiaráil..."
 
-#: .\tracker_app\templates\tracker_app\home.html:119
+#: .\tracker_app\templates\tracker_app\home.html:52
 msgid "People at the Centre"
 msgstr "Daoine sa Lár"
 
-#: .\tracker_app\templates\tracker_app\home.html:120
+#: .\tracker_app\templates\tracker_app\home.html:54
 msgid ""
 "We are committed to putting people at the core of our processes. This "
 "ensures all services are simple, integrated, seamless, and accessible. We "
@@ -171,7 +247,7 @@ msgid ""
 "and alternate channels to ensure we leave no one behind."
 msgstr "Táimid tiomanta daoine a chur i gcroílár ár bpróiseas..."
 
-#: .\tracker_app\templates\tracker_app\home.html:133
+#: .\tracker_app\templates\tracker_app\home.html:67
 msgid ""
 "To achieve our goal, our ambitious strategy is divided into the following "
 "key metrics:"
@@ -179,35 +255,35 @@ msgstr ""
 "Chun ár sprioc a bhaint amach, roinntear ár straitéis isteach i méadrachtaí "
 "lárnacha..."
 
-#: .\tracker_app\templates\tracker_app\home.html:151
+#: .\tracker_app\templates\tracker_app\home.html:85
 msgid "Objectives"
 msgstr "Cuspóirí"
 
-#: .\tracker_app\templates\tracker_app\home.html:159
+#: .\tracker_app\templates\tracker_app\home.html:93
 msgid "Actions"
 msgstr "Gníomhartha"
 
-#: .\tracker_app\templates\tracker_app\home.html:193
+#: .\tracker_app\templates\tracker_app\home.html:122
 msgid "digital services"
 msgstr "seirbhísí digiteacha"
 
-#: .\tracker_app\templates\tracker_app\home.html:213
+#: .\tracker_app\templates\tracker_app\home.html:139
 msgid "digital workforce"
 msgstr "lucht oibre digiteach"
 
-#: .\tracker_app\templates\tracker_app\home.html:232
+#: .\tracker_app\templates\tracker_app\home.html:156
 msgid "digital systems"
 msgstr "córais dhigiteacha"
 
-#: .\tracker_app\templates\tracker_app\home.html:251
+#: .\tracker_app\templates\tracker_app\home.html:173
 msgid "digital communities"
 msgstr "pobail dhigiteacha"
 
-#: .\tracker_app\templates\tracker_app\home.html:273
+#: .\tracker_app\templates\tracker_app\home.html:189
 msgid "Celebrating past achievements"
 msgstr "Ag Ceiliúradh na mBaiteach Róimhe Seo"
 
-#: .\tracker_app\templates\tracker_app\home.html:274
+#: .\tracker_app\templates\tracker_app\home.html:191
 msgid ""
 "This section summarises a selection of Digital and ICT projects delivered "
 "during the Council Term <strong>2019-2024.</strong>"
@@ -215,15 +291,15 @@ msgstr ""
 "Tugann an rannóg seo achoimre ar thionscadail Dhigiteacha agus TFC a seoladh "
 "idir 2019–2024."
 
-#: .\tracker_app\templates\tracker_app\home.html:278
+#: .\tracker_app\templates\tracker_app\home.html:197
 msgid "website"
 msgstr "Suíomh Gréasáin"
 
-#: .\tracker_app\templates\tracker_app\home.html:281
+#: .\tracker_app\templates\tracker_app\home.html:201
 msgid "Website"
 msgstr "Suíomh Gréasáin"
 
-#: .\tracker_app\templates\tracker_app\home.html:283
+#: .\tracker_app\templates\tracker_app\home.html:205
 msgid ""
 "In partnership with Corporate, in 2019 a totally redeveloped, customer-"
 "centric and responsive website was launched. In the last 12 months alone "
@@ -234,15 +310,15 @@ msgstr ""
 "I gcomhpháirt leis an gCorparáid, seoladh suíomh gréasáin athfhorbartha agus "
 "freagrúil in 2019.."
 
-#: .\tracker_app\templates\tracker_app\home.html:287
+#: .\tracker_app\templates\tracker_app\home.html:212
 msgid "consultation portal"
 msgstr "Tairseach Chomhairliúcháin"
 
-#: .\tracker_app\templates\tracker_app\home.html:290
+#: .\tracker_app\templates\tracker_app\home.html:216
 msgid "Consultation Portal"
 msgstr "Tairseach Chomhairliúcháin"
 
-#: .\tracker_app\templates\tracker_app\home.html:292
+#: .\tracker_app\templates\tracker_app\home.html:220
 msgid ""
 "There has been a strong focus on the use of our online consultation portal "
 "consult.meath.ie/en/ with the County Development Plan and Meath’s Digital "
@@ -251,17 +327,17 @@ msgid ""
 "184 consultations, 10 corporate surveys and 12 application forms."
 msgstr "Bhí fócas láidir ar úsáid ár dtairseach chomhairliúcháin ar líne..."
 
-#: .\tracker_app\templates\tracker_app\home.html:296
+#: .\tracker_app\templates\tracker_app\home.html:227
 msgid "CRM website"
 msgstr "Réiteach CRM Fiontraíochta"
 
-#: .\tracker_app\templates\tracker_app\home.html:299
+#: .\tracker_app\templates\tracker_app\home.html:231
 msgid "Enterprise CRM solution"
 msgstr ""
 "Bhí ról lárnach ag an bhfoireann TF i soláthar agus cur i bhfeidhm an "
 "chórais CRM nua..."
 
-#: .\tracker_app\templates\tracker_app\home.html:301
+#: .\tracker_app\templates\tracker_app\home.html:235
 msgid ""
 "The IT team played a pivotal role in the successful procurement, "
 "implementation and rollout of a new Corporate Enterprise CRM. This supports "
@@ -270,47 +346,47 @@ msgid ""
 "over 240,000 cases processed through the CRM."
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:305
+#: .\tracker_app\templates\tracker_app\home.html:242
 msgid "GIS website"
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:308
+#: .\tracker_app\templates\tracker_app\home.html:246
 msgid "GIS"
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:310
+#: .\tracker_app\templates\tracker_app\home.html:249
 msgid "Projects delivered by the GIS team include:"
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:311
+#: .\tracker_app\templates\tracker_app\home.html:251
 msgid ""
 "significant assistance on the 2021-2027 County Development Plan (CDP) "
 "including interactive mapping portfolio for public display."
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:312
+#: .\tracker_app\templates\tracker_app\home.html:252
 msgid ""
 "4,569 RZLT land parcels digitised with automated site assessment reports."
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:313
+#: .\tracker_app\templates\tracker_app\home.html:253
 msgid "spatial reporting services for all departments"
 msgstr "Córas Faisnéise Geografaí (GIS)"
 
-#: .\tracker_app\templates\tracker_app\home.html:314
+#: .\tracker_app\templates\tracker_app\home.html:254
 msgid ""
 "assistance on the Community Fire Safety initiative and Major Emergency Plans."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:319
+#: .\tracker_app\templates\tracker_app\home.html:261
 msgid "authentication"
 msgstr "henticatio"
 
-#: .\tracker_app\templates\tracker_app\home.html:322
+#: .\tracker_app\templates\tracker_app\home.html:265
 msgid "Cyber Security"
 msgstr "Cyber Security"
 
-#: .\tracker_app\templates\tracker_app\home.html:324
+#: .\tracker_app\templates\tracker_app\home.html:269
 msgid ""
 "There has been a continuous focus on cyber security including enhancements "
 "to network infrastructure, SOC\\SIEM, vulnerability and patch management, "
@@ -321,17 +397,17 @@ msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:328
+#: .\tracker_app\templates\tracker_app\home.html:276
 msgid "Home office"
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:331
+#: .\tracker_app\templates\tracker_app\home.html:280
 msgid "Covid-19"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:333
+#: .\tracker_app\templates\tracker_app\home.html:284
 msgid ""
 "As with all organisations we had to quickly adapt to agile working "
 "arrangements in a very short timeframe, and the IT department played a key "
@@ -343,38 +419,38 @@ msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:337
-#: .\tracker_app\templates\tracker_app\home.html:340
+#: .\tracker_app\templates\tracker_app\home.html:291
+#: .\tracker_app\templates\tracker_app\home.html:295
 msgid "Selection of Services"
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:342
+#: .\tracker_app\templates\tracker_app\home.html:298
 msgid "The provision of numerous solutions including:"
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:343
+#: .\tracker_app\templates\tracker_app\home.html:300
 msgid ""
 "Online services for the provision of the allocation of housing units and the "
 "processing of the Affordable House Purchase scheme"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:344
+#: .\tracker_app\templates\tracker_app\home.html:301
 msgid "The rollout of the national ePlanning Portal"
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:345
+#: .\tracker_app\templates\tracker_app\home.html:302
 msgid "Healthy Age Friendly Shared Services."
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:346
+#: .\tracker_app\templates\tracker_app\home.html:303
 msgid ""
 "Mobile solutions facilitating thousands of inspections across multiple "
 "departments in the Council."
@@ -382,15 +458,15 @@ msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:352
+#: .\tracker_app\templates\tracker_app\home.html:310
 msgid "technology"
 msgstr "Cosúil ."
 
-#: .\tracker_app\templates\tracker_app\home.html:355
+#: .\tracker_app\templates\tracker_app\home.html:314
 msgid "Modernisation of Services"
 msgstr "Cosúil le gach "
 
-#: .\tracker_app\templates\tracker_app\home.html:357
+#: .\tracker_app\templates\tracker_app\home.html:318
 msgid ""
 "Continued modernisation of processes, technology, devices, operating "
 "systems, and software within the Council. This includes but is not limited "
@@ -400,93 +476,31 @@ msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:364
+#: .\tracker_app\templates\tracker_app\home.html:328
 msgid "Scroll to top"
 msgstr "Cosúil le gach."
 
-#: .\tracker_app\templates\tracker_app\home.html:374
-msgid "Accessibility Statement (opens in a new tab)"
-msgstr ""
-"Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
-"shocruithe oibre solúbtha."
-
-#: .\tracker_app\templates\tracker_app\home.html:374
-msgid "Accessibility"
-msgstr "Cosúil."
-
-#: .\tracker_app\templates\tracker_app\home.html:375
-msgid "Disclaimer Statement (opens in a new tab)"
-msgstr "Cosúil ."
-
-#: .\tracker_app\templates\tracker_app\home.html:375
-msgid "Disclaimer"
-msgstr "Cosúil "
-
-#: .\tracker_app\templates\tracker_app\home.html:376
-msgid "Privacy Statement (opens in a new tab)"
-msgstr "Cosúil"
-
-#: .\tracker_app\templates\tracker_app\home.html:376
-msgid "Privacy"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:377
-msgid "Freedom of Information Statement (opens in a new tab)"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:377
-msgid "Freedom of Information"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:378
-msgid "Meath Sitemap (opens in a new tab)"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:378
-msgid "Sitemap"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:381
-msgid "YouTube"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:382
-msgid "Facebook"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:383
-msgid "X"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:384
-msgid "LinkedIn"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:385
-msgid "Instagram"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\home.html:398
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:89
+#: .\tracker_app\templates\tracker_app\home.html:337
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:91
 msgid "Action"
 msgstr "Cosúil "
 
-#: .\tracker_app\templates\tracker_app\home.html:399
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:90
+#: .\tracker_app\templates\tracker_app\home.html:338
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:92
 msgid "Description"
 msgstr " CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:400
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:92
+#: .\tracker_app\templates\tracker_app\home.html:339
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:94
 msgid "Details"
 msgstr "CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:401
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:108
+#: .\tracker_app\templates\tracker_app\home.html:340
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:110
 msgid "View"
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:402
+#: .\tracker_app\templates\tracker_app\home.html:341
 #: .\tracker_app\templates\tracker_app\modal_content_fragment.html:118
 #, fuzzy
 #| msgid "Selection of Services"
@@ -495,79 +509,79 @@ msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\home.html:403
+#: .\tracker_app\templates\tracker_app\home.html:342
 #: .\tracker_app\templates\tracker_app\modal_content_fragment.html:123
 #, fuzzy
 #| msgid "Actions In Progress"
 msgid "Action Progress"
 msgstr "Cosúil Cosúil Cosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:404
+#: .\tracker_app\templates\tracker_app\home.html:343
 msgid "No update recorded yet."
 msgstr "Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:405
+#: .\tracker_app\templates\tracker_app\home.html:344
 msgid "← Back"
 msgstr "Cosúil "
 
-#: .\tracker_app\templates\tracker_app\home.html:406
+#: .\tracker_app\templates\tracker_app\home.html:345
 msgid "Loading..."
 msgstr "Cosúil "
 
-#: .\tracker_app\templates\tracker_app\home.html:407
-#: .\tracker_app\templates\tracker_app\home.html:439
+#: .\tracker_app\templates\tracker_app\home.html:346
+#: .\tracker_app\templates\tracker_app\home.html:370
 msgid "Please wait while content loads..."
 msgstr "Cosúil CosúilCosúil Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:408
+#: .\tracker_app\templates\tracker_app\home.html:347
 msgid "Error loading content. Please try again."
 msgstr "Cosúil CosúilCosúil Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:409
+#: .\tracker_app\templates\tracker_app\home.html:348
 msgid "No projects have reached this stage of the strategy yet."
 msgstr ""
 
-#: .\tracker_app\templates\tracker_app\home.html:421
+#: .\tracker_app\templates\tracker_app\home.html:356
 msgid "Loading Theme Details..."
 msgstr "Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\home.html:423
+#: .\tracker_app\templates\tracker_app\home.html:358
 msgid "Close Modal"
 msgstr "Cosúil "
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:13
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:14
 msgid ""
 "In line with Meath Digital's vision, goals and operational objectives, the "
 "following progress has been made in Digital Services:"
 msgstr "Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:25
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:26
 msgid "Actions Completed"
 msgstr "Cosúil CosúilCosúil"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:39
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:40
 msgid "Actions In Progress"
 msgstr "Cosúil Cosúil Cosúil"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:53
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:54
 msgid "Actions Not Started"
 msgstr "Cosúil"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:73
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:74
 msgid "Objective"
 msgstr "Cosúil"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:91
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:93
 msgid "Status"
 msgstr "Cosúil "
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:140
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:134
 msgid "There are no actions for this objective yet."
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "
 "shocruithe oibre solúbtha."
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:145
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:139
 msgid "No objectives found for this theme yet."
 msgstr ""
 "Cosúil le gach eagraíocht eile, bhí orainn dul in oiriúint go tapa do "

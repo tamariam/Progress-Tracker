@@ -2,6 +2,7 @@
 from django.urls import path
 from .views import (
     get_filtered_actions_by_status,
+    get_roadmap_data,
     get_theme_details,
     home,
     preview_403,
@@ -13,6 +14,7 @@ app_name = 'tracker_app' # <-- This is vital
 
 urlpatterns = [
     path('', home, name='home'),
+    path('api/roadmap-data/', get_roadmap_data, name='roadmap_data'),
     path('api/theme-details/<int:theme_id>/', get_theme_details, name='get_theme_details'),
     path('api/actions/filter/<str:status>/', get_filtered_actions_by_status, name='filter_actions_by_status'),
 

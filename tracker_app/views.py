@@ -3,6 +3,9 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Count, Q, Prefetch 
+from django.db.models.functions import TruncMonth
+from django.utils import timezone
+import calendar
 from .models import Theme, Action, ActionStatus 
 from django.utils.html import strip_tags 
 from django.core.paginator import Paginator
@@ -16,9 +19,82 @@ from django.utils.translation import get_language, activate
 PUBLIC_ACTIONS_FILTER = Q()
 
 
+def _build_roadmap_payload(year_param):
+    """Builds Roadmap chart + KPI payload for a given year."""
+    current_year = timezone.now().year
+    default_year = 2026 if current_year >= 2026 else current_year
+    try:
+        chart_year = int(year_param) if year_param else default_year
+    except ValueError:
+        chart_year = default_year
+
+    if chart_year < 2025 or chart_year > current_year:
+        chart_year = default_year
+
+    monthly_counts = (
+        Action.objects.filter(
+            is_approved=True,
+            status__in=[ActionStatus.COMPLETED, ActionStatus.IN_PROGRESS],
+            updated_at__year=chart_year,
+        )
+        .annotate(month=TruncMonth("updated_at"))
+        .values("month", "status")
+        .annotate(total=Count("id"))
+        .order_by("month")
+    )
+    completed_totals = {}
+    in_progress_totals = {}
+    for item in monthly_counts:
+        month_value = item["month"].month if item["month"] else None
+        if not month_value:
+            continue
+        if item["status"] == ActionStatus.COMPLETED:
+            completed_totals[month_value] = item["total"]
+        elif item["status"] == ActionStatus.IN_PROGRESS:
+            in_progress_totals[month_value] = item["total"]
+
+    labels_en = [calendar.month_name[i] for i in range(1, 13)]
+    labels_ga = [
+        "Eanáir",
+        "Feabhra",
+        "Márta",
+        "Aibreán",
+        "Bealtaine",
+        "Meitheamh",
+        "Iúil",
+        "Lúnasa",
+        "Meán Fómhair",
+        "Deireadh Fómhair",
+        "Samhain",
+        "Nollaig",
+    ]
+    chart_data_completed = [completed_totals.get(i, 0) for i in range(1, 13)]
+    chart_data_in_progress = [in_progress_totals.get(i, 0) for i in range(1, 13)]
+    completed_total_year = sum(chart_data_completed)
+    in_progress_total_year = sum(chart_data_in_progress)
+
+    return {
+        "chart_year": chart_year,
+        "chart_labels_en": labels_en,
+        "chart_labels_ga": labels_ga,
+        "chart_data_completed": chart_data_completed,
+        "chart_data_in_progress": chart_data_in_progress,
+        "completed_total_year": completed_total_year,
+        "in_progress_total_year": in_progress_total_year,
+        "year_options": list(range(2025, current_year + 1)),
+    }
+
+
 def home(request):
     """Render the public-facing home page template."""
-    return render(request, 'tracker_app/home.html', {})
+    roadmap_payload = _build_roadmap_payload(request.GET.get("year"))
+    return render(request, 'tracker_app/home.html', roadmap_payload)
+
+
+def get_roadmap_data(request):
+    """Return Roadmap chart data for AJAX year changes."""
+    payload = _build_roadmap_payload(request.GET.get("year"))
+    return JsonResponse(payload)
 
 
 

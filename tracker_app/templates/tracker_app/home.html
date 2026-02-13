@@ -15,7 +15,7 @@
             </header>
 
             <!-- Strategy Overview / Services Section -->
-            <section class="page-section bg-light pb-0" id="services">
+            <section class="page-section bg-light" id="services">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">{% trans "Our Digital & ICT Strategy" %}</h2>
@@ -95,6 +95,74 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roadmap Section: yearly progress on completed/in-progress actions -->
+            <section class="page-section activity-graph-section" id="activity-graph">
+                <div class="container">
+                    <!-- Section heading (localized) -->
+                    <div class="activity-graph-header text-center">
+                        <div>
+                            <h2 class="section-heading text-uppercase mb-2">
+                            {% if LANGUAGE_CODE == 'ga' %}
+                                Treochlár Gníomhartha Straitéise
+                            {% else %}
+                                Progress on Strategy Actions
+                            {% endif %}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Year selector: refreshes the page with the chosen year -->
+                    <form method="get" action="{% url 'tracker_app:home' %}#activity-graph" class="activity-graph-controls activity-graph-controls-center" aria-label="{% if LANGUAGE_CODE == 'ga' %}Roghnú bliana{% else %}Year selection{% endif %}">
+                        <div class="activity-graph-select">
+                            <select id="activityYear" name="year" class="form-select">
+                                {% for year in year_options %}
+                                    <option value="{{ year }}" {% if year == chart_year %}selected{% endif %}>{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+
+                    <!-- KPI cards for yearly totals -->
+                    <div class="activity-kpi-grid ">
+                        <div class="activity-kpi-card activity-kpi-completed">
+                            <div class="activity-kpi-title">
+                                {% if LANGUAGE_CODE == 'ga' %}
+                                    Criochnaithe
+                                {% else %}
+                                    Completed
+                                {% endif %}
+                            </div>
+                            <div class="activity-kpi-value">{{ completed_total_year }}</div>
+                        </div>
+                        <div class="activity-kpi-card activity-kpi-in-progress">
+                            <div class="activity-kpi-title">
+                                {% if LANGUAGE_CODE == 'ga' %}
+                                    Ar siúl
+                                {% else %}
+                                    In progress
+                                {% endif %}
+                            </div>
+                            <div class="activity-kpi-value">{{ in_progress_total_year }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Chart canvas uses data-* attributes for labels and title -->
+                    <div class="activity-graph-card">
+                        <div class="activity-chart-wrapper">
+                                    <canvas
+                                        id="activityChart"
+                                        role="img"
+                                        data-chart-title="{% if LANGUAGE_CODE == 'ga' %}Gníomhartha críochnaithe agus ar siúl in {{ chart_year }}{% else %}Completed and progressed actions in {{ chart_year }}{% endif %}"
+                                        data-label-completed="{% if LANGUAGE_CODE == 'ga' %}Críochnaithe{% else %}Completed{% endif %}"
+                                        data-label-in-progress="{% if LANGUAGE_CODE == 'ga' %}Ar siúl{% else %}In progress{% endif %}"
+                                        data-actions-suffix="{% if LANGUAGE_CODE == 'ga' %}gníomhartha{% else %}actions{% endif %}"
+                                        aria-label="{% if LANGUAGE_CODE == 'ga' %}Líneghraf a thaispeánann líon na ngníomhartha críochnaithe agus ar siúl in aghaidh na míosa i {{ chart_year }}.{% else %}Line chart showing the number of completed and progressed actions per month in {{ chart_year }}.{% endif %}"
+                                    ></canvas>
                         </div>
                     </div>
                 </div>
@@ -182,11 +250,13 @@
                 </div>
             </section>
 
+        
+
             <!----Looking Back Section -->
             <section class="page-section bg-light" id="about">
                 <div class="container">
                     <div class="text-center">
-                        <h2 class="section-heading text-uppercases">{% trans "Celebrating past achievements" %}</h2>
+                        <h2 class="section-heading text-uppercase">{% trans "Celebrating past achievements" %}</h2>
                         <h3 class="section-subheading text-muted">
                             {% blocktranslate trimmed %}This section summarises a selection of Digital and ICT projects delivered during the Council Term <strong>2019-2024.</strong>{% endblocktranslate %}
                         </h3>
@@ -382,5 +452,10 @@
 {% block extra_js %}
     <!-- API bridge: modal.js replaces __ID__ with the selected theme id. -->
     <div id="api-url-template" data-url-template="/{{ LANGUAGE_CODE }}/api/theme-details/__ID__/"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    {{ chart_labels_en|json_script:"activity-chart-labels-en" }}
+    {{ chart_labels_ga|json_script:"activity-chart-labels-ga" }}
+    {{ chart_data_completed|json_script:"activity-chart-data-completed" }}
+    {{ chart_data_in_progress|json_script:"activity-chart-data-in-progress" }}
     <script src="{% static 'js/custom.js' %}"></script>
 {% endblock %}

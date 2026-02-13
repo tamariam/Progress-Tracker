@@ -3,8 +3,9 @@
 {% load i18n %}
 
 {% block content %}
-<div class="error-container container text-center my-5 mt-5 pt-5" style="min-height: 84vh;">
-    <h2>{% trans "Access Forbidden" %}</h2>
+<div class="container error-container">
+    <hr class="error-hr">
+    <h1>{% trans "Access Forbidden" %}</h1>
     <p>{% trans "You do not have permission to access this page." %}</p>
 </div>
 {% endblock %}

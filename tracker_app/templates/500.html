@@ -3,8 +3,9 @@
 {% load i18n %}
 
 {% block content %}
-<div class="error-container container text-center my-5 mt-5 pt-5" style="min-height: 85vh;">
-    <h2>{% trans "Internal Server Error" %}</h2>
+<div class="container error-container " >
+    <hr class="error-hr">
+    <h1>{% trans "Internal Server Error" %}</h1>
     <p>{% trans "An error has occurred on our end. Please try again later." %}</p>
 </div>
 {% endblock %}
