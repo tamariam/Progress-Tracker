@@ -61,8 +61,15 @@ function animateCounter(entries, observer) {
     });
 }
 
-const counterSection = document.getElementById('strategy-counter');
-if (counterSection) {
+/**
+ * Initializes the strategy counters when the section is visible.
+ */
+function initCounterObserver() {
+    const counterSection = document.getElementById('strategy-counter');
+    if (!counterSection || typeof IntersectionObserver === 'undefined') {
+        return;
+    }
+
     const observerOptions = { root: null, threshold: 0.5 };
     const observer = new IntersectionObserver(animateCounter, observerOptions);
     observer.observe(counterSection);
@@ -236,7 +243,13 @@ function initRoadmapChart() {
             },
             plugins: {
                 legend: {
-                    display: false,
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 10,
+                        padding: 12,
+                    }
                 },
                 title: {
                     display: true,
@@ -286,6 +299,8 @@ function handleRoadmapYearChange(event) {
         .then(data => {
             const completedNode = document.getElementById('activity-chart-data-completed');
             const inProgressNode = document.getElementById('activity-chart-data-in-progress');
+            const startedNode = document.getElementById('activity-chart-data-started');
+            const continuedNode = document.getElementById('activity-chart-data-continued');
             const labelsEnNode = document.getElementById('activity-chart-labels-en');
             const labelsGaNode = document.getElementById('activity-chart-labels-ga');
             const chartCanvas = document.getElementById('activityChart');
@@ -297,11 +312,15 @@ function handleRoadmapYearChange(event) {
             // Sync the JSON data nodes so initRoadmapChart can reuse them.
             completedNode.textContent = JSON.stringify(data.chart_data_completed);
             inProgressNode.textContent = JSON.stringify(data.chart_data_in_progress);
+            if (startedNode) startedNode.textContent = JSON.stringify(data.chart_data_started);
+            if (continuedNode) continuedNode.textContent = JSON.stringify(data.chart_data_continued);
             labelsEnNode.textContent = JSON.stringify(data.chart_labels_en);
             labelsGaNode.textContent = JSON.stringify(data.chart_labels_ga);
 
             const completedValue = document.querySelector('.activity-kpi-completed .activity-kpi-value');
             const inProgressValue = document.querySelector('.activity-kpi-in-progress .activity-kpi-value');
+            const startedTotalNode = document.getElementById('started-total');
+            const continuedTotalNode = document.getElementById('continued-total');
             // Update the KPI totals in-place.
             if (completedValue) {
                 completedValue.textContent = data.completed_total_year;
@@ -309,6 +328,8 @@ function handleRoadmapYearChange(event) {
             if (inProgressValue) {
                 inProgressValue.textContent = data.in_progress_total_year;
             }
+            if (startedTotalNode) startedTotalNode.textContent = data.started_total_year || 0;
+            if (continuedTotalNode) continuedTotalNode.textContent = data.continued_total_year || 0;
 
             const isGa = document.documentElement.lang === 'ga';
             chartCanvas.dataset.chartTitle = isGa
@@ -323,17 +344,10 @@ function handleRoadmapYearChange(event) {
         });
 }
 
-// Initialize the Roadmap chart once the DOM is ready.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initRoadmapChart();
-        const yearSelect = document.getElementById('activityYear');
-        if (yearSelect) {
-            yearSelect.addEventListener('change', handleRoadmapYearChange);
-        }
-    });
-} else {
-    initRoadmapChart();
+/**
+ * Wires the year selector to update the chart without a page reload.
+ */
+function initRoadmapYearSelector() {
     const yearSelect = document.getElementById('activityYear');
     if (yearSelect) {
         yearSelect.addEventListener('change', handleRoadmapYearChange);
@@ -488,7 +502,10 @@ function fetchAndDisplayActions(status, page = 1) {
 let currentModalThemeTitle = '';
 let currentThemeId = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Wires modal interactions and theme data loading.
+ */
+function initModalHandlers() {
     const portfolioModal = document.getElementById('portfolioModal');
 
     if (portfolioModal) {
@@ -541,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     processExternalLinks(document);
-});
+}
 
 /**
  * Closes the modal using the Bootstrap instance.
@@ -556,17 +573,23 @@ function closeMCCModal() {
    Scroll To Top
    ===================================================== */
 
-// Cache the scroll-to-top button.
-const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-
-// Toggle visibility on scroll.
-window.onscroll = function() {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        scrollToTopBtn.style.display = 'block';
-    } else {
-        scrollToTopBtn.style.display = 'none';
+/**
+ * Initializes the scroll-to-top button behavior.
+ */
+function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) {
+        return;
     }
-};
+
+    window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+}
 
 /**
  * Smoothly scrolls the page back to the top.
@@ -577,4 +600,22 @@ function scrollToTopFunction() {
         behavior: 'smooth'
     });
 }
+
+/**
+ * Single entry point for DOM-dependent scripts.
+ */
+function initPage() {
+    initCounterObserver();
+    initRoadmapChart();
+    initRoadmapYearSelector();
+    initModalHandlers();
+    initScrollToTop();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPage);
+} else {
+    initPage();
+}
+
 

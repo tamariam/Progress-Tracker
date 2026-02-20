@@ -1,4 +1,5 @@
 from django.utils import translation
+from django.http import HttpResponseRedirect
 
 
 class AdminEnglishMiddleware:
@@ -8,6 +9,9 @@ class AdminEnglishMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        if request.path.startswith('/ga/admin/'):
+            return HttpResponseRedirect(request.get_full_path().replace('/ga/admin/', '/en/admin/', 1))
+
         if "/admin/" in request.path:
             translation.activate("en")
             request.LANGUAGE_CODE = "en"

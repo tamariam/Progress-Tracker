@@ -300,7 +300,8 @@ class ActionAdminSaveModelTests(TestCase):
 		action.status = cleaned_data["status"]
 
 		self.action_admin.save_model(request, action, form, change=True)
-		self.assertFalse(mocked_send_mail.called)
+		# Irish-only update should trigger notification to superusers
+		self.assertTrue(mocked_send_mail.called)
 
 	def test_superuser_save_keeps_completed_status(self):
 		action = Action.objects.create(

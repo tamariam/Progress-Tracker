@@ -36,3 +36,5 @@ Thumbs.db # Windows
 htmlcov/
 
 *.mo
+
+web.config

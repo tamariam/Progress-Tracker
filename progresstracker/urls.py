@@ -35,3 +35,8 @@ urlpatterns += i18n_patterns(
     path('', include('tracker_app.urls')), # This is  Home Page
     prefix_default_language=True # This forces /en/ or /ga/ to show in the bar
 )
+
+# Custom error handlers
+handler403 = 'tracker_app.views.handler_403'
+handler404 = 'tracker_app.views.handler_404'
+handler500 = 'tracker_app.views.handler_500'

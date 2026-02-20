@@ -5,6 +5,9 @@ from .views import (
     get_roadmap_data,
     get_theme_details,
     home,
+    handler_403,
+    handler_404,
+    handler_500,
     preview_403,
     preview_404,
     preview_500,
@@ -22,6 +25,5 @@ urlpatterns = [
     path('debug/preview-403/', preview_403, name='preview_403'),
     path('debug/preview-404/', preview_404, name='preview_404'),
     path('debug/preview-500/', preview_500, name='preview_500'),
-    
     
 ]

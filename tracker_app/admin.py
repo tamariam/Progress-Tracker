@@ -7,6 +7,7 @@ from django.utils.html import strip_tags
 from django.contrib.auth import get_user_model
 
 from .models import Theme, Objective, Action, ActionStatus 
+from datetime import date
 
 
 @admin.register(Theme)
@@ -30,12 +31,13 @@ class ActionAdmin(SummernoteModelAdmin):
         "small_description",
         "objective",
         "status",
+        "progress_started_at",
         "is_approved",
         "updated_by",
         "updated_at",
     )
     
-    list_filter = ("objective", "status", "is_approved", "updated_by") 
+    list_filter = ("objective", "status", "progress_started_at", "is_approved", "updated_by") 
     search_fields = ("title", "small_description", "description", "update",
                      "small_description_ga", "description_ga", "update_ga")
     
@@ -46,7 +48,7 @@ class ActionAdmin(SummernoteModelAdmin):
         (None, {'fields': ('title',)}),
         ('English Content', {'fields': ('small_description', 'description', 'update')}),
         ('Irish Content', {'fields': ('small_description_ga', 'description_ga', 'update_ga')}),
-        ('System Status & Attribution', {'fields': ('status', 'objective', 'is_approved', 'created_by', 'updated_by', 'created_at', 'updated_at')}),
+        ('System Status & Attribution', {'fields': ('status', 'progress_started_at', 'objective', 'is_approved', 'created_by', 'updated_by', 'created_at', 'updated_at')}),
     )
 
     def get_readonly_fields(self, request, obj=None):
@@ -82,6 +84,15 @@ class ActionAdmin(SummernoteModelAdmin):
             if user_selected_status != ActionStatus.COMPLETED:
                 obj.status = ActionStatus.NOT_STARTED
         
+        # If status has become In Progress and no start date is set, record it once.
+        if obj.status == ActionStatus.IN_PROGRESS and not obj.progress_started_at:
+            obj.progress_started_at = date.today()
+
+        # If an action is marked completed, ensure it's approved so it appears
+        # immediately on public charts and KPI totals.
+        if obj.status == ActionStatus.COMPLETED:
+            obj.is_approved = True
+
         super().save_model(request, obj, form, change)
 
         # THE NOTIFICATION LOGIC

@@ -26,7 +26,7 @@
         {% block extra_css %}{% endblock %}
     </head>
 
-    <body id="page-top">
+    <body id="page-top" class="kpi-variant-a">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
@@ -49,9 +49,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#services">{% trans "Strategy" %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#portfolio">{% trans "Themes" %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#about">{% trans "Looking Back" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#strategy">{% trans "Strategy" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#progress">{% trans "Progress" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#themes">{% trans "Themes" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tracker_app:home' %}#achievements">{% trans "Past Achievements" %}</a></li>
                     </ul>
                 </div>
 

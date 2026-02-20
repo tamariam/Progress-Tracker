@@ -264,6 +264,13 @@ header.masthead .masthead-heading {
     z-index: 1;
 }
 
+.section-anchor {
+    display: block;
+    position: relative;
+    top: -88px;
+    visibility: hidden;
+}
+
 /* =====================================================
    Activity Graph
    ===================================================== */
@@ -387,6 +394,7 @@ header.masthead .masthead-heading {
     border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
+
 .activity-kpi-card.activity-kpi-completed {
     background: rgb(113, 153, 73);
     border-color: rgb(113, 153, 73);
@@ -417,6 +425,13 @@ header.masthead .masthead-heading {
     font-weight: 700;
     color: #0f172a;
     margin-top: 0.35rem;
+    display: block;
+    line-height: 1;
+    /* Emphasis: larger, bolder, tighter tracking */
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform 160ms ease, color 160ms ease, text-shadow 160ms ease;
 }
 
 
@@ -464,6 +479,41 @@ header.masthead .masthead-heading {
 
     .activity-kpi-value {
         font-size: 1.6rem;
+    }
+}
+
+/* Hover emphasis removed per user request — keep KPI visuals static */
+.activity-kpi-card:hover .activity-kpi-value {
+    transform: none !important;
+    color: inherit !important;
+    text-shadow: none !important;
+}
+
+/* =====================================================
+   KPI Variant A (moved from kpi_ab.css)
+   Pill-style badges for the KPI subtext numbers
+   ===================================================== */
+.activity-kpi-subtext span {
+    display: inline-block;
+    background: #ffffff;
+    color: #0b3a66;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(11,58,102,0.08);
+    margin: 0 0.25rem;
+}
+
+@media (max-width: 576px) {
+    .activity-kpi-subtext span { padding: 0.08rem 0.4rem; font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .activity-kpi-value,
+    .activity-kpi-card:hover .activity-kpi-value {
+        transition: none !important;
+        transform: none !important;
+        text-shadow: none !important;
     }
 }
 
@@ -536,7 +586,7 @@ header.masthead .masthead-heading {
 }
 
 .objective-p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding-top: 15px;
     white-space: normal;
     word-wrap: break-word;
@@ -1132,7 +1182,7 @@ header.masthead .masthead-heading {
 
     .objective-p,
     .header-summary {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .counter-text {

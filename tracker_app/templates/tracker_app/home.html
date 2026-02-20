@@ -10,11 +10,12 @@
                 <div class="container">
                     <!-- <div class="masthead-subheading">Welcome To Our Studio!</div> -->
                     <div class="masthead-heading">{% blocktrans %}Actions for Digital <br>Transformation{% endblocktrans %}</div>
-                    <a class="btn btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#services">{% trans "Scroll Down" %}</a>
+                    <a class="btn btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#strategy">{% trans "Scroll Down" %}</a>
                 </div>
             </header>
 
             <!-- Strategy Overview / Services Section -->
+            <span class="section-anchor" id="strategy" aria-hidden="true"></span>
             <section class="page-section bg-light" id="services">
                 <div class="container">
                     <div class="text-center">
@@ -101,7 +102,7 @@
             </section>
 
             <!-- Roadmap Section: yearly progress on completed/in-progress actions -->
-            <section class="page-section activity-graph-section" id="activity-graph">
+            <section class="page-section activity-graph-section" id="progress">
                 <div class="container">
                     <!-- Section heading (localized) -->
                     <div class="activity-graph-header text-center">
@@ -117,9 +118,14 @@
                     </div>
 
                     <!-- Year selector: refreshes the page with the chosen year -->
-                    <form method="get" action="{% url 'tracker_app:home' %}#activity-graph" class="activity-graph-controls activity-graph-controls-center" aria-label="{% if LANGUAGE_CODE == 'ga' %}Roghnú bliana{% else %}Year selection{% endif %}">
+                    <form method="get" action="{% url 'tracker_app:home' %}#progress" class="activity-graph-controls activity-graph-controls-center" aria-label="{% if LANGUAGE_CODE == 'ga' %}Roghnú bliana{% else %}Year selection{% endif %}">
                         <div class="activity-graph-select">
-                            <select id="activityYear" name="year" class="form-select">
+                            <select
+                                id="activityYear"
+                                name="year"
+                                class="form-select"
+                                aria-label="{% if LANGUAGE_CODE == 'ga' %}Roghnaigh bliain{% else %}Select year{% endif %}"
+                            >
                                 {% for year in year_options %}
                                     <option value="{{ year }}" {% if year == chart_year %}selected{% endif %}>{{ year }}</option>
                                 {% endfor %}
@@ -151,6 +157,16 @@
                         </div>
                     </div>
 
+                    <div class="activity-kpi-subtext text-center my-3">
+                        <small>
+                            {% if LANGUAGE_CODE == 'ga' %}
+                                Bhunaigh an bhliain seo: <span id="started-total">{{ started_total_year }}</span> · Nuashonruithe leanúnaigh: <span id="continued-total">{{ continued_total_year }}</span>
+                            {% else %}
+                                Started this year: <span id="started-total">{{ started_total_year }}</span> · Continued updates: <span id="continued-total">{{ continued_total_year }}</span>
+                            {% endif %}
+                        </small>
+                    </div>
+
                     <!-- Chart canvas uses data-* attributes for labels and title -->
                     <div class="activity-graph-card">
                         <div class="activity-chart-wrapper">
@@ -169,6 +185,7 @@
             </section>
 
             <!-- Strategic Themes / Portfolio Grid Section -->
+            <span class="section-anchor" id="themes" aria-hidden="true"></span>
             <section class="page-section bg-light py-3" id="portfolio">
                 <div class="container">
                     <div class="text-center">
@@ -180,7 +197,7 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 1 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="8">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="12">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
@@ -198,7 +215,7 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 2 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="3">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="13">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
@@ -215,7 +232,7 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 3 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="4">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="14">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
@@ -232,7 +249,7 @@
                         <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                             <!-- Portfolio item 4 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="5">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="15">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
@@ -253,6 +270,7 @@
         
 
             <!----Looking Back Section -->
+                    <span class="section-anchor" id="achievements" aria-hidden="true"></span>
             <section class="page-section bg-light" id="about">
                 <div class="container">
                     <div class="text-center">
@@ -457,5 +475,7 @@
     {{ chart_labels_ga|json_script:"activity-chart-labels-ga" }}
     {{ chart_data_completed|json_script:"activity-chart-data-completed" }}
     {{ chart_data_in_progress|json_script:"activity-chart-data-in-progress" }}
+    {{ chart_data_started|json_script:"activity-chart-data-started" }}
+    {{ chart_data_continued|json_script:"activity-chart-data-continued" }}
     <script src="{% static 'js/custom.js' %}"></script>
 {% endblock %}

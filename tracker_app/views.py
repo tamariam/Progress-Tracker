@@ -28,9 +28,10 @@ def _build_roadmap_payload(year_param):
     except ValueError:
         chart_year = default_year
 
-    if chart_year < 2025 or chart_year > current_year:
+    if chart_year < 2024 or chart_year > current_year:
         chart_year = default_year
 
+    # Existing behavior: totals by updated_at (keeps Completed series working)
     monthly_counts = (
         Action.objects.filter(
             is_approved=True,
@@ -53,6 +54,35 @@ def _build_roadmap_payload(year_param):
         elif item["status"] == ActionStatus.IN_PROGRESS:
             in_progress_totals[month_value] = item["total"]
 
+    # New: counts for actions that *started* in this year (progress_started_at)
+    started_qs = (
+        Action.objects.filter(
+            is_approved=True,
+            progress_started_at__year=chart_year,
+        )
+        .annotate(month=TruncMonth("progress_started_at"))
+        .values("month")
+        .annotate(total=Count("id"))
+        .order_by("month")
+    )
+    started_totals = {item["month"].month: item["total"] for item in started_qs if item.get("month")}
+
+    # New: continued updates = updated in this year but started in an earlier year (or no start date)
+    continued_qs = (
+        Action.objects.filter(
+            is_approved=True,
+            updated_at__year=chart_year,
+        )
+        .filter(
+            (Q(progress_started_at__year__lt=chart_year) | Q(progress_started_at__isnull=True))
+        )
+        .annotate(month=TruncMonth("updated_at"))
+        .values("month")
+        .annotate(total=Count("id"))
+        .order_by("month")
+    )
+    continued_totals = {item["month"].month: item["total"] for item in continued_qs if item.get("month")}
+
     labels_en = [calendar.month_name[i] for i in range(1, 13)]
     labels_ga = [
         "Eanáir",
@@ -69,9 +99,28 @@ def _build_roadmap_payload(year_param):
         "Nollaig",
     ]
     chart_data_completed = [completed_totals.get(i, 0) for i in range(1, 13)]
-    chart_data_in_progress = [in_progress_totals.get(i, 0) for i in range(1, 13)]
+    # In-progress series: defined as Started this year + Continued updates
+    # (continued = updated this year but started earlier or unknown).
+    # This makes the KPI/chart show the sum of new starts and continued work
+    # rather than all actions updated in the year, avoiding unexpectedly
+    # large counts from unrelated updates.
+    chart_data_in_progress = [0] * 12
+    chart_data_started = [started_totals.get(i, 0) for i in range(1, 13)]
+    chart_data_continued = [continued_totals.get(i, 0) for i in range(1, 13)]
+
+    # Compose the in-progress monthly series as started + continued,
+    # avoiding double-counting by construction (these are disjoint sets
+    # by the continued query definition).
+    for idx in range(12):
+        chart_data_in_progress[idx] = chart_data_started[idx] + chart_data_continued[idx]
+
+    # Completed KPI should reflect the same monthly completed series
+    # (completions that occurred in the selected year). Use the sum
+    # of the monthly completed series so the card matches the chart.
     completed_total_year = sum(chart_data_completed)
     in_progress_total_year = sum(chart_data_in_progress)
+    started_total_year = sum(chart_data_started)
+    continued_total_year = sum(chart_data_continued)
 
     return {
         "chart_year": chart_year,
@@ -79,9 +128,13 @@ def _build_roadmap_payload(year_param):
         "chart_labels_ga": labels_ga,
         "chart_data_completed": chart_data_completed,
         "chart_data_in_progress": chart_data_in_progress,
+        "chart_data_started": chart_data_started,
+        "chart_data_continued": chart_data_continued,
         "completed_total_year": completed_total_year,
         "in_progress_total_year": in_progress_total_year,
-        "year_options": list(range(2025, current_year + 1)),
+        "started_total_year": started_total_year,
+        "continued_total_year": continued_total_year,
+        "year_options": list(range(2024, current_year + 1)),
     }
 
 
@@ -201,6 +254,20 @@ def get_theme_details(request, theme_id):
     return JsonResponse({'html_content': html_content, 'title': theme_title})
 
 
+# Custom error handlers
+def handler_404(request, exception):
+    return render(request, '404.html', status=404)
+
+
+def handler_403(request, exception):
+    return render(request, '403.html', status=403)
+
+
+def handler_500(request):
+    return render(request, '500.html', status=500)
+
+
+# Preview handlers for testing (can be removed in production)
 def preview_404(request):
     return render(request, '404.html', status=404)
 

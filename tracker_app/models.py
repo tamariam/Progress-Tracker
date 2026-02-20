@@ -96,6 +96,13 @@ class Action(models.Model):
         default=ActionStatus.NOT_STARTED,
     )
 
+    progress_started_at = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name=_("Progress started on"),
+        help_text=_("Set the date this action first moved from Inactive to In progress."),
+    )
+
     # --- Approval workflow ---
     is_approved = models.BooleanField(default=False)
     # This field is not in use, i use display_update property instead
