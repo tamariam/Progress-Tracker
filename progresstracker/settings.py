@@ -164,13 +164,13 @@ STATICFILES_DIRS = [
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-EMAIL_HOST = 'meathcoco-ie.mail.protection.outlook.com'  
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.office365.com'  
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'DjangoTest@meathcoco.ie'
+EMAIL_HOST_PASSWORD = 'M3@thcoco2026'
 
 DEFAULT_FROM_EMAIL = 'DjangoTest@meathcoco.ie'
 
