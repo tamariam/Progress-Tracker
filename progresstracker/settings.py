@@ -164,7 +164,7 @@ STATICFILES_DIRS = [
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-EMAIL_HOST = 'mx1.topsec.com'  
+EMAIL_HOST = 'meathcoco-ie.mail.protection.outlook.com'  
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
