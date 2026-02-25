@@ -165,12 +165,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 EMAIL_HOST = 'smtp.office365.com'  
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = 'DjangoTest@meathcoco.ie'
-EMAIL_HOST_PASSWORD = 'M3@thcoco2026'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 DEFAULT_FROM_EMAIL = 'DjangoTest@meathcoco.ie'
 
@@ -182,22 +182,3 @@ DEFAULT_FROM_EMAIL = 'DjangoTest@meathcoco.ie'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# # settings.py
-
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-# # 1) Use your tenant MX host for Office 365 relay (connector-based)
-# EMAIL_HOST = "YOURDOMAIN-xxx.mail.protection.outlook.com"   # e.g., meathcoco-ie.mail.protection.outlook.com
-# EMAIL_PORT = 25
-
-# # 2) No authentication for connector relay (authorization is by your server's public IP)
-# EMAIL_HOST_USER = ""
-# EMAIL_HOST_PASSWORD = ""
-
-# # 3) TLS on port 25 is recommended if supported by your server and the path
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False  # keep False for port 25
-
-# # 4) From addresses must be in an accepted domain
-# DEFAULT_FROM_EMAIL = "DjangoTest@meathcoco.ie"
-# SERVER_EMAIL = "DjangoTest@meathcoco.ie"
