@@ -41,7 +41,7 @@ DEBUG = True
 # settings.py
 ALLOWED_HOSTS = os.getenv(
     "ALLOWED_HOSTS",
-    "127.0.0.1,localhost,10.55.214.65"
+    "127.0.0.1,progresstracker"
 ).split(",")
 
 
