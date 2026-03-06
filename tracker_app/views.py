@@ -118,6 +118,7 @@ def _build_roadmap_payload(year_param):
     # (completions that occurred in the selected year). Use the sum
     # of the monthly completed series so the card matches the chart.
     completed_total_year = sum(chart_data_completed)
+    # KPI: year-scoped in-progress total (sum of monthly started+continued)
     in_progress_total_year = sum(chart_data_in_progress)
     started_total_year = sum(chart_data_started)
     continued_total_year = sum(chart_data_continued)
