@@ -71,6 +71,7 @@ def _build_roadmap_payload(year_param):
     continued_qs = (
         Action.objects.filter(
             is_approved=True,
+            status=ActionStatus.IN_PROGRESS,
             updated_at__year=chart_year,
         )
         .filter(
