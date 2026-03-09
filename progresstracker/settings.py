@@ -164,15 +164,23 @@ STATICFILES_DIRS = [
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-# EMAIL_HOST = ''
-# EMAIL_PORT = 25
-# EMAIL_USE_TLS = False
-# # EMAIL_USE_SSL = False
+  
+import os
 
-# EMAIL_HOST_USER = ' '
-# EMAIL_HOST_PASSWORD = ''
+# Change 'console' to 'smtp' to actually send the email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# DEFAULT_FROM_EMAIL = ''
+# Use os.environ.get to pull values from your web.config
+EMAIL_HOST = os.environ.get('SMTP_HOST', 'smtp.office365.com')
+EMAIL_PORT = int(os.environ.get('SMTP_PORT', 25))
+EMAIL_USE_TLS = os.environ.get('SMTP_USE_TLS') == 'True'
+EMAIL_USE_SSL = os.environ.get('SMTP_USE_SSL') == 'False'
+EMAIL_HOST_USER = os.environ.get('SMTP_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+
+
 
 
 
