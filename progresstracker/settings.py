@@ -172,7 +172,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = os.environ.get('SMTP_HOST', 'smtp.office365.com')
+EMAIL_HOST = os.environ.get('SMTP_HOST', 'smtp.meathcoco.ie')
 EMAIL_PORT = int(os.environ.get('SMTP_PORT', 587))
 
 EMAIL_USE_TLS = True
