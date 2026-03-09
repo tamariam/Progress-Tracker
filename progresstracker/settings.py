@@ -165,20 +165,24 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
   
-import os
+
 
 # Change 'console' to 'smtp' to actually send the email
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# Use os.environ.get to pull values from your web.config
 EMAIL_HOST = os.environ.get('SMTP_HOST', 'smtp.office365.com')
 EMAIL_PORT = int(os.environ.get('SMTP_PORT', 25))
-EMAIL_USE_TLS = os.environ.get('SMTP_USE_TLS') == 'True'
-EMAIL_USE_SSL = os.environ.get('SMTP_USE_SSL') == 'False'
+
+# Correct boolean handling (string → bool)
+EMAIL_USE_TLS = os.environ.get('SMTP_USE_TLS', 'False') == 'True'
+EMAIL_USE_SSL = os.environ.get('SMTP_USE_SSL', 'False') == 'True'
+
 EMAIL_HOST_USER = os.environ.get('SMTP_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 
 
 
