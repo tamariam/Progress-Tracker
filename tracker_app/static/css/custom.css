@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
 /* =====================================================
     Custom Stylesheet
     -----------------------------------------------------
@@ -41,6 +43,20 @@
     --background-light-gray: #f9f9f9;
 }
 
+/* Import Lato from Google Fonts and set a global fallback stack
+   Applied here in custom.css so core theme `style.css` remains untouched. */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+/* Global font override: prefer Lato across the site without editing style.css */
+html, body, main, header, section, .masthead, #footer, .container, .row {
+    font-family: 'Lato', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Ensure headings inherit the Lato family (stronger specificity for theme headings) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif !important;
+}
+
 /* =====================================================
    Base Styles
    ===================================================== */
@@ -48,6 +64,7 @@ html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -78,6 +95,173 @@ header.masthead {
 
 header.masthead .masthead-heading {
     font-size: 2.5rem !important;
+    line-height: 1.08;
+}
+
+/* Masthead copy: improve readability and spacing without altering theme colors */
+header.masthead .masthead-copy {
+    max-width: 68ch;
+    margin: 0.75rem auto 0 auto;
+    color: rgba(255,255,255,0.95); /* keep high contrast on dark header */
+    font-size: 1.03rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+/* translucent panel behind masthead copy for readability */
+header.masthead .masthead-copy-panel {
+    /* translucent panel for legibility (reduced opacity) */
+    background: rgba(0,0,0,0.55);
+    padding: 1rem 1.15rem;
+    border-radius: 10px;
+    display: inline-block;
+    color: #ffffff;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+header.masthead .masthead-copy .lead {
+    margin-bottom: 0.65rem;
+}
+
+/* On larger screens give the copy a slightly increased measure and spacing */
+@media (min-width: 992px) {
+    header.masthead .masthead-copy {
+        margin: 0;
+        padding-right: 0.5rem;
+        font-size: 1.05rem;
+        max-width: 60ch;
+    }
+}
+
+/* Tighter, readable copy on small devices */
+@media (max-width: 575.98px) {
+    header.masthead .masthead-copy {
+        font-size: 0.98rem;
+        line-height: 1.5;
+        padding: 0 1rem;
+    }
+}
+
+/* Responsive masthead heading sizes (custom overrides only) */
+@media (min-width: 1200px) {
+    header.masthead .masthead-heading {
+        font-size: 3.25rem !important;
+        line-height: 1.08;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    header.masthead .masthead-heading {
+        font-size: 2.75rem !important;
+        line-height: 1.10;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    header.masthead .masthead-heading {
+        font-size: 2.25rem !important;
+        line-height: 1.12;
+    }
+}
+
+@media (max-width: 575.98px) {
+    header.masthead .masthead-heading {
+        font-size: 1.6rem !important;
+        line-height: 1.16;
+    }
+}
+
+/* =====================================================
+   Navbar & Logo responsive rules
+   - Reduce logo height and nav spacing between 1200px and 343px
+   - Prevent nav items and language button from wrapping until 343px
+   ===================================================== */
+@media (min-width: 343px) and (max-width: 1199.98px) {
+    /* compact the logo so there's room for menu items (keep same on scroll) */
+    #mainNav .navbar-brand img,
+    #mainNav.navbar-shrink .navbar-brand img {
+        height: 2.4rem !important;
+        transition: height 0.18s ease-in-out;
+    }
+
+    /* tighten nav item spacing */
+    #mainNav .navbar-nav .nav-item {
+        margin-right: 0.5rem !important;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link {
+        font-size: 0.92rem !important;
+        padding: 0.45rem 0.45rem !important;
+        letter-spacing: 0.02em;
+    }
+
+    /* keep nav as a single line if possible */
+    #mainNav .navbar-collapse {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+    }
+
+    #mainNav .navbar-nav { flex-wrap: nowrap !important; }
+    #mainNav .navbar-nav .nav-item { white-space: nowrap; }
+
+    /* make language switcher compact */
+    .lang-switcher-btn {
+        padding: 4px 8px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Further reductions for narrow devices while still aiming to avoid wrap */
+@media (min-width: 343px) and (max-width: 991.98px) {
+    #mainNav .navbar-brand img,
+    #mainNav.navbar-shrink .navbar-brand img { height: 2.2rem !important; }
+    #mainNav .navbar-nav .nav-item .nav-link { font-size: 0.9rem !important; }
+}
+
+@media (min-width: 343px) and (max-width: 575.98px) {
+    #mainNav .navbar-brand img,
+    #mainNav.navbar-shrink .navbar-brand img { height: 1.95rem !important; }
+    #mainNav .navbar-nav .nav-item .nav-link { font-size: 0.86rem !important; }
+    .lang-switcher-btn { padding: 3px 6px !important; }
+}
+
+/* Below 343px device width we allow normal stacking to preserve legibility */
+@media (max-width: 342.98px) {
+    #mainNav .navbar-collapse { flex-wrap: wrap !important; }
+}
+
+/* Keep large-screen logo consistent on scroll to avoid size jump */
+@media (min-width: 1200px) {
+    #mainNav .navbar-brand img,
+    #mainNav.navbar-shrink .navbar-brand img {
+        height: 3rem !important;
+        transition: height 0.18s ease-in-out;
+    }
+}
+
+/* Extra small logos for very narrow screens (<404px) */
+@media (max-width: 403.98px) {
+    #mainNav .navbar-brand img {
+        height: 1.5rem !important;
+        transition: height 0.12s ease-in-out;
+    }
+
+    #mainNav.navbar-shrink .navbar-brand img {
+        height: 1.5rem !important;
+    }
+
+    /* Slightly reduce nav-link size to avoid wrap */
+    #mainNav .navbar-nav .nav-item .nav-link {
+        font-size: 0.82rem !important;
+        padding: 0.32rem 0.36rem !important;
+    }
+
+    /* Compact language button */
+    .lang-switcher-btn {
+        padding: 2px 6px !important;
+        font-size: 0.82rem !important;
+    }
 }
 
 .section-heading {
@@ -1083,15 +1267,44 @@ header.masthead .masthead-heading {
 
 /* Scroll Down Button */
 .scroll-down-btn {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.22s cubic-bezier(.2,.9,.2,1), box-shadow 0.22s;
+    padding: 0.6rem 1.05rem;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(2,24,50,0.18);
+    color: var(--mcc-blue) !important;
+    background: var(--mcc-yellow) !important;
+    border: 0.5px solid rgba(0,0,0,0.06);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* When placed inside the masthead copy panel, center it and avoid overlap */
+.masthead-copy-panel > .scroll-down-btn {
+    position: relative;
+    left: auto;
+    transform: none;
+    bottom: auto;
+    display: block;
+    margin: 1rem auto 0 auto;
+    z-index: 10;
 }
 
 .scroll-down-btn:hover {
-    transform: translateY(5px) scale(1.1);
+    transform: translateY(3px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(2,24,50,0.18);
 }
 
 .scroll-down-btn:active {
+    transform: translateY(1px) scale(0.995);
+    box-shadow: 0 6px 12px rgba(2,24,50,0.12);
     border: none;
+}
+
+/* Ensure the button doesn't overlap important content on very small screens */
+@media (max-width: 420px) {
+    .masthead-copy-panel > .scroll-down-btn { padding: 0.5rem 0.9rem; font-size: 0.9rem; }
 }
 
 /* Scroll to Top Button */

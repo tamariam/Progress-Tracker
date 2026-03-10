@@ -2,15 +2,19 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{% trans "MeathDigital" %}{% endblock %}
+{% block title %}{% trans "Meath County Council Digital and ICT Strategy" %}{% endblock %}
 
 {% block content %}
             <!-- Hero / Masthead Section -->
             <header class="masthead">
                 <div class="container">
                     <!-- <div class="masthead-subheading">Welcome To Our Studio!</div> -->
-                    <div class="masthead-heading">{% blocktrans %}Actions for Digital <br>Transformation{% endblocktrans %}</div>
-                    <a class="btn btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#strategy">{% trans "Scroll Down" %}</a>
+                    <div class="masthead-heading">{% blocktrans %}Welcome to the Meath County Council<br> Digital and ICT Strategy 2030 <br>information portal.{% endblocktrans %}</div>
+                    <div class="masthead-copy mt-3 masthead-copy-panel">
+                        <p class="lead">{% blocktrans %}Within the pages of this site, you will find information as to the actions of the strategy and our progress on those actions.{% endblocktrans %}</p>
+                        <p class="lead">{% blocktrans %}The portal is updated every quarter with information, so stay tuned to see how we are getting on!{% endblocktrans %}</p>
+                        <a class="btn btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#strategy">{% trans "Scroll Down" %}</a>
+                    </div>
                 </div>
             </header>
 
@@ -25,7 +29,7 @@
                         </h3>
                     </div>
                     <div class="row text-center">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <span class="fa-stack fa-4x" aria-hidden="true">
                                 <i class="fas fa-circle fa-stack-2x strategy-icon"></i>
                                 <i class="fas fa-chart-line fa-stack-1x fa-inverse"></i>
@@ -35,7 +39,7 @@
                                 {% blocktranslate trimmed %}Expectations for what IT should deliver have risen exponentially over the last decade. Technology has fundamentally changed how we interact, raising the bar for how Meath County Council engages with citizens as a public service body.{% endblocktranslate %}
                             </p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <span class="fa-stack fa-4x" aria-hidden="true">
                                 <i class="fas fa-circle fa-stack-2x strategy-icon"></i>
                                 <i class="fas fa-road fa-stack-1x fa-inverse"></i>
@@ -45,7 +49,7 @@
                                 {% blocktranslate trimmed %}The Meath County Council Digital and ICT Strategy is an ambitious roadmap to harness technology's potential. Following 4 main themes-Digital Services, Workforce, Systems, and Communities-it helps us modernise and improve our services.{% endblocktranslate %}
                             </p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <span class="fa-stack fa-4x" aria-hidden="true">
                                 <i class="fas fa-circle fa-stack-2x strategy-icon"></i>
                                 <i class="fas fa-users fa-stack-1x fa-inverse"></i>
@@ -54,6 +58,18 @@
                             <p class="text-muted text-left">
                                 {% blocktranslate trimmed %}We are committed to putting people at the core of our processes. This ensures all services are simple, integrated, seamless, and accessible. We aim to deliver services digitally while still offering essential in-person and alternate channels to ensure we leave no one behind.{% endblocktranslate %}
                             </p>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="fa-stack fa-4x" aria-hidden="true">
+                                <i class="fas fa-circle fa-stack-2x strategy-icon"></i>
+                                <i class="fas fa-file-pdf fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <h4 class="my-3">{% trans "Download Strategy" %}</h4>
+                            
+                
+                            </p>
+                            {% static 'assets/docs/Meath_Digital_Strategy_2030.pdf' as strategy_pdf %}
+                            <p class="text-muted text-left">{% blocktrans %}Download the full <a href="" class="download-link" title="Download the Meath County Council Digital and ICT Strategy 2030" aria-label="Download the Meath County Council Digital and ICT Strategy 2030" target="_blank" rel="noopener noreferrer"><strong>Meath County Council Digital and ICT Strategy 2030</strong></a>, which outlines our vision and actions for modern, accessible, secure and people-centred digital services.{% endblocktrans %}</p>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="720" height="90">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 90" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Meath County Council logo">
 <path d="M0 0 C237.6 0 475.2 0 720 0 C720 29.7 720 59.4 720 90 C482.4 90 244.8 90 0 90 C0 60.3 0 30.6 0 0 Z " fill="#03193A" transform="translate(0,0)"/>
 <path d="M0 0 C22.11 0 44.22 0 67 0 C67 22.11 67 44.22 67 67 C44.89 67 22.78 67 0 67 C0 44.89 0 22.78 0 0 Z " fill="#FCB94D" transform="translate(176,12)"/>
 <path d="M0 0 C21.78 0 43.56 0 66 0 C66 21.78 66 43.56 66 66 C44.22 66 22.44 66 0 66 C0 44.22 0 22.44 0 0 Z " fill="#FEFBF5" transform="translate(13,12)"/>

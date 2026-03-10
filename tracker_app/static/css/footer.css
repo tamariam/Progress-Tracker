@@ -1,4 +1,4 @@
-/* =====================================================
+/* /* =====================================================
    Footer Styles
    ===================================================== */
 
@@ -9,6 +9,8 @@
     color: #fff;
     font-size: 0.8rem;
     background-color: RGB(2, 24, 50);
+    padding-top:0.66rem;
+    font-weight:700;
 }
 
 /* Ensure main navigation uses the exact same background colour as the footer */
@@ -20,7 +22,7 @@
 
 /* Footer links */
 #footer a {
-    color: #fff;
+    color: #ffff;
     text-decoration: none;
     line-height: 2.5rem;
 }
@@ -79,7 +81,7 @@
 
 .footer-left {
     flex-grow: 1000;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .footer-right {
@@ -87,7 +89,13 @@
     flex-wrap: wrap;
     align-items: center;
     flex-grow: 0;
-    font-weight: 400;
+    font-weight: 700;
+}
+
+/* Set footer font-size to 12px (explicitly scoped under #footer to override global rules) */
+#footer .footer-left,
+#footer .footer-right {
+    font-size: 12px;
 }
 
 /* Footer separators */
@@ -97,7 +105,18 @@
 .footer-right a:nth-child(4)::after {
     content: "\007c";
     color: #fcb900;
-    margin: 0 1.5rem;
+    margin: 0 1.2rem;
+}
+
+/* Make the quick links in the footer visually stronger (color + weight)
+   Targets the five links in the .footer-right span in `templates/base.html` */
+#footer .footer-right a:nth-child(1),
+#footer .footer-right a:nth-child(2),
+#footer .footer-right a:nth-child(3),
+#footer .footer-right a:nth-child(4),
+#footer .footer-right a:nth-child(5) {
+    color: #fff; /* MCC yellow */
+    font-weight: 700;
 }
 
 /* Footer layout on small screens */
@@ -108,6 +127,7 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        font-size:0.8rem;
     }
 
     .footer-left {
@@ -126,9 +146,9 @@
         display: flex;
         flex-direction: column !important;
         flex-wrap: wrap;
-        align-content: center;
+        align-content: flex-start;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
     }
 
     #footer .social-icons {
