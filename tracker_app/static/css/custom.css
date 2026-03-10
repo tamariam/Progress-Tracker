@@ -1307,6 +1307,17 @@ header.masthead .masthead-copy .lead {
     .masthead-copy-panel > .scroll-down-btn { padding: 0.5rem 0.9rem; font-size: 0.9rem; }
 }
 
+/* Add breathing room below the scroll button inside the masthead on very small screens */
+@media (max-width: 420px) {
+    .masthead-copy-panel {
+        padding-bottom: 1rem; /* ensure space between panel edge and button */
+    }
+
+    .masthead-copy-panel > .scroll-down-btn {
+        margin-bottom: 0.5rem;
+    }
+}
+
 /* Scroll to Top Button */
 #scrollToTopBtn {
     display: none;
