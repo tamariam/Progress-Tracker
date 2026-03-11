@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin 
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 import logging
 from django.conf import settings
@@ -123,26 +123,30 @@ class ActionAdmin(SummernoteModelAdmin):
                     f"Note: Updates are hidden from the public until you click Save."
                 )
 
-                # FIND THE BOSS: Get all superuser emails
+                # FIND THE BOSS: Get all superuser emails and filter empties
                 superusers = get_user_model().objects.filter(is_superuser=True).values_list('email', flat=True)
-                
-                if superusers:
-                    # Render HTML alternative using a simple template.
+                recipients = [e.strip() for e in superusers if e and e.strip()]
+
+                if not recipients:
+                    logging.warning('No superuser email addresses found; notification not sent.')
+                else:
                     try:
                         html_body = render_to_string('emails/action_update.html', {
+                            'subject': subject,
                             'user': request.user,
                             'obj': obj,
                             'admin_url': admin_url,
                             'update_note': update_note,
                         })
 
-                        email = EmailMultiAlternatives(
+                        # Send HTML-only email (no plain-text alternative)
+                        email = EmailMessage(
                             subject=subject,
-                            body=message,
+                            body=html_body,
                             from_email=settings.DEFAULT_FROM_EMAIL,
-                            to=list(superusers),
+                            to=recipients,
                         )
-                        email.attach_alternative(html_body, 'text/html')
+                        email.content_subtype = 'html'
                         email.send(fail_silently=False)
                     except Exception:
                         logging.exception('Failed to send action update notification')
