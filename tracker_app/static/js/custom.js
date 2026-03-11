@@ -393,7 +393,15 @@ function fetchAndDisplayActions(status, page = 1) {
     const labels = document.getElementById('js-table-labels').dataset;
     const currentLang = document.documentElement.lang || 'en';
     const themeQuery = currentThemeId ? `&theme_id=${currentThemeId}` : '';
-    const url = `/${currentLang}/api/actions/filter/${status.toLowerCase()}/?page=${page}${themeQuery}`;
+    // Allow a special "TOTAL"/"ALL" status to fetch all actions for the theme
+    const statusLower = (status || '').toLowerCase();
+    let url;
+    if (statusLower === 'total' || statusLower === 'all') {
+        // Use the general actions endpoint (no status filter) and pass theme_id
+        url = `/${currentLang}/api/actions/?page=${page}${themeQuery}`;
+    } else {
+        url = `/${currentLang}/api/actions/filter/${statusLower}/?page=${page}${themeQuery}`;
+    }
 
     const tableArea = document.getElementById('filtered-table-view-container');
     const accordionArea = document.getElementById('accordion-view-container');
@@ -437,8 +445,9 @@ function fetchAndDisplayActions(status, page = 1) {
 
             // Loop through actions and render rows.
             data.actions.forEach(action => {
-                const statusLower = status.toLowerCase().replace(/\s+/g, '_');
-                const showUpdates = statusLower === 'in_progress' || statusLower === 'completed';
+                // Determine update visibility per-action (use actual action.status when unfiltered)
+                const actionStatusLower = (action.status || '').toLowerCase().replace(/\s+/g, '_');
+                const showUpdates = actionStatusLower === 'in_progress' || actionStatusLower === 'completed';
 
                 htmlOutput += `
                     <tr class="action-summary-row status-${statusLower}">

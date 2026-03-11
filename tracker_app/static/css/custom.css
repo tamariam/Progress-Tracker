@@ -93,9 +93,66 @@ header.masthead {
     background-image: url("../assets/img/bggg.jpg");
 }
 
+/* Glassy background for masthead copy only */
+.masthead .glass-card {
+    /* stronger blur with a very light fill so the card reads as glass, not solid */
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    padding: clamp(12px, 2.5vw, 22px);
+    max-width: 520px;
+    color: #0b0b0b;
+    display: inline-block;
+}
+
+
+header.masthead .masthead-copy-panel.glass-card {
+    background: rgba(255,255,255,0.06) !important;
+    -webkit-backdrop-filter: blur(22px) !important;
+    backdrop-filter: blur(22px) !important;
+    border-radius: 16px;
+    padding: clamp(12px, 2.5vw, 22px);
+    color: #0b0b0b !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+    .masthead .glass-card {
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.95);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    header.masthead .masthead-copy-panel.glass-card {
+        background: rgba(255,255,255,0.04) !important;
+        color: rgba(255,255,255,0.95) !important;
+    }
+
+    /* Ensure paragraph variants remain readable in dark mode */
+    .masthead .masthead-lead-primary {
+        color: rgba(255,255,255,0.95) !important;
+    }
+    .masthead .masthead-lead-white {
+        color: #ffffff !important;
+    }
+}
+
 header.masthead .masthead-heading {
     font-size: 2.5rem !important;
     line-height: 1.08;
+}
+
+/* Masthead paragraph variants for testing contrast */
+.masthead .masthead-lead-primary {
+    color: rgba(255,255,255,0.95) !important;
+}
+.masthead .masthead-lead-white {
+    color: #ffffff !important;
 }
 
 /* Masthead copy: improve readability and spacing without altering theme colors */
@@ -299,6 +356,11 @@ header.masthead .masthead-copy .lead {
    ===================================================== */
 .mcc-blue {
     background: rgb(2, 24, 50) !important;
+}
+
+/* Neutral gray used for single-card accent (Total Actions) */
+.mcc-gray {
+    background-color: rgb(108, 117, 125) !important;
 }
 
 .mcc-yellow {

@@ -211,6 +211,53 @@ def get_filtered_actions_by_status(request, status):
         'has_previous': page_obj.has_previous(),
     })
 
+
+def get_all_actions(request):
+    """Return paginated actions for a given theme (no status filter).
+
+    This endpoint mirrors the structure returned by get_filtered_actions_by_status
+    so the client can request all actions for a theme (used by the TOTAL/ALL
+    status card).
+    """
+
+    actions_list = Action.objects.all()
+    theme_id = request.GET.get('theme_id')
+    if theme_id:
+        actions_list = actions_list.filter(objective__theme_id=theme_id)
+
+    actions_list = actions_list.order_by('id')
+
+    paginator = Paginator(actions_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    current_lang = get_language()
+    is_ga = current_lang == 'ga'
+
+    data = []
+    for action in page_obj:
+        show_ga = is_ga and action.is_ga_approved
+
+        data.append({
+            'id': action.id,
+            'title': action.title,
+            'small_description': action.small_description_ga if show_ga and action.small_description_ga else action.small_description,
+            'description': action.description_ga if show_ga and action.description_ga else action.description,
+            'status': action.get_status_display(),
+            'objective_title': action.objective.title,
+            'update': action.update_ga if show_ga and action.update_ga else (action.update if action.update else "")
+        })
+
+    return JsonResponse({
+        'status_title': _('All Actions'),
+        'actions': data,
+        'count': paginator.count,
+        'current_page': page_obj.number,
+        'total_pages': paginator.num_pages,
+        'has_next': page_obj.has_next(),
+        'has_previous': page_obj.has_previous(),
+    })
+
 def get_theme_details(request, theme_id):
     """Return the HTML fragment and localized title for a single theme modal."""
     PUBLIC_ACTIONS_FILTER = Q()

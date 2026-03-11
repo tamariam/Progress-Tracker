@@ -10,9 +10,9 @@
                 <div class="container">
                     <!-- <div class="masthead-subheading">Welcome To Our Studio!</div> -->
                     <div class="masthead-heading">{% blocktrans %}Welcome to the Meath County Council<br> Digital and ICT Strategy 2030 <br>information portal.{% endblocktrans %}</div>
-                    <div class="masthead-copy mt-3 masthead-copy-panel">
-                        <p class="lead">{% blocktrans %}Within the pages of this site, you will find information as to the actions of the strategy and our progress on those actions.{% endblocktrans %}</p>
-                        <p class="lead">{% blocktrans %}The portal is updated every quarter with information, so stay tuned to see how we are getting on!{% endblocktrans %}</p>
+                    <div class="masthead-copy mt-3 masthead-copy-panel glass-card">
+                        <p class="lead masthead-lead-white">{% blocktrans %}Within the pages of this site, you will find information as to the actions of the strategy and our progress on those actions.{% endblocktrans %}</p>
+                        <p class="lead masthead-lead-white">{% blocktrans %}The portal is updated every quarter with information, so stay tuned to see how we are getting on!{% endblocktrans %}</p>
                         <a class="btn btn-xl text-uppercase mcc-yellow scroll-down-btn" href="#strategy">{% trans "Learn More" %}</a>
                     </div>
                 </div>
@@ -213,17 +213,17 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 1 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="12">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="12" title="{% trans 'digital services' %}">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
 
                                     {% if LANGUAGE_CODE == 'en' %}
                                         <!-- V-Logic: Show the English theme image when the active language is English. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services' %}" title="{% trans 'digital services' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital services' %}" title="{% trans 'digital services' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -231,16 +231,16 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 2 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="13">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="13" title="{% trans 'digital workforce' %}">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
                                     {% if LANGUAGE_CODE == 'en' %}
                                         <!-- V-Logic: Show the English theme image when the active language is English. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce' %}" title="{% trans 'digital workforce' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital workforce' %}" title="{% trans 'digital workforce' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -248,16 +248,16 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <!-- Portfolio item 3 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="14">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="14" title="{% trans 'digital systems' %}">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
                                     {% if LANGUAGE_CODE == 'en' %}
                                         <!-- V-Logic: Show the English theme image when the active language is English. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems' %}" title="{% trans 'digital systems' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital systems' %}" title="{% trans 'digital systems' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -265,16 +265,16 @@
                         <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                             <!-- Portfolio item 4 -->
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="15">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal" data-theme-id="15" title="{% trans 'digital communities' %}">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
                                     {% if LANGUAGE_CODE == 'en' %}
                                         <!-- V-Logic: Show the English theme image when the active language is English. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities' %}" title="{% trans 'digital communities' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital communities' %}" title="{% trans 'digital communities' %}" />
                                     {% endif %}
                                 </a>
                             </div>

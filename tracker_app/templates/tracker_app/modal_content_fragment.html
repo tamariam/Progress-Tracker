@@ -11,7 +11,7 @@
       <!-- Left Summary Column -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
-          {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made in Digital Services:{% endblocktranslate %}
+          {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the Digital Services Theme:{% endblocktranslate %}
         </p>
       </div>
 
@@ -19,6 +19,20 @@
       <div class="col-lg-7">
         <div class="row g-3">
           <!-- Completed -->
+          <!-- Total Actions -->
+          <div class="col-12">
+            <div class="card mcc-gray text-white shadow-sm p-3 status-card" data-status="TOTAL">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text uppercase-class mb-0 fw-bold">
+                  <i class="fas fa-list-alt icon-spacing fa-2x"></i> {% trans "Total Actions" %}
+                </p>
+                <h2 class="display-6 mb-0 counter-value" aria-label="Total actions">
+                  {{ counts.completed|add:counts.in_progress|add:counts.not_started }}
+                </h2>
+              </div>
+            </div>
+          </div>
+
           <div class="col-12">
             <div class="card mcc-green text-white shadow-sm p-3 status-card" data-status="COMPLETED">
               <div class="d-flex justify-content-between align-items-center">
