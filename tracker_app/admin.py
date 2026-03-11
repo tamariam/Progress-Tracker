@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin 
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+import logging
 from django.conf import settings
 from django.urls import reverse
 from django.utils.html import strip_tags 
@@ -125,13 +127,25 @@ class ActionAdmin(SummernoteModelAdmin):
                 superusers = get_user_model().objects.filter(is_superuser=True).values_list('email', flat=True)
                 
                 if superusers:
-                    send_mail(
-                        subject,
-                        message,
-                        settings.DEFAULT_FROM_EMAIL,
-                        list(superusers),
-                        fail_silently=True
-                    )
+                    # Render HTML alternative using a simple template.
+                    try:
+                        html_body = render_to_string('emails/action_update.html', {
+                            'user': request.user,
+                            'obj': obj,
+                            'admin_url': admin_url,
+                            'update_note': update_note,
+                        })
+
+                        email = EmailMultiAlternatives(
+                            subject=subject,
+                            body=message,
+                            from_email=settings.DEFAULT_FROM_EMAIL,
+                            to=list(superusers),
+                        )
+                        email.attach_alternative(html_body, 'text/html')
+                        email.send(fail_silently=False)
+                    except Exception:
+                        logging.exception('Failed to send action update notification')
 
     # FIXED INDENTATION: This is now correctly a method of ActionAdmin
     def get_queryset(self, request):

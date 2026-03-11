@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ subject|default:"Action Update" }}</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; color: #222; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .button { display: inline-block; padding: 10px 14px; background:#004C97; color:#fff; text-decoration:none; border-radius:4px }
+    .meta { color:#666; font-size:0.9rem }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Meath County Council – Action Update Pending Approval</h2>
+    <p>User <strong>{{ user.username }}</strong> has updated the <strong>{{ update_note }}</strong> progress for: <strong>{{ obj.title }}</strong>.</p>
+    <p>Please review and approve the update using the link below:</p>
+    <p><a class="button" href="{{ admin_url }}">Open action in admin</a></p>
+    <hr>
+    <p class="meta">Note: Updates are hidden from the public until a superuser approves and saves the change.</p>
+  </div>
+</body>
+</html>
