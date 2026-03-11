@@ -25,6 +25,26 @@ function processExternalLinks(targetElement) {
     });
 }
 
+/**
+ * Initialize Bootstrap tooltips for elements with a `title` attribute.
+ * Uses zero show delay so native-like tooltips appear immediately.
+ */
+function initTooltips() {
+    if (typeof bootstrap === 'undefined' || !bootstrap.Tooltip) {
+        return;
+    }
+
+    const tooltipTargets = document.querySelectorAll('[title]:not([data-bs-tooltip-initialized])');
+    tooltipTargets.forEach(el => {
+        try {
+            new bootstrap.Tooltip(el, { delay: { show: 0, hide: 100 } });
+            el.setAttribute('data-bs-tooltip-initialized', '1');
+        } catch (e) {
+            // ignore initialization errors for non-standard elements
+        }
+    });
+}
+
 /* =====================================================
    Counter Animation
    ===================================================== */
@@ -550,6 +570,7 @@ function initModalHandlers() {
                     const contentArea = document.getElementById('dynamicModalContent');
                     contentArea.innerHTML = data.html_content;
                     processExternalLinks(contentArea);
+                    initTooltips();
 
                     const capitalizedTitle = capitalizeEachWord(data.title);
                     document.getElementById('modalThemeTitle').textContent = capitalizedTitle;
@@ -618,6 +639,7 @@ function initPage() {
     initRoadmapChart();
     initRoadmapYearSelector();
     initModalHandlers();
+    initTooltips();
     initScrollToTop();
 }
 
