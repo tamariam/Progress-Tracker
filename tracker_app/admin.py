@@ -130,7 +130,7 @@ class ActionAdmin(SummernoteModelAdmin):
                         message,
                         settings.DEFAULT_FROM_EMAIL,
                         list(superusers),
-                        fail_silently=True
+                        fail_silently=False
                     )
 
     # FIXED INDENTATION: This is now correctly a method of ActionAdmin
