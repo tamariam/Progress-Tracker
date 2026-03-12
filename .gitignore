@@ -34,7 +34,7 @@ local_settings.py
 # These will be handled by collectstatic and S3 in production.
 static_root/
 media/
-
+staticfiles/
 # IDE files
 .vscode/
 
