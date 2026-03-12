@@ -1,0 +1,652 @@
+
+
+/**
+ * Capitalizes the first letter of each word for clean display titles.
+ */
+function capitalizeEachWord(str) {
+    if (!str) {
+        return '';
+    }
+
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+}
+
+/**
+ * Ensures external links open in a new tab and apply security rel attributes.
+ */
+function processExternalLinks(targetElement) {
+    const links = targetElement.querySelectorAll('a');
+
+    links.forEach(link => {
+        if (link.hostname !== window.location.hostname) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+}
+
+/**
+ * Initialize Bootstrap tooltips for elements with a `title` attribute.
+ * Uses zero show delay so native-like tooltips appear immediately.
+ */
+function initTooltips() {
+    if (typeof bootstrap === 'undefined' || !bootstrap.Tooltip) {
+        return;
+    }
+
+    const tooltipTargets = document.querySelectorAll('[title]:not([data-bs-tooltip-initialized])');
+    tooltipTargets.forEach(el => {
+        try {
+            new bootstrap.Tooltip(el, { delay: { show: 0, hide: 100 } });
+            el.setAttribute('data-bs-tooltip-initialized', '1');
+        } catch (e) {
+            // ignore initialization errors for non-standard elements
+        }
+    });
+}
+
+/* =====================================================
+   Counter Animation
+   ===================================================== */
+
+/**
+ * Animates counter values when the strategy counter section is visible.
+ */
+function animateCounter(entries, observer) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            return;
+        }
+
+        const counters = document.querySelectorAll('.counter-value');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let current = 0;
+            const increment = target / 40;
+
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.innerText = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            updateCounter();
+        });
+
+        observer.unobserve(entry.target);
+    });
+}
+
+/**
+ * Initializes the strategy counters when the section is visible.
+ */
+function initCounterObserver() {
+    const counterSection = document.getElementById('strategy-counter');
+    if (!counterSection || typeof IntersectionObserver === 'undefined') {
+        return;
+    }
+
+    const observerOptions = { root: null, threshold: 0.5 };
+    const observer = new IntersectionObserver(animateCounter, observerOptions);
+    observer.observe(counterSection);
+}
+
+/* =====================================================
+   Accordion: Objectives
+   ===================================================== */
+
+/**
+ * Toggles an objective accordion panel while closing all others and resetting details rows.
+ */
+function toggleAccordion(element) {
+    const currentContent = element.nextElementSibling;
+    const allContents = document.querySelectorAll('.accordion-content');
+    const allTitles = document.querySelectorAll('.accordion-title');
+    const isOpening = !currentContent.classList.contains('show');
+
+    // 1) Close everything and reset internal action details.
+    allContents.forEach(content => {
+        const internalDetails = content.querySelectorAll('.full-details');
+        const viewButtons = content.querySelectorAll('.view-button');
+        const closeButtons = content.querySelectorAll('.close-button');
+
+        internalDetails.forEach(detail => {
+            detail.style.display = 'none';
+        });
+
+        viewButtons.forEach(btn => {
+            btn.style.display = 'inline-block';
+        });
+
+        closeButtons.forEach(btn => {
+            btn.style.display = 'none';
+        });
+
+        content.classList.remove('show');
+        content.style.maxHeight = '0px';
+        content.style.display = 'none';
+    });
+
+    allTitles.forEach(title => title.classList.remove('active'));
+
+    // 2) Open only the clicked section.
+    if (isOpening) {
+        element.classList.add('active');
+        currentContent.classList.add('show');
+        currentContent.style.display = 'block';
+
+        // Dynamic scrollHeight + buffer for 2026 table growth.
+        currentContent.style.maxHeight = `${currentContent.scrollHeight + 1000}px`;
+    }
+}
+
+/**
+ * Toggles an action's details row and swaps the view/close buttons.
+ */
+function handleDetailsToggle(clickedElement) {
+    const summaryRow = clickedElement.closest('tr.action-summary-row');
+    const detailsRow = summaryRow.nextElementSibling;
+    const viewButton = summaryRow.querySelector('.view-button');
+    const closeButton = summaryRow.querySelector('.close-button');
+    const isHidden = window.getComputedStyle(detailsRow).display === 'none';
+
+    if (isHidden) {
+        detailsRow.classList.add('expanded');
+
+        // Dynamic display: use 'table-row' for desktop, 'block' for mobile.
+        const isMobile = window.innerWidth <= 541;
+        detailsRow.style.display = isMobile ? 'block' : 'table-row';
+
+        viewButton.style.display = 'none';
+        closeButton.style.display = 'inline-block';
+    } else {
+        detailsRow.classList.remove('expanded');
+        detailsRow.style.display = 'none';
+
+        viewButton.style.display = 'inline-block';
+        closeButton.style.display = 'none';
+    }
+}
+
+/* =====================================================
+   Roadmap Chart
+   ===================================================== */
+
+let roadmapChartInstance = null;
+
+/**
+ * Builds or refreshes the Roadmap chart using localized labels and data.
+ */
+function initRoadmapChart() {
+    const chartCanvas = document.getElementById('activityChart');
+    if (!chartCanvas) {
+        return;
+    }
+
+    if (typeof Chart === 'undefined') {
+        window.addEventListener('load', initRoadmapChart, { once: true });
+        return;
+    }
+
+    const labelsEnNode = document.getElementById('activity-chart-labels-en');
+    const labelsGaNode = document.getElementById('activity-chart-labels-ga');
+    const completedNode = document.getElementById('activity-chart-data-completed');
+    const inProgressNode = document.getElementById('activity-chart-data-in-progress');
+
+    if (!labelsEnNode || !labelsGaNode || !completedNode || !inProgressNode) {
+        return;
+    }
+
+    const labelsEn = JSON.parse(labelsEnNode.textContent);
+    const labelsGa = JSON.parse(labelsGaNode.textContent);
+    const completedPoints = JSON.parse(completedNode.textContent);
+    const inProgressPoints = JSON.parse(inProgressNode.textContent);
+
+    const useGa = document.documentElement.lang === 'ga';
+    const chartTitle = chartCanvas.dataset.chartTitle;
+    const labelCompleted = chartCanvas.dataset.labelCompleted;
+    const labelInProgress = chartCanvas.dataset.labelInProgress;
+    const actionsSuffix = chartCanvas.dataset.actionsSuffix;
+
+    const chartContext = chartCanvas.getContext('2d');
+    const gradientCompleted = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    gradientCompleted.addColorStop(0, 'rgba(113, 153, 73, 0.3)');
+    gradientCompleted.addColorStop(1, 'rgba(113, 153, 73, 0.04)');
+
+    const gradientInProgress = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    gradientInProgress.addColorStop(0, 'rgba(254, 186, 53, 0.32)');
+    gradientInProgress.addColorStop(1, 'rgba(254, 186, 53, 0.05)');
+
+    const chartConfig = {
+        type: 'line',
+        data: {
+            labels: useGa ? labelsGa : labelsEn,
+            datasets: [
+                {
+                    label: labelCompleted,
+                    data: completedPoints,
+                    borderColor: 'rgb(113, 153, 73)',
+                    backgroundColor: gradientCompleted,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(113, 153, 73)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    borderWidth: 3,
+                },
+                {
+                    label: labelInProgress,
+                    data: inProgressPoints,
+                    borderColor: 'rgb(254, 186, 53)',
+                    backgroundColor: gradientInProgress,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(254, 186, 53)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    borderWidth: 3,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1200,
+                easing: 'easeOutQuart',
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 10,
+                        padding: 12,
+                    }
+                },
+                title: {
+                    display: true,
+                    text: chartTitle,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.dataset.label}: ${context.parsed.y} ${actionsSuffix}`,
+                    },
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                    },
+                    grid: {
+                        color: 'rgba(0, 64, 133, 0.08)',
+                    },
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0, 64, 133, 0.06)',
+                    },
+                },
+            },
+        },
+    };
+
+    if (roadmapChartInstance) {
+        roadmapChartInstance.destroy();
+    }
+    roadmapChartInstance = new Chart(chartCanvas, chartConfig);
+}
+
+/**
+ * Fetches updated Roadmap data for a selected year and refreshes the UI.
+ */
+function handleRoadmapYearChange(event) {
+    const select = event.target;
+    const yearValue = select.value;
+
+    // Pull new data without reloading the page.
+    fetch(`/api/roadmap-data/?year=${encodeURIComponent(yearValue)}`)
+        .then(response => response.json())
+        .then(data => {
+            const completedNode = document.getElementById('activity-chart-data-completed');
+            const inProgressNode = document.getElementById('activity-chart-data-in-progress');
+            const startedNode = document.getElementById('activity-chart-data-started');
+            const continuedNode = document.getElementById('activity-chart-data-continued');
+            const labelsEnNode = document.getElementById('activity-chart-labels-en');
+            const labelsGaNode = document.getElementById('activity-chart-labels-ga');
+            const chartCanvas = document.getElementById('activityChart');
+
+            if (!completedNode || !inProgressNode || !labelsEnNode || !labelsGaNode || !chartCanvas) {
+                return;
+            }
+
+            // Sync the JSON data nodes so initRoadmapChart can reuse them.
+            completedNode.textContent = JSON.stringify(data.chart_data_completed);
+            inProgressNode.textContent = JSON.stringify(data.chart_data_in_progress);
+            if (startedNode) startedNode.textContent = JSON.stringify(data.chart_data_started);
+            if (continuedNode) continuedNode.textContent = JSON.stringify(data.chart_data_continued);
+            labelsEnNode.textContent = JSON.stringify(data.chart_labels_en);
+            labelsGaNode.textContent = JSON.stringify(data.chart_labels_ga);
+
+            const completedValue = document.querySelector('.activity-kpi-completed .activity-kpi-value');
+            const inProgressValue = document.querySelector('.activity-kpi-in-progress .activity-kpi-value');
+            const startedTotalNode = document.getElementById('started-total');
+            const continuedTotalNode = document.getElementById('continued-total');
+            // Update the KPI totals in-place.
+            if (completedValue) {
+                completedValue.textContent = data.completed_total_year;
+            }
+            if (inProgressValue) {
+                inProgressValue.textContent = data.in_progress_total_year;
+            }
+            if (startedTotalNode) startedTotalNode.textContent = data.started_total_year || 0;
+            if (continuedTotalNode) continuedTotalNode.textContent = data.continued_total_year || 0;
+
+            const isGa = document.documentElement.lang === 'ga';
+            chartCanvas.dataset.chartTitle = isGa
+                ? `Gníomhartha críochnaithe agus ar siúl in ${data.chart_year}`
+                : `Completed and progressed actions in ${data.chart_year}`;
+
+            // Rebuild the chart with the new data.
+            initRoadmapChart();
+        })
+        .catch(error => {
+            console.error('Error loading roadmap data:', error);
+        });
+}
+
+/**
+ * Wires the year selector to update the chart without a page reload.
+ */
+function initRoadmapYearSelector() {
+    const yearSelect = document.getElementById('activityYear');
+    if (yearSelect) {
+        yearSelect.addEventListener('change', handleRoadmapYearChange);
+    }
+}
+
+/* =====================================================
+   Filtered Actions
+   ===================================================== */
+
+/**
+ * Resets the accordion state and returns the user to the main objectives view.
+ */
+function hideFilteredActions() {
+    // Force all objectives to close before returning for a fresh start.
+    document.querySelectorAll('.accordion-content').forEach(content => {
+        content.classList.remove('show');
+        content.style.display = 'none';
+        content.style.maxHeight = '0';
+    });
+
+    document.querySelectorAll('.accordion-title').forEach(title => {
+        title.classList.remove('active');
+    });
+
+    // Switch the view back to the main list.
+    document.getElementById('accordion-view-container').style.display = 'block';
+    document.getElementById('filtered-table-view-container').style.display = 'none';
+
+    // Reset scroll so the user returns to the top of the modal.
+    const modalBody = document.querySelector('.modal-body');
+    if (modalBody) {
+        modalBody.scrollTop = 0;
+    }
+}
+
+/**
+ * Fetches and renders filtered action rows for a given status and page.
+ * Bilingual UI note: this function reads the js-table-labels dataset to
+ * inject language-specific labels into the generated markup.
+ */
+function fetchAndDisplayActions(status, page = 1) {
+    const labels = document.getElementById('js-table-labels').dataset;
+    const currentLang = document.documentElement.lang || 'en';
+    const themeQuery = currentThemeId ? `&theme_id=${currentThemeId}` : '';
+    // Allow a special "TOTAL"/"ALL" status to fetch all actions for the theme
+    const statusLower = (status || '').toLowerCase();
+    let url;
+    if (statusLower === 'total' || statusLower === 'all') {
+        // Use the general actions endpoint (no status filter) and pass theme_id
+        url = `/${currentLang}/api/actions/?page=${page}${themeQuery}`;
+    } else {
+        url = `/${currentLang}/api/actions/filter/${statusLower}/?page=${page}${themeQuery}`;
+    }
+
+    const tableArea = document.getElementById('filtered-table-view-container');
+    const accordionArea = document.getElementById('accordion-view-container');
+
+    // Show initial loading state from bridge.
+    tableArea.innerHTML = `<div class="text-center py-4"><p>${labels.loading}</p></div>`;
+    accordionArea.style.display = 'none';
+    tableArea.style.display = '';
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.actions || data.actions.length === 0) {
+                tableArea.innerHTML = `
+                    <div class="text-center bg-light rounded border p-4">
+                        <i class="fas fa-folder-open fa-3x  "></i>
+                        <p class="lead text-danger text-center text-bold">${labels.noActions}</p>
+                        <p class="text-center">
+                            <button class="btn mcc-blue text-white btn-back" onclick="hideFilteredActions()">${labels.back}</button>
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            const statusHeaderClass = `header-${status.toLowerCase()}`;
+
+            // Build table headers using the bridge labels.
+            let htmlOutput = `
+                <div class="action-table-container">
+                    <table class="action-table">
+                        <thead class="${statusHeaderClass}">
+                            <tr>
+                                <th>${labels.actionHeader}</th>
+                                <th>${labels.descriptionHeader}</th>
+                                <th class="text-center">${labels.detailsHeader}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            // Loop through actions and render rows.
+            data.actions.forEach(action => {
+                // Determine update visibility per-action (use actual action.status when unfiltered)
+                const actionStatusLower = (action.status || '').toLowerCase().replace(/\s+/g, '_');
+                const showUpdates = actionStatusLower === 'in_progress' || actionStatusLower === 'completed';
+
+                htmlOutput += `
+                    <tr class="action-summary-row status-${statusLower}">
+                        <td class="title-col"><strong>${action.title}</strong></td>
+                        <td class="objective-col">${action.small_description}</td>
+                        <td class="details-col text-center">
+                            <button class="btn btn-sm toggle-details view-button universal-action-button" onclick="handleDetailsToggle(this)">${labels.view}</button>
+                            <button class="btn btn-sm toggle-details close-button universal-action-button" style="display: none;" onclick="handleDetailsToggle(this)">&minus;</button>
+                        </td>
+                    </tr>
+                    <tr class="full-details" style="display: none;">
+                        <td colspan="3">
+                            <div class="details-content">
+                                <p class="fw-bold details-heading">${labels.actionDesc}</p>
+                                <div>${action.description}</div>
+                                ${showUpdates ? `
+                                    <hr class="bg-light">
+                                    <p class="fw-bold details-heading">${labels.latestUpdate}</p>
+                                    <div>${action.update || labels.noUpdate}</div>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            htmlOutput += '</tbody></table></div>';
+
+            // Pagination.
+            if (data.total_pages > 1) {
+                htmlOutput += `<div class="pagination-controls text-center mt-3">`;
+                if (data.has_previous) {
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page - 1})">${currentLang === 'ga' ? 'Roimhe seo' : 'Previous'}</button>`;
+                }
+                htmlOutput += `<span class="mx-2">${currentLang === 'ga' ? 'Leathanach' : 'Page'} ${data.current_page} / ${data.total_pages}</span>`;
+                if (data.has_next) {
+                    htmlOutput += `<button class="btn btn-sm btn-outline-secondary mx-1" onclick="fetchAndDisplayActions('${status}', ${data.current_page + 1})">${currentLang === 'ga' ? 'Ar aghaidh' : 'Next'}</button>`;
+                }
+                htmlOutput += `</div>`;
+            }
+
+            // Centered "Go Back" button from bridge.
+            htmlOutput += `
+                <p class="text-center">
+                    <button class="btn mcc-blue text-white mt-3 btn-back" onclick="hideFilteredActions()">${labels.back}</button>
+                </p>
+            `;
+
+            tableArea.innerHTML = htmlOutput;
+        })
+        .catch(error => {
+            console.error('Error fetching filtered actions:', error);
+            tableArea.innerHTML = `<div class="text-center py-4"><p class="text-danger">${labels.error}</p></div>`;
+        });
+}
+
+/* =====================================================
+   Modal Events & Theme Fetching
+   ===================================================== */
+
+let currentModalThemeTitle = '';
+let currentThemeId = null;
+
+/**
+ * Wires modal interactions and theme data loading.
+ */
+function initModalHandlers() {
+    const portfolioModal = document.getElementById('portfolioModal');
+
+    if (portfolioModal) {
+        // Listen for clicks that happen anywhere inside the modal.
+        portfolioModal.addEventListener('click', event => {
+            const clickedCard = event.target.closest('.status-card');
+
+            if (clickedCard) {
+                const status = clickedCard.getAttribute('data-status');
+                if (status) {
+                    fetchAndDisplayActions(status);
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('a[data-theme-id]').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const themeId = this.getAttribute('data-theme-id');
+            currentThemeId = themeId;
+
+            const urlTemplate = document.getElementById('api-url-template').getAttribute('data-url-template');
+            const url = urlTemplate.replace('__ID__', themeId);
+
+            document.getElementById('modalThemeTitle').textContent = 'Loading...';
+            document.getElementById('dynamicModalContent').innerHTML = '<p>Fetching data, please wait...</p>';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const contentArea = document.getElementById('dynamicModalContent');
+                    contentArea.innerHTML = data.html_content;
+                    processExternalLinks(contentArea);
+                    initTooltips();
+
+                    const capitalizedTitle = capitalizeEachWord(data.title);
+                    document.getElementById('modalThemeTitle').textContent = capitalizedTitle;
+
+                    const modalElement = document.getElementById('portfolioModal');
+                    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error('Error fetching theme details:', error);
+                    document.getElementById('dynamicModalContent').innerHTML = '<p>Error loading content.</p>';
+                    document.getElementById('modalThemeTitle').textContent = 'Error';
+                });
+        });
+    });
+
+    processExternalLinks(document);
+}
+
+/**
+ * Closes the modal using the Bootstrap instance.
+ */
+function closeMCCModal() {
+    const modalElement = document.getElementById('portfolioModal');
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modal.hide();
+}
+
+/* =====================================================
+   Scroll To Top
+   ===================================================== */
+
+/**
+ * Initializes the scroll-to-top button behavior.
+ */
+function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) {
+        return;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+}
+
+/**
+ * Smoothly scrolls the page back to the top.
+ */
+function scrollToTopFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+/**
+ * Single entry point for DOM-dependent scripts.
+ */
+function initPage() {
+    initCounterObserver();
+    initRoadmapChart();
+    initRoadmapYearSelector();
+    initModalHandlers();
+    initTooltips();
+    initScrollToTop();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPage);
+} else {
+    initPage();
+}
+
+
