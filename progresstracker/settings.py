@@ -35,7 +35,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 # settings.py
@@ -161,24 +161,17 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-  
-
-
-# Change 'console' to 'smtp' to actually send the email
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = "smtp.office365.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# Use console email backend in development, SMTP in production
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = "smtp.office365.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
