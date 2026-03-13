@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 import logging
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("tracker_app")
 
 
 from .models import Theme, Objective, Action, ActionStatus 
