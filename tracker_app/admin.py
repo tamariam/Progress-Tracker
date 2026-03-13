@@ -99,6 +99,8 @@ class ActionAdmin(SummernoteModelAdmin):
             obj.is_approved = True
 
         super().save_model(request, obj, form, change)
+        #DEBUG
+        logger.error("Changed fields: %s", form.changed_data)
 
         # THE NOTIFICATION LOGIC
         if not is_super:
@@ -106,6 +108,9 @@ class ActionAdmin(SummernoteModelAdmin):
             update_ga_changed = 'update_ga' in form.changed_data
 
             if change and (update_changed or update_ga_changed):
+                # DEBUG: confirm email block reached
+                logger.error("EMAIL BLOCK REACHED for action %s", obj.id)
+
                 subject = f"Meath County Council – Action Update Pending Approval: {obj.title}"
                 
                 admin_url = request.build_absolute_uri(
