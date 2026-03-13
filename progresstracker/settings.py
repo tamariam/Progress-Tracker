@@ -36,7 +36,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 # settings.py
@@ -47,9 +47,6 @@ ALLOWED_HOSTS = os.getenv(
 
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://10.55.214.65'
-]
 
 
 # Application definition

@@ -125,13 +125,16 @@ class ActionAdmin(SummernoteModelAdmin):
                 superusers = get_user_model().objects.filter(is_superuser=True).values_list('email', flat=True)
                 
                 if superusers:
-                    send_mail(
-                        subject,
-                        message,
-                        settings.DEFAULT_FROM_EMAIL,
-                        list(superusers),
-                        fail_silently=False
-                    )
+                    try:
+                        send_mail(
+                            subject,
+                            message,
+                            settings.DEFAULT_FROM_EMAIL,
+                            list(superusers),
+                            fail_silently=False
+                        )
+                    except Exception as e:
+                        print("email send failed", e)
 
     # FIXED INDENTATION: This is now correctly a method of ActionAdmin
     def get_queryset(self, request):
