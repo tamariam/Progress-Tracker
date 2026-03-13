@@ -5,6 +5,11 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.html import strip_tags 
 from django.contrib.auth import get_user_model
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 from .models import Theme, Objective, Action, ActionStatus 
 from datetime import date
@@ -134,7 +139,7 @@ class ActionAdmin(SummernoteModelAdmin):
                             fail_silently=False
                         )
                     except Exception as e:
-                        print("email send failed", e)
+                        logger.exception("email send failed")
 
     # FIXED INDENTATION: This is now correctly a method of ActionAdmin
     def get_queryset(self, request):
