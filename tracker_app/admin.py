@@ -107,7 +107,7 @@ class ActionAdmin(SummernoteModelAdmin):
             update_changed = 'update' in form.changed_data
             update_ga_changed = 'update_ga' in form.changed_data
 
-            if change and (update_changed or update_ga_changed):
+            if change:
                 # DEBUG: confirm email block reached
                 logger.error("EMAIL BLOCK REACHED for action %s", obj.id)
 
