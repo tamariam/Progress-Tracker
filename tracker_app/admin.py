@@ -69,6 +69,17 @@ class ActionAdmin(SummernoteModelAdmin):
     def save_model(self, request, obj, form, change):
         is_super = request.user.is_superuser
 
+        # Capture pre-save progress text for diagnostics (if this is an update)
+        original_update = None
+        original_update_ga = None
+        if obj.pk:
+            try:
+                orig = Action.objects.get(pk=obj.pk)
+                original_update = (orig.update or "").strip()
+                original_update_ga = (orig.update_ga or "").strip()
+            except Action.DoesNotExist:
+                pass
+
         if not change and obj.created_by is None:
             obj.created_by = request.user
         obj.updated_by = request.user
@@ -102,17 +113,39 @@ class ActionAdmin(SummernoteModelAdmin):
         #DEBUG
         logger.error("Changed fields: %s", form.changed_data)
 
+        # DIAGNOSTICS: Log detailed pre/post values to help debug missing emails
+        logger.error(
+            "DIAG save_model: user=%s is_super=%s change=%s changed_data=%s",
+            getattr(request.user, 'username', None),
+            is_super,
+            change,
+            form.changed_data,
+        )
+        logger.error(
+            "DIAG pre_update=%r pre_update_ga=%r form_update=%r form_update_ga=%r",
+            original_update,
+            original_update_ga,
+            (form.cleaned_data.get('update') or "").strip(),
+            (form.cleaned_data.get('update_ga') or "").strip(),
+        )
+        # limit POST keys logged to avoid huge output
+        try:
+            post_keys = list(request.POST.keys())[:50]
+        except Exception:
+            post_keys = []
+        logger.error("DIAG request.POST keys: %s", post_keys)
+
         # THE NOTIFICATION LOGIC
         if not is_super:
             update_changed = 'update' in form.changed_data
             update_ga_changed = 'update_ga' in form.changed_data
 
-            if change:
-                # DEBUG: confirm email block reached
-                logger.error("EMAIL BLOCK REACHED for action %s", obj.id)
+            # Only notify admins when the progress text was changed.
+            if change and (update_changed or update_ga_changed):
+                logger.debug("EMAIL BLOCK REACHED for action %s; changed: %s, %s", obj.id, update_changed, update_ga_changed)
 
                 subject = f"Meath County Council – Action Update Pending Approval: {obj.title}"
-                
+
                 admin_url = request.build_absolute_uri(
                     reverse('admin:tracker_app_action_change', args=[obj.id])
                 )
@@ -121,9 +154,9 @@ class ActionAdmin(SummernoteModelAdmin):
                     update_note = "ENGLISH and IRISH"
                 elif update_ga_changed:
                     update_note = "IRISH"
-                else:
+                elif update_changed:
                     update_note = "ENGLISH"
-                
+
                 message = (
                     "Meath County Council – Digital and ICT Strategy Tracker\n\n"
                     f"User {request.user.username} has updated the {update_note} progress for: {obj.title}.\n\n"
@@ -133,7 +166,9 @@ class ActionAdmin(SummernoteModelAdmin):
 
                 # FIND THE BOSS: Get all superuser emails
                 superusers = get_user_model().objects.filter(is_superuser=True).values_list('email', flat=True)
-                
+
+                logger.debug("Preparing to send update email; from=%s to=%s", settings.DEFAULT_FROM_EMAIL, list(superusers))
+
                 if superusers:
                     try:
                         send_mail(
@@ -143,8 +178,10 @@ class ActionAdmin(SummernoteModelAdmin):
                             list(superusers),
                             fail_silently=False
                         )
-                    except Exception as e:
-                        logger.exception("email send failed")
+                    except Exception:
+                        logger.exception("email send failed for action %s", obj.id)
+            elif change:
+                logger.debug("Change detected for action %s but no progress text changed; skipping email.", obj.id)
 
     # FIXED INDENTATION: This is now correctly a method of ActionAdmin
     def get_queryset(self, request):

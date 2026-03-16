@@ -177,6 +177,27 @@ else:
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+# LOGGING = {
+# "version": 1,
+# "disable_existing_loggers": False,
+# "handlers": {
+# "console": {
+# "class": "logging.StreamHandler",
+# },
+# },
+# "loggers": {
+# "tracker_app": { # use your app name
+# "handlers": ["console"],
+# "level": "DEBUG",
+# "propagate": True,
+# },
+# "__main__": {
+# "handlers": ["console"],
+# "level": "DEBUG",
+# },
+# },
+# }
+
 
 
 
@@ -185,5 +206,44 @@ else:
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Ensure application logs directory exists and configure file logging so
+# server-side logs can be inspected regardless of how the process is run.
+LOGS_DIR = BASE_DIR / 'logs'
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s %(levelname)s %(name)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': str(LOGS_DIR / 'tracker_app.log'),
+            'maxBytes': 1024 * 1024 * 5,  # 5MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+    },
+    'loggers': {
+        'tracker_app': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        # also capture Django errors to the same file for convenience
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 
 
