@@ -69,7 +69,16 @@
                 
                             </p>
                             {% static 'assets/docs/Meath_Digital_Strategy_2030.pdf' as strategy_pdf %}
-                            <p class="text-muted text-left">{% blocktrans %}Download the full <a href="" class="download-link" title="Download the Meath County Council Digital and ICT Strategy 2030" aria-label="Download the Meath County Council Digital and ICT Strategy 2030" target="_blank" rel="noopener noreferrer"><strong>Meath County Council Digital and ICT Strategy 2030</strong></a>, which outlines our vision and actions for modern, accessible, secure and people-centred digital services.{% endblocktrans %}</p>
+                            <p class="text-muted text-left">
+                                {% trans "Download the full" %}
+                                <a href="{{ strategy_pdf }}" class="download-link"
+                                   title="{% trans 'Download the Meath County Council Digital and ICT Strategy 2030' %}"
+                                   aria-label="{% trans 'Download the Meath County Council Digital and ICT Strategy 2030' %}"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <strong>{% trans "Meath County Council Digital and ICT Strategy 2030" %}</strong>
+                                </a>
+                                {% trans ", which outlines our vision and actions for modern, accessible, secure and people-centred digital services." %}
+                            </p>
                         </div>
                     </div>
                 </div>
