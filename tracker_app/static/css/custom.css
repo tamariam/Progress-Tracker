@@ -527,6 +527,13 @@ header.masthead .masthead-copy .lead {
     min-height: 360px;
 }
 
+@media (max-width: 576px) {
+    /* Reduce chart min-height on very small screens to avoid overflow */
+    .activity-chart-wrapper {
+        min-height: 240px;
+    }
+}
+
 .activity-graph-section {
     position: relative;
     padding: 6rem 0;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-25 16:11+0000\n"
+"POT-Creation-Date: 2026-03-27 13:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,11 +54,11 @@ msgstr ""
 
 #: .\templates\base.html:11
 msgid "Digital and ICT Strategy 2030"
-msgstr ""
+msgstr " Straitéis Dhigiteach agus TFC 2023"
 
 #: .\templates\base.html:11 .\templates\base.html:13
 msgid "Meath County Council"
-msgstr ""
+msgstr "Comhairle Chontae na Mí"
 
 #: .\templates\base.html:12
 msgid ""
@@ -75,7 +75,7 @@ msgstr "Comhairle Chontae na Mí — Straitéis Dhigiteach agus TFC"
 
 #: .\templates\base.html:35
 msgid "Meath County Council logo"
-msgstr ""
+msgstr "Lógó Chomhairle Chontae na Mí"
 
 #: .\templates\base.html:53
 msgid "Strategy"
@@ -83,7 +83,7 @@ msgstr "Náisiúnta"
 
 #: .\templates\base.html:54
 msgid "Progress"
-msgstr ""
+msgstr "Dul chun Cinn"
 
 #: .\templates\base.html:55 .\tracker_app\templates\tracker_app\home.html:103
 #: .\tracker_app\templates\tracker_app\home.html:217
@@ -96,7 +96,7 @@ msgstr ""
 
 #: .\templates\base.html:85
 msgid "Accessibility Statement (opens in a new tab)"
-msgstr ""
+msgstr "Inrochtaineacht Ráiteas(osclaíonn sé i dtáb nua)"
 
 #: .\templates\base.html:85
 msgid "Accessibility"
@@ -104,7 +104,7 @@ msgstr "Inrochtaineacht"
 
 #: .\templates\base.html:86
 msgid "Disclaimer Statement (opens in a new tab)"
-msgstr ""
+msgstr "Séanadh Ráiteas(osclaíonn sé i dtáb nua)"
 
 #: .\templates\base.html:86
 msgid "Disclaimer"
@@ -112,7 +112,7 @@ msgstr "Séanadh"
 
 #: .\templates\base.html:87
 msgid "Privacy Statement (opens in a new tab)"
-msgstr ""
+msgstr "Príobháideachas Ráiteas(osclaíonn sé i dtáb nua)"
 
 #: .\templates\base.html:87
 msgid "Privacy"
@@ -120,7 +120,7 @@ msgstr "Príobháideachas"
 
 #: .\templates\base.html:88
 msgid "Freedom of Information Statement (opens in a new tab)"
-msgstr ""
+msgstr "Saoráil Faisnéise Ráiteas(osclaíonn sé i dtáb nua) "
 
 #: .\templates\base.html:88
 msgid "Freedom of Information"
@@ -164,7 +164,7 @@ msgstr ""
 
 #: .\tracker_app\models.py:57
 msgid "Inactive"
-msgstr ""
+msgstr "Neamhghníomhach"
 
 #: .\tracker_app\models.py:58
 msgid "In progress"
@@ -195,10 +195,16 @@ msgid "Irish Content Approved"
 msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:12
-msgid ""
-"Welcome to the Meath County Council<br> Digital and ICT Strategy 2030 "
-"<br>information portal."
-msgstr ""
+msgid "Welcome to the Meath County Council"
+msgstr "Comhairle Chontae na Mí"
+
+#: .\tracker_app\templates\tracker_app\home.html:12
+msgid " Digital and ICT Strategy 2030"
+msgstr " Straitéis Dhigiteach agus TFC 2023"
+
+#: .\tracker_app\templates\tracker_app\home.html:12
+msgid " information portal."
+msgstr "Tairseach Chomhairliúcháin"
 
 #: .\tracker_app\templates\tracker_app\home.html:14
 msgid ""
@@ -221,12 +227,11 @@ msgid "Our Digital & ICT Strategy"
 msgstr "Ár Straitéis Dhigiteach agus TFC"
 
 #: .\tracker_app\templates\tracker_app\home.html:28
+#, fuzzy, python-format
 msgid ""
-"Driving digital innovation and transformation for all <strong>Meath County "
-"Council</strong> services."
+"Driving digital innovation and transformation for all %(council)s services."
 msgstr ""
-"Nuálaíocht agus claochlú digiteach a chur chun tosaigh do sheirbhísí "
-"Chomhairle Contae na Mí."
+"Nuálaíocht agus claochlú digiteach a chur chun tosaigh do sheirbhísí %(council)s."
 
 #: .\tracker_app\templates\tracker_app\home.html:37
 msgid "Evolving Expectations"
@@ -290,8 +295,6 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:75
 #: .\tracker_app\templates\tracker_app\home.html:76
-#, fuzzy
-#| msgid "Meath County Council Digital and ICT Strategy 2030"
 msgid "Download the Meath County Council Digital and ICT Strategy 2030"
 msgstr "Comhairle Chontae na Mí — Straitéis Dhigiteach agus TFC 2030"
 
@@ -350,12 +353,13 @@ msgid "Celebrating past achievements"
 msgstr "Éachtaí a cheiliúradh"
 
 #: .\tracker_app\templates\tracker_app\home.html:304
+#, fuzzy, python-format
 msgid ""
 "This section summarises a selection of Digital and ICT projects delivered "
-"during the Council Term <strong>2019-2024.</strong>"
+"during the Council Term %(term)s"
 msgstr ""
 "Déantar achoimre sa rannán seo ar rogha tionscadal Digiteach agus TFC a "
-"cuireadh i gcrích le linn Théarma na Comhairle, 2019-2024."
+"cuireadh i gcrích le linn Théarma na Comhairle, %(term)s"
 
 #: .\tracker_app\templates\tracker_app\home.html:310
 msgid "website"
@@ -467,7 +471,7 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:374
 msgid "authentication"
-msgstr "Cibearshlándáil"
+msgstr "fíordheimhniú"
 
 #: .\tracker_app\templates\tracker_app\home.html:378
 msgid "Cyber Security"
@@ -490,7 +494,7 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:389
 msgid "Home office"
-msgstr ""
+msgstr "Oifig baile"
 
 #: .\tracker_app\templates\tracker_app\home.html:393
 msgid "Covid-19"
@@ -547,7 +551,7 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:423
 msgid "technology"
-msgstr ""
+msgstr "Teicneolaíocht"
 
 #: .\tracker_app\templates\tracker_app\home.html:427
 msgid "Modernisation of Services"
@@ -568,7 +572,7 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:441
 msgid "Scroll to top"
-msgstr ""
+msgstr "Scrollaigh go dtí an barr"
 
 #: .\tracker_app\templates\tracker_app\home.html:450
 #: .\tracker_app\templates\tracker_app\modal_content_fragment.html:105
@@ -606,7 +610,7 @@ msgstr "Níor taifeadadh aon nuashonrú go fóill"
 
 #: .\tracker_app\templates\tracker_app\home.html:457
 msgid "← Back"
-msgstr "Siar"
+msgstr "← Siar"
 
 #: .\tracker_app\templates\tracker_app\home.html:458
 msgid "Loading..."
@@ -623,7 +627,7 @@ msgstr "Tharla earráid agus an t-ábhar á lódáil. Bain triail eile as"
 
 #: .\tracker_app\templates\tracker_app\home.html:461
 msgid "No projects have reached this stage of the strategy yet."
-msgstr ""
+msgstr "Níor shroich tionscadail ar bith an chéim seo den straitéis go fóill"
 
 #: .\tracker_app\templates\tracker_app\home.html:469
 msgid "Loading Theme Details..."
@@ -631,7 +635,7 @@ msgstr "Sonraí an Téama á Lódáil"
 
 #: .\tracker_app\templates\tracker_app\home.html:471
 msgid "Close Modal"
-msgstr ""
+msgstr "Dún"
 
 #: .\tracker_app\templates\tracker_app\modal_content_fragment.html:14
 msgid ""
@@ -674,3 +678,7 @@ msgstr ""
 #: .\tracker_app\views.py:252
 msgid "All Actions"
 msgstr ""
+
+#~| msgid "digital services"
+#~ msgid "services."
+#~ msgstr "Seirbhísí Digiteacha"

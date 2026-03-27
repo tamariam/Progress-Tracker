@@ -9,7 +9,7 @@
             <header class="masthead">
                 <div class="container">
                     <!-- <div class="masthead-subheading">Welcome To Our Studio!</div> -->
-                    <div class="masthead-heading">{% blocktrans %}Welcome to the Meath County Council<br> Digital and ICT Strategy 2030 <br>information portal.{% endblocktrans %}</div>
+                    <div class="masthead-heading">{% blocktrans %}Welcome to the Meath County Council{% endblocktrans %}<br>{% blocktrans %} Digital and ICT Strategy 2030{% endblocktrans %} <br>{% blocktrans %} information portal.{% endblocktrans %}</div>
                     <div class="masthead-copy mt-3 masthead-copy-panel glass-card">
                         <p class="lead masthead-lead-white">{% blocktrans %}Within the pages of this site, you will find information as to the actions of the strategy and our progress on those actions.{% endblocktrans %}</p>
                         <p class="lead masthead-lead-white">{% blocktrans %}The portal is updated every quarter with information, so stay tuned to see how we are getting on!{% endblocktrans %}</p>
@@ -25,7 +25,7 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">{% trans "Our Digital & ICT Strategy" %}</h2>
                         <h3 class="section-subheading text-muted">
-                            {% blocktrans %}Driving digital innovation and transformation for all <strong>Meath County Council</strong> services.{% endblocktrans %}
+                            {% blocktrans with council="<strong>Meath County Council</strong>"|safe %}Driving digital innovation and transformation for all {{ council }} services.{% endblocktrans %}
                         </h3>
                     </div>
                     <div class="row text-center">
@@ -68,7 +68,7 @@
                             
                 
                             </p>
-                            {% static 'assets/docs/Meath_Digital_Strategy_2030.pdf' as strategy_pdf %}
+                            {% static 'assets/docs/MCC_ICT_Strategy_2030.pdf' as strategy_pdf %}
                             <p class="text-muted text-left">
                                 {% trans "Download the full" %}
                                 <a href="{{ strategy_pdf }}" class="download-link"
@@ -134,7 +134,7 @@
                         <div>
                             <h2 class="section-heading text-uppercase mb-2">
                             {% if LANGUAGE_CODE == 'ga' %}
-                                Treochlár Gníomhartha Straitéise
+                                Dul chun Cinn i dtaca le Gníomhartha na Straitéise
                             {% else %}
                                 Progress on Strategy Actions
                             {% endif %}
@@ -232,7 +232,7 @@
                                         <img class="img-fluid" src="{% static 'assets/img/portfolio/digital.jpg' %}" alt="{% trans 'digital services' %}" title="{% trans 'digital services' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital services' %}" title="{% trans 'digital services' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-irish.png' %}" alt="{% trans 'digital services' %}" title="{% trans 'digital services' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -249,7 +249,7 @@
                                         <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w.jpg' %}" alt="{% trans 'digital workforce' %}" title="{% trans 'digital workforce' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital workforce' %}" title="{% trans 'digital workforce' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-w-irish.png' %}" alt="{% trans 'digital workforce' %}" title="{% trans 'digital workforce' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -266,7 +266,7 @@
                                         <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s.jpg' %}" alt="{% trans 'digital systems' %}" title="{% trans 'digital systems' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital systems' %}" title="{% trans 'digital systems' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-s-irish.png' %}" alt="{% trans 'digital systems' %}" title="{% trans 'digital systems' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -283,7 +283,7 @@
                                         <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c.jpg' %}" alt="{% trans 'digital communities' %}" title="{% trans 'digital communities' %}" />
                                     {% else %}
                                         <!-- V-Logic: Swap to the Irish theme image when the active language is Irish. -->
-                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-sc.jpg' %}" alt="{% trans 'digital communities' %}" title="{% trans 'digital communities' %}" />
+                                        <img class="img-fluid" src="{% static 'assets/img/portfolio/digital-c-irish.png' %}" alt="{% trans 'digital communities' %}" title="{% trans 'digital communities' %}" />
                                     {% endif %}
                                 </a>
                             </div>
@@ -301,7 +301,7 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">{% trans "Celebrating past achievements" %}</h2>
                         <h3 class="section-subheading text-muted">
-                            {% blocktranslate trimmed %}This section summarises a selection of Digital and ICT projects delivered during the Council Term <strong>2019-2024.</strong>{% endblocktranslate %}
+                            {% blocktranslate trimmed with term="<strong>2019-2024.</strong>"|safe %}This section summarises a selection of Digital and ICT projects delivered during the Council Term {{ term }}{% endblocktranslate %}
                         </h3>
                     </div>
                     <ul class="timeline">

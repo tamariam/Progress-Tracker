@@ -212,12 +212,21 @@ function initRoadmapChart() {
     const labelInProgress = chartCanvas.dataset.labelInProgress;
     const actionsSuffix = chartCanvas.dataset.actionsSuffix;
 
+    // Ensure the canvas has an explicit height derived from its wrapper so
+    // Chart.js can calculate gradients and scales correctly on small screens.
+    const wrapper = chartCanvas.closest('.activity-chart-wrapper') || chartCanvas.parentElement;
+    const wrapperHeight = wrapper ? Math.max(240, wrapper.clientHeight || 300) : 300;
+    // Set CSS height and canvas internal height to ensure consistent sizing.
+    chartCanvas.style.height = `${wrapperHeight}px`;
+    chartCanvas.height = wrapperHeight;
+
     const chartContext = chartCanvas.getContext('2d');
-    const gradientCompleted = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    const canvasMeasuredHeight = chartCanvas.clientHeight || chartCanvas.height || 300;
+    const gradientCompleted = chartContext.createLinearGradient(0, 0, 0, canvasMeasuredHeight);
     gradientCompleted.addColorStop(0, 'rgba(113, 153, 73, 0.3)');
     gradientCompleted.addColorStop(1, 'rgba(113, 153, 73, 0.04)');
 
-    const gradientInProgress = chartContext.createLinearGradient(0, 0, 0, chartCanvas.height || 300);
+    const gradientInProgress = chartContext.createLinearGradient(0, 0, 0, canvasMeasuredHeight);
     gradientInProgress.addColorStop(0, 'rgba(254, 186, 53, 0.32)');
     gradientInProgress.addColorStop(1, 'rgba(254, 186, 53, 0.05)');
 
@@ -304,6 +313,12 @@ function initRoadmapChart() {
         roadmapChartInstance.destroy();
     }
     roadmapChartInstance = new Chart(chartCanvas, chartConfig);
+    // Ensure Chart.js recalculates layout immediately after creation
+    try {
+        roadmapChartInstance.resize();
+    } catch (e) {
+        // ignore resize errors on very old browsers
+    }
 }
 
 /**
@@ -647,6 +662,30 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPage);
 } else {
     initPage();
+}
+
+/* =====================================================
+   Responsive fixes: debounce + resize handler
+   Rebuild the roadmap chart on resize so gradients and sizing
+   are recalculated correctly on small screens / orientation changes.
+   ===================================================== */
+function debounce(fn, delay) {
+    let timer = null;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+if (typeof window !== 'undefined') {
+    window.addEventListener('resize', debounce(() => {
+        // Re-init chart to ensure gradients and canvas sizing update
+        try {
+            initRoadmapChart();
+        } catch (e) {
+            // swallow resize errors to avoid noisy console on older devices
+        }
+    }, 200));
 }
 
 
