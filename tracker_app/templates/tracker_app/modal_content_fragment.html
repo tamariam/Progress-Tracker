@@ -11,7 +11,12 @@
       <!-- Left Summary Column -->
       <div class="col-lg-5 mb-lg-0">
         <p class="fs-6 bigger-font yellow-color">
-          {% blocktranslate trimmed %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the Digital Services Theme:{% endblocktranslate %}
+          {% get_current_language as LANGUAGE_CODE %}
+          {% if LANGUAGE_CODE == 'ga' and theme.title_ga %}
+            {% blocktranslate trimmed with theme_name=theme.title_ga %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the {{ theme_name }} Theme:{% endblocktranslate %}
+          {% else %}
+            {% blocktranslate trimmed with theme_name=theme.title %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the {{ theme_name }} Theme:{% endblocktranslate %}
+          {% endif %}
         </p>
       </div>
 
