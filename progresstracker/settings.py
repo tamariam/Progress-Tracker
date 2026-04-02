@@ -176,7 +176,7 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
     # Ensure DEFAULT_FROM_EMAIL is set; fall back to EMAIL_HOST_USER or a sensible default
-    DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL") or EMAIL_HOST_USER or f"no-reply@{ALLOWED_HOSTS[0] if ALLOWED_HOSTS else 'localhost'}"
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER 
 
 
 
