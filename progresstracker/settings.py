@@ -36,7 +36,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 # settings.py
@@ -176,7 +176,7 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
     # Ensure DEFAULT_FROM_EMAIL is set; fall back to EMAIL_HOST_USER or a sensible default
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER 
+   
 
 
 
@@ -184,6 +184,12 @@ else:
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
+# Default from email: prefer explicit env var, fall back to EMAIL_HOST_USER, then safe fallback
+DEFAULT_FROM_EMAIL = os.getenv(
+    "DEFAULT_FROM_EMAIL",
+    os.getenv("EMAIL_HOST_USER", "no-reply@meath.ie")
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
