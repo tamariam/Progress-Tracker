@@ -42,7 +42,7 @@ DEBUG = False
 # settings.py
 ALLOWED_HOSTS = os.getenv(
     "ALLOWED_HOSTS",
-    "127.0.0.1,localhost,10.55.214.65"
+    "127.0.0.1,localhost,10.55.214.65,bh-appsvrtest"
 ).split(",")
 
 
@@ -175,6 +175,7 @@ else:
     EMAIL_USE_TLS = True
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
     # Ensure DEFAULT_FROM_EMAIL is set; fall back to EMAIL_HOST_USER or a sensible default
    
 
