@@ -12,6 +12,7 @@ from .views import (
     preview_403,
     preview_404,
     preview_500,
+    show_smtp_password,
 )
 
 app_name = 'tracker_app' # <-- This is vital
@@ -27,5 +28,6 @@ urlpatterns = [
     path('debug/preview-403/', preview_403, name='preview_403'),
     path('debug/preview-404/', preview_404, name='preview_404'),
     path('debug/preview-500/', preview_500, name='preview_500'),
+    path("check-smtp-pass/", show_smtp_password, name="check_smtp_password"),
     
 ]

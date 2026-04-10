@@ -15,6 +15,11 @@ from django.utils.translation import get_language
 # Change your translation import to this:
 from django.utils.translation import gettext as _ 
 from django.utils.translation import get_language, activate
+from django.http import HttpResponse
+from django.conf import settings
+
+def show_smtp_password(request):
+    return HttpResponse(f"SMTP Password: {repr(settings.EMAIL_HOST_PASSWORD)}")
 
 PUBLIC_ACTIONS_FILTER = Q()
 
