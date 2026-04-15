@@ -9,13 +9,13 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-from multiprocessing.util import DEBUG
 # dual 
 from django.utils.translation import gettext_lazy as _ 
 # 
 
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 import dj_database_url
 load_dotenv()
@@ -36,7 +36,15 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG resolution (in order of precedence):
+# 1. DJANGO_DEBUG env var (1/true/yes)
+# 2. DEVELOPMENT env var present (any value)
+# 3. running via `manage.py runserver` (detect 'runserver' in sys.argv)
+DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
+if DJANGO_DEBUG is not None:
+    DEBUG = DJANGO_DEBUG.strip().lower() in ("1", "true", "yes")
+else:
+    DEBUG = ('DEVELOPMENT' in os.environ) or ('runserver' in sys.argv)
 
 
 # settings.py

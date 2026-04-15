@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 13:05+0000\n"
+"POT-Creation-Date: 2026-04-15 15:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
 "4);\n"
 
-#: .\progresstracker\settings.py:149
+#: .\progresstracker\settings.py:157
 msgid "English"
 msgstr ""
 
-#: .\progresstracker\settings.py:150
+#: .\progresstracker\settings.py:158
 msgid "Gaeilge"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr "Téamaí"
 
 #: .\templates\base.html:56
 msgid "Past Achievements"
-msgstr ""
+msgstr "Gaiscí ón am atá thart"
 
 #: .\templates\base.html:85
 msgid "Accessibility Statement (opens in a new tab)"
@@ -168,11 +168,11 @@ msgstr "Neamhghníomhach"
 
 #: .\tracker_app\models.py:58
 msgid "In progress"
-msgstr ""
+msgstr "Idir Lámha"
 
 #: .\tracker_app\models.py:59
 msgid "Completed"
-msgstr ""
+msgstr "Curtha i gCrích"
 
 #: .\tracker_app\models.py:77
 msgid "Small Description (Irish)"
@@ -196,42 +196,47 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:12
 msgid "Welcome to the Meath County Council"
-msgstr "Comhairle Chontae na Mí"
+msgstr "Fáilte chuig tairseach faisnéise Straitéis Dhigiteach"
 
 #: .\tracker_app\templates\tracker_app\home.html:12
 msgid " Digital and ICT Strategy 2030"
-msgstr " Straitéis Dhigiteach agus TFC 2023"
+msgstr "agus TFC Chomhairle"
 
 #: .\tracker_app\templates\tracker_app\home.html:12
 msgid " information portal."
-msgstr "Tairseach Chomhairliúcháin"
+msgstr "Chontae na Mí 2030."
 
 #: .\tracker_app\templates\tracker_app\home.html:14
 msgid ""
 "Within the pages of this site, you will find information as to the actions "
 "of the strategy and our progress on those actions."
 msgstr ""
+"Laistigh de leathanaigh an tsuímh seo, gheobhaidh tú faisnéis maidir le "
+"gníomhartha na straitéise agus ár ndul chun cinn ar na gníomhartha sin."
 
 #: .\tracker_app\templates\tracker_app\home.html:15
 msgid ""
 "The portal is updated every quarter with information, so stay tuned to see "
 "how we are getting on!"
 msgstr ""
+"Déantar an tairseach a nuashonrú gach ceathrú le faisnéis, mar sin bí ag "
+"faire amach go bhfeicfidh tú conas atá ag éirí linn!"
 
 #: .\tracker_app\templates\tracker_app\home.html:16
 msgid "Learn More"
-msgstr ""
+msgstr "Foghlaim níos mó"
 
 #: .\tracker_app\templates\tracker_app\home.html:26
 msgid "Our Digital & ICT Strategy"
 msgstr "Ár Straitéis Dhigiteach agus TFC"
 
 #: .\tracker_app\templates\tracker_app\home.html:28
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Driving digital innovation and transformation for all %(council)s services."
 msgstr ""
-"Nuálaíocht agus claochlú digiteach a chur chun tosaigh do sheirbhísí %(council)s."
+"Nuálaíocht agus claochlú digiteach a chur chun tosaigh do sheirbhísí "
+"%(council)s."
 
 #: .\tracker_app\templates\tracker_app\home.html:37
 msgid "Evolving Expectations"
@@ -287,11 +292,11 @@ msgstr ""
 
 #: .\tracker_app\templates\tracker_app\home.html:67
 msgid "Download Strategy"
-msgstr ""
+msgstr "Íoslódáil straitéis"
 
 #: .\tracker_app\templates\tracker_app\home.html:73
 msgid "Download the full"
-msgstr ""
+msgstr "Íoslódáil straitéis"
 
 #: .\tracker_app\templates\tracker_app\home.html:75
 #: .\tracker_app\templates\tracker_app\home.html:76
@@ -307,6 +312,8 @@ msgid ""
 ", which outlines our vision and actions for modern, accessible, secure and "
 "people-centred digital services."
 msgstr ""
+"ina leagtar amach ár bhfís agus ár ngníomhartha le haghaidh seirbhísí "
+"digiteacha nua-aimseartha, inrochtana, slána agus dírithe ar an duine"
 
 #: .\tracker_app\templates\tracker_app\home.html:93
 msgid ""
@@ -353,7 +360,7 @@ msgid "Celebrating past achievements"
 msgstr "Éachtaí a cheiliúradh"
 
 #: .\tracker_app\templates\tracker_app\home.html:304
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This section summarises a selection of Digital and ICT projects delivered "
 "during the Council Term %(term)s"
@@ -575,32 +582,32 @@ msgid "Scroll to top"
 msgstr "Scrollaigh go dtí an barr"
 
 #: .\tracker_app\templates\tracker_app\home.html:450
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:105
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:110
 msgid "Action"
 msgstr "ar son na hAeráide"
 
 #: .\tracker_app\templates\tracker_app\home.html:451
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:106
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:111
 msgid "Description"
 msgstr "Cur síos"
 
 #: .\tracker_app\templates\tracker_app\home.html:452
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:108
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:113
 msgid "Details"
 msgstr "Sonraí"
 
 #: .\tracker_app\templates\tracker_app\home.html:453
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:124
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:129
 msgid "View"
 msgstr "Breathnaigh"
 
 #: .\tracker_app\templates\tracker_app\home.html:454
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:132
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:137
 msgid "Action Overview"
 msgstr "Léargas Ginearálta ar an nGníomh"
 
 #: .\tracker_app\templates\tracker_app\home.html:455
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:137
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:142
 msgid "Action Progress"
 msgstr "Dul chun Cinn an Ghnímh"
 
@@ -637,47 +644,55 @@ msgstr "Sonraí an Téama á Lódáil"
 msgid "Close Modal"
 msgstr "Dún"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:14
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:16
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:18
+#, fuzzy, python-format
+#| msgid ""
+#| "In line with Meath Digital's vision, goals and operational objectives, "
+#| "the following progress has been made under the Digital Services Theme:"
 msgid ""
 "In line with Meath Digital's vision, goals and operational objectives, the "
-"following progress has been made under the Digital Services Theme:"
+"following progress has been made under the %(theme_name)s Theme:"
 msgstr ""
+"I gcomhréir le fís, spriocanna agus cuspóirí oibriúcháin Straitéis "
+"Dhigiteach na Mí, rinneadh an dul chun cinn seo a leanas faoi Théama na "
+"Seirbhísí Digiteacha"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:27
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:32
 msgid "Total Actions"
-msgstr ""
+msgstr "Gníomhartha Iomlána"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:40
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:45
 msgid "Actions Completed"
 msgstr "Gníomhartha a Cuireadh i gCrích"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:54
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:59
 msgid "Actions In Progress"
 msgstr "Gníomhartha atá idir Lámha"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:68
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:73
 msgid "Actions Not Started"
 msgstr "Gníomhartha nár Tosaíodh "
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:88
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:93
 msgid "Objective"
 msgstr "Cuspóirí"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:107
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:112
 msgid "Status"
 msgstr "Stádas"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:148
-msgid "There are no actions for this objective yet."
-msgstr ""
-
 #: .\tracker_app\templates\tracker_app\modal_content_fragment.html:153
-msgid "No objectives found for this theme yet."
-msgstr ""
+msgid "There are no actions for this objective yet."
+msgstr "Níl aon ghníomhartha ann don chuspóir seo go fóill."
 
-#: .\tracker_app\views.py:252
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:158
+msgid "No objectives found for this theme yet."
+msgstr "Níor aimsíodh aon chuspóirí don téama seo go fóill."
+
+#: .\tracker_app\views.py:257
 msgid "All Actions"
-msgstr ""
+msgstr "Gníomhartha Iomlána"
 
 #~| msgid "digital services"
 #~ msgid "services."

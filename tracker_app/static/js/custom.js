@@ -368,7 +368,7 @@ function handleRoadmapYearChange(event) {
 
             const isGa = document.documentElement.lang === 'ga';
             chartCanvas.dataset.chartTitle = isGa
-                ? `Gníomhartha críochnaithe agus ar siúl in ${data.chart_year}`
+                ? `Gníomhartha a cuireadh i gcrích agus a ndearnadh dul chun cinn orthu in ${data.chart_year}`
                 : `Completed and progressed actions in ${data.chart_year}`;
 
             // Rebuild the chart with the new data.

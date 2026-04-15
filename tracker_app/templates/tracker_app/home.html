@@ -163,7 +163,7 @@
                         <div class="activity-kpi-card activity-kpi-completed">
                             <div class="activity-kpi-title">
                                 {% if LANGUAGE_CODE == 'ga' %}
-                                    Criochnaithe
+                                    Curtha i gCrích
                                 {% else %}
                                     Completed
                                 {% endif %}
@@ -173,7 +173,7 @@
                         <div class="activity-kpi-card activity-kpi-in-progress">
                             <div class="activity-kpi-title">
                                 {% if LANGUAGE_CODE == 'ga' %}
-                                    Ar siúl
+                                    Idir Lámha
                                 {% else %}
                                     In progress
                                 {% endif %}
@@ -185,7 +185,7 @@
                     <div class="activity-kpi-subtext text-center my-3">
                         <small>
                             {% if LANGUAGE_CODE == 'ga' %}
-                                Bhunaigh an bhliain seo: <span id="started-total">{{ started_total_year }}</span> · Nuashonruithe leanúnaigh: <span id="continued-total">{{ continued_total_year }}</span>
+                                Tosaithe an bhliain seo: <span id="started-total">{{ started_total_year }}</span> · Uasdátuithe leanúnacha: <span id="continued-total">{{ continued_total_year }}</span>
                             {% else %}
                                 Started this year: <span id="started-total">{{ started_total_year }}</span> · Continued updates: <span id="continued-total">{{ continued_total_year }}</span>
                             {% endif %}
@@ -198,9 +198,9 @@
                                     <canvas
                                         id="activityChart"
                                         role="img"
-                                        data-chart-title="{% if LANGUAGE_CODE == 'ga' %}Gníomhartha críochnaithe agus ar siúl in {{ chart_year }}{% else %}Completed and progressed actions in {{ chart_year }}{% endif %}"
-                                        data-label-completed="{% if LANGUAGE_CODE == 'ga' %}Críochnaithe{% else %}Completed{% endif %}"
-                                        data-label-in-progress="{% if LANGUAGE_CODE == 'ga' %}Ar siúl{% else %}In progress{% endif %}"
+                                        data-chart-title="{% if LANGUAGE_CODE == 'ga' %}Gníomhartha a cuireadh i gcrích agus a ndearnadh dul chun cinn orthu in {{ chart_year }}{% else %}Completed and progressed actions in {{ chart_year }}{% endif %}"
+                                        data-label-completed="{% if LANGUAGE_CODE == 'ga' %}Curtha i gCrích{% else %}Completed{% endif %}"
+                                        data-label-in-progress="{% if LANGUAGE_CODE == 'ga' %}Idir Lámha{% else %}In progress{% endif %}"
                                         data-actions-suffix="{% if LANGUAGE_CODE == 'ga' %}gníomhartha{% else %}actions{% endif %}"
                                         aria-label="{% if LANGUAGE_CODE == 'ga' %}Líneghraf a thaispeánann líon na ngníomhartha críochnaithe agus ar siúl in aghaidh na míosa i {{ chart_year }}.{% else %}Line chart showing the number of completed and progressed actions per month in {{ chart_year }}.{% endif %}"
                                     ></canvas>
