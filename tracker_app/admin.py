@@ -174,7 +174,7 @@ class ActionAdmin(SummernoteModelAdmin):
                         send_mail(
                             subject,
                             message,
-                            settings.EMAIL_HOST_USER,
+                            settings.EMAIL_HOST_USER or settings.DEFAULT_FROM_EMAIL,
                             list(superusers),
                             fail_silently=False
                         )
