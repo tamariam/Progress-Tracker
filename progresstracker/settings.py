@@ -173,7 +173,7 @@ else:
     EMAIL_HOST = "smtp.office365.com"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "").strip()  # Remove potential quotes from env var
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
     # Ensure DEFAULT_FROM_EMAIL is set; fall back to EMAIL_HOST_USER or a sensible default
