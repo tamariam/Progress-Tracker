@@ -13,7 +13,7 @@
         <p class="fs-6 bigger-font yellow-color">
           {% get_current_language as LANGUAGE_CODE %}
           {% if LANGUAGE_CODE == 'ga' and theme.title_ga %}
-            {% blocktranslate trimmed with theme_name=theme.title_ga %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the {{ theme_name }} Theme:{% endblocktranslate %}
+            {% blocktranslate trimmed with theme_name=theme.title_ga %}I gcomhréir le fís, spriocanna agus cuspóirí oibriúcháin Straitéis Dhigiteach na Mí, rinneadh an dul chun cinn seo a leanas faoi Théama na {{ theme_name }} {% endblocktranslate %}
           {% else %}
             {% blocktranslate trimmed with theme_name=theme.title %}In line with Meath Digital's vision, goals and operational objectives, the following progress has been made under the {{ theme_name }} Theme:{% endblocktranslate %}
           {% endif %}
