@@ -41,13 +41,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # 2. DEVELOPMENT env var present (any value)
 # 3. running via `manage.py runserver` (detect 'runserver' in sys.argv)
 
-# DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
-# if DJANGO_DEBUG is not None:
-#     DEBUG = DJANGO_DEBUG.strip().lower() in ("1", "true", "yes")
-# else:
-#     DEBUG = ('DEVELOPMENT' in os.environ) or ('runserver' in sys.argv)
+DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
+if DJANGO_DEBUG is not None:
+    DEBUG = DJANGO_DEBUG.strip().lower() in ("1", "true", "yes")
+else:
+    DEBUG = ('DEVELOPMENT' in os.environ) or ('runserver' in sys.argv)
 
-DEBUG = True
+
 
 
 # settings.py
