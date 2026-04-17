@@ -1,0 +1,1 @@
+from progresstracker.wsgi import application
