@@ -34,18 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# Simple rule:
-# - local/default: DEBUG = True
-# - production server (DJANGO_ENV=production): DEBUG = False
-# Optional override: DJANGO_DEBUG (1/true/yes enables, 0/false/no disables)
-DJANGO_ENV = os.getenv("DJANGO_ENV", "development").strip().lower()
-DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
-
-if DJANGO_DEBUG is not None:
-    DEBUG = DJANGO_DEBUG.strip().lower() in ("1", "true", "yes")
-else:
-    DEBUG = DJANGO_ENV != "production"
+DEBUG = False
 
 
 
