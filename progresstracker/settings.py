@@ -15,7 +15,6 @@ from django.utils.translation import gettext_lazy as _
 
 from pathlib import Path
 import os
-import sys
 from dotenv import load_dotenv
 import dj_database_url
 load_dotenv()
@@ -36,16 +35,18 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG resolution (in order of precedence):
-# 1. DJANGO_DEBUG env var (1/true/yes)
-# 2. DEVELOPMENT env var present (any value)
-# 3. running via `manage.py runserver` (detect 'runserver' in sys.argv)
-
+# Simple rule:
+# - local/default: DEBUG = True
+# - production server (DJANGO_ENV=production): DEBUG = False
+# Optional override: DJANGO_DEBUG (1/true/yes enables, 0/false/no disables)
+DJANGO_ENV = os.getenv("DJANGO_ENV", "development").strip().lower()
 DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
+
 if DJANGO_DEBUG is not None:
     DEBUG = DJANGO_DEBUG.strip().lower() in ("1", "true", "yes")
 else:
-    DEBUG = ('DEVELOPMENT' in os.environ) or ('runserver' in sys.argv)
+    DEBUG = DJANGO_ENV != "production"
+
 
 
 
@@ -76,6 +77,7 @@ INSTALLED_APPS = [
 # third midlware for dual
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',    
     'tracker_app.middleware.AdminEnglishMiddleware',
@@ -172,9 +174,14 @@ LOCALE_PATHS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 # Use console email backend in development, SMTP in production
 if DEBUG:
