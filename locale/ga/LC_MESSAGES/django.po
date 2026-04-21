@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-16 15:53+0100\n"
+"POT-Creation-Date: 2026-04-21 14:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
 "4);\n"
 
-#: .\progresstracker\settings.py:157
+#: .\progresstracker\settings.py:150
 msgid "English"
 msgstr ""
 
-#: .\progresstracker\settings.py:158
+#: .\progresstracker\settings.py:151
 msgid "Gaeilge"
 msgstr ""
 
@@ -582,32 +582,32 @@ msgid "Scroll to top"
 msgstr "Scrollaigh go dtí an barr"
 
 #: .\tracker_app\templates\tracker_app\home.html:450
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:110
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:105
 msgid "Action"
 msgstr "ar son na hAeráide"
 
 #: .\tracker_app\templates\tracker_app\home.html:451
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:111
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:106
 msgid "Description"
 msgstr "Cur síos"
 
 #: .\tracker_app\templates\tracker_app\home.html:452
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:113
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:108
 msgid "Details"
 msgstr "Sonraí"
 
 #: .\tracker_app\templates\tracker_app\home.html:453
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:129
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:124
 msgid "View"
 msgstr "Breathnaigh"
 
 #: .\tracker_app\templates\tracker_app\home.html:454
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:137
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:132
 msgid "Action Overview"
 msgstr "Léargas Ginearálta ar an nGníomh"
 
 #: .\tracker_app\templates\tracker_app\home.html:455
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:142
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:137
 msgid "Action Progress"
 msgstr "Dul chun Cinn an Ghnímh"
 
@@ -644,56 +644,45 @@ msgstr "Sonraí an Téama á Lódáil"
 msgid "Close Modal"
 msgstr "Dún"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:16
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:14
 #, python-format
-msgid ""
-"I gcomhréir le fís, spriocanna agus cuspóirí oibriúcháin Straitéis "
-"Dhigiteach na Mí, rinneadh an dul chun cinn seo a leanas faoi Théama na "
-"%(theme_name)s"
-msgstr ""
-
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:18
-#, fuzzy, python-format
-#| msgid ""
-#| "In line with Meath Digital's vision, goals and operational objectives, "
-#| "the following progress has been made under the Digital Services Theme:"
 msgid ""
 "In line with Meath Digital's vision, goals and operational objectives, the "
 "following progress has been made under the %(theme_name)s Theme:"
 msgstr ""
 "I gcomhréir le fís, spriocanna agus cuspóirí oibriúcháin Straitéis "
 "Dhigiteach na Mí, rinneadh an dul chun cinn seo a leanas faoi Théama na "
-"Seirbhísí Digiteacha"
+"%(theme_name)s"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:32
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:27
 msgid "Total Actions"
 msgstr "Gníomhartha Iomlána"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:45
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:40
 msgid "Actions Completed"
 msgstr "Gníomhartha a Cuireadh i gCrích"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:59
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:54
 msgid "Actions In Progress"
 msgstr "Gníomhartha atá idir Lámha"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:73
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:68
 msgid "Actions Not Started"
 msgstr "Gníomhartha nár Tosaíodh "
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:93
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:88
 msgid "Objective"
 msgstr "Cuspóirí"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:112
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:107
 msgid "Status"
 msgstr "Stádas"
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:153
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:148
 msgid "There are no actions for this objective yet."
 msgstr "Níl aon ghníomhartha ann don chuspóir seo go fóill."
 
-#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:158
+#: .\tracker_app\templates\tracker_app\modal_content_fragment.html:153
 msgid "No objectives found for this theme yet."
 msgstr "Níor aimsíodh aon chuspóirí don téama seo go fóill."
 
